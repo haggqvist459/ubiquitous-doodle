@@ -1,4 +1,3 @@
-import { InfoButton } from '@/components'
 
 type Props = {
   id: string
@@ -9,7 +8,6 @@ type Props = {
   onFocus?: () => void,
   onBlur?: () => void,
   inputType?: string
-  infoMessage?: string
   required?: boolean
   allowDecimals?: boolean
   autoComplete?: string 
@@ -21,7 +19,6 @@ const Input = ({
   placeholder,
   id,
   inputType = 'text',
-  infoMessage = '',
   required = true,
   allowDecimals = false,
   onChange,
@@ -34,9 +31,6 @@ const Input = ({
       {label !== undefined && (
         <div className="flex space-x-1">
           <label htmlFor={id} className="label">{label || '\u00A0'}</label>
-          <div className='relative top-[2px]'>
-            {infoMessage && <InfoButton message={infoMessage} />}
-          </div>
         </div>
       )}
       <input
