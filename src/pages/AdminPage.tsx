@@ -1,8 +1,10 @@
-import { Trashcan } from "@/components";
+import { PageContainer } from "@/components";
 
 const AdminPage = () => {
   return (
-    <div>AdminPage</div>
+    <PageContainer>
+      <div>AdminPage</div>
+    </PageContainer>
   );
 }
 

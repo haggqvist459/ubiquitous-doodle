@@ -55,39 +55,35 @@ textarea {
 @layer components {
 
   .section-header {
-    @apply text-xl xs:text-2xl md:text-3xl font-bold text-primary
+    @apply text-xl xs:text-2xl md:text-3xl font-bold text-primary-text
   }
 
   .main-header {
-    @apply text-lg lg:text-xl font-semibold text-primary
+    @apply text-lg lg:text-xl font-semibold text-primary-text
   }
 
   .sub-header {
-    @apply text-[17px] font-semibold text-primary
+    @apply text-[17px] font-semibold text-primary-text
   }
 
   .label {
-    @apply text-base font-medium text-primary
+    @apply text-base font-medium text-primary-text
   }
 
   .input-text {
-    @apply border rounded border-neutral-600 text-neutral-800 w-full px-1
+    @apply border rounded border-primary-text text-primary-text w-full px-1
   }
 
   .dropdown-text {
-    @apply border rounded border-neutral-600 text-neutral-800 w-full px-1 appearance-none shadow-sm
+    @apply border rounded border-primary-text text-primary-text w-full px-1 appearance-none shadow-sm
   }
 
   .output-text {
-    @apply text-base text-neutral-800 border rounded border-transparent
+    @apply text-base text-primary-text border rounded border-transparent
   }
 
-  .add-button {
-    @apply w-full mx-auto px-4 my-2 rounded border-2 border-primary bg-primary text-blue-50 font-medium hover:border-blue-50 disabled:opacity-50 disabled:hover:border-primary
-  }
-
-  .auth-button {
-    @apply w-full mx-auto px-4 my-2 rounded border-2 border-primary bg-primary text-blue-50 font-medium hover:border-blue-50 disabled:opacity-50 disabled:hover:border-primary
+  .primary-button {
+    @apply w-full mx-auto px-4 my-2 rounded border-2 border-primary bg-primary text-primary-text font-medium hover:border-primary-text disabled:opacity-50 disabled:hover:border-primary
   }
 
   .section-form {

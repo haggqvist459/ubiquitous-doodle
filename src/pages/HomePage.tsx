@@ -1,6 +1,12 @@
+import { PageContainer } from "@/components";
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <PageContainer>
+      <div>
+        HomePage
+      </div>
+    </PageContainer>
   );
 }
 

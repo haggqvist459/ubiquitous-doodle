@@ -22,6 +22,6 @@ export const DB_TABLES = {
 
 } as const;
 
-export const DB_TABLE_ROWS = {
+export const DB_COLUMNS = {
 
 } as const;
