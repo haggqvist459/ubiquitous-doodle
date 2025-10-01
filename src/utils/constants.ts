@@ -25,3 +25,7 @@ export const DB_TABLES = {
 export const DB_COLUMNS = {
 
 } as const;
+
+export const LOCALSTORAGE_KEYS = { 
+
+} as const;

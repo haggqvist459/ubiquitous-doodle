@@ -1,0 +1,33 @@
+import { Database, Tables } from "./database.types"
+
+export type RecipeDbType = Tables<"recipes">
+
+export type RecipeType = {
+  id: number
+  title: string
+  subtitle: string | null
+  cuisine: Database["public"]["Enums"]["cuisine"] | null
+  type: Database["public"]["Enums"]["main_ingredient"]
+  includeWeekly: boolean
+  ingredients: IngredientType[]
+  instructions: string[] | null
+  createdAt: Date
+}
+
+export type Unit =
+  | "-"
+  | "tsp"
+  | "tbsp"
+  | "pcs"
+  | "g"
+  | "kg"
+  | "ml"
+  | "dl"
+  | "cl"
+  | "l"
+
+export type IngredientType = {
+  name: string
+  amount: number
+  unit: Unit
+}
