@@ -22,8 +22,8 @@ export type Unit =
   | "g"
   | "kg"
   | "ml"
-  | "dl"
   | "cl"
+  | "dl"
   | "l"
 
 export type IngredientType = {
