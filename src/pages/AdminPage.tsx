@@ -1,9 +1,10 @@
 import { PageContainer } from "@/components";
+import { CreateRecipeForm } from "@/features/recipeForm";
 
 const AdminPage = () => {
   return (
     <PageContainer>
-      <div>AdminPage</div>
+      <CreateRecipeForm/>
     </PageContainer>
   );
 }

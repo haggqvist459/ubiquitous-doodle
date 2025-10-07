@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { saveData, LOCALSTORAGE_KEYS } from "@/utils";
+import recipeForm from '@/features/recipeForm';
+
 
 export const store = configureStore({
   reducer: {
-    
+    recipeForm: recipeForm
   }
 })
 
@@ -13,7 +15,7 @@ store.subscribe(() => {
   // Object.values(LOCALSTORAGE_KEYS).forEach((key) => {
   //   saveData(key, state.appState[key]);
   // });
-  
+
 });
 
 

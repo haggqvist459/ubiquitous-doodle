@@ -20,7 +20,7 @@ export type Database = {
           cuisine: Database["public"]["Enums"]["cuisine"] | null
           id: number
           include_weekly: boolean
-          ingredients: Json[]
+          ingredients: Json[] | null
           instructions: string[] | null
           subtitle: string | null
           title: string
@@ -31,7 +31,7 @@ export type Database = {
           cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: number
           include_weekly?: boolean
-          ingredients: Json[]
+          ingredients?: Json[] | null
           instructions?: string[] | null
           subtitle?: string | null
           title: string
@@ -42,7 +42,7 @@ export type Database = {
           cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: number
           include_weekly?: boolean
-          ingredients?: Json[]
+          ingredients?: Json[] | null
           instructions?: string[] | null
           subtitle?: string | null
           title?: string
@@ -94,6 +94,7 @@ export type Database = {
         | "Seafood"
         | "Vegetarian"
         | "Pasta"
+        | "Other"
       user_role_enum: "admin" | "user"
     }
     CompositeTypes: {
@@ -238,6 +239,7 @@ export const Constants = {
         "Seafood",
         "Vegetarian",
         "Pasta",
+        "Other",
       ],
       user_role_enum: ["admin", "user"],
     },
