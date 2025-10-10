@@ -20,8 +20,8 @@ export type Database = {
           cuisine: Database["public"]["Enums"]["cuisine"] | null
           id: number
           include_weekly: boolean
-          ingredients: Json[] | null
-          instructions: string[] | null
+          ingredients: Json[]
+          instructions: Json[] | null
           subtitle: string | null
           title: string
           type: Database["public"]["Enums"]["main_ingredient"]
@@ -31,8 +31,8 @@ export type Database = {
           cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: number
           include_weekly?: boolean
-          ingredients?: Json[] | null
-          instructions?: string[] | null
+          ingredients: Json[]
+          instructions?: Json[] | null
           subtitle?: string | null
           title: string
           type: Database["public"]["Enums"]["main_ingredient"]
@@ -42,8 +42,8 @@ export type Database = {
           cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: number
           include_weekly?: boolean
-          ingredients?: Json[] | null
-          instructions?: string[] | null
+          ingredients?: Json[]
+          instructions?: Json[] | null
           subtitle?: string | null
           title?: string
           type?: Database["public"]["Enums"]["main_ingredient"]

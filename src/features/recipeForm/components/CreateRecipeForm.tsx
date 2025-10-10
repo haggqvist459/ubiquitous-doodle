@@ -8,13 +8,14 @@ const CreateRecipeForm = () => {
   return (
     <form>
       {/* display all sections on larger screens */}
-      <div className="hidden md:flex flex-row space-x-2">
+      <h2 className="section-header">Add Recipe</h2>
+      <div className="hidden md:flex flex-row space-x-2 mt-2">
         <MetaDataSection />
         <IngredientSection />
         <InstructionSection />
       </div>
       {/* display sections one by one on smaller screens */}
-      <div className="md:hidden">
+      <div className="md:hidden mt-2">
         {currentSection === "metadata" && <MetaDataSection />}
         {currentSection === "ingredients" && <IngredientSection />}
         {currentSection === "instructions" && <InstructionSection />}

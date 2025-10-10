@@ -21,6 +21,11 @@ export type IngredientType = {
   unit: Unit
 }
 
+export type InstructionType = {
+  id: number,
+  text: string,
+}
+
 export type RecipeType = {
   id: number
   title: string
@@ -29,6 +34,6 @@ export type RecipeType = {
   type: Database["public"]["Enums"]["main_ingredient"]
   includeWeekly: boolean
   ingredients: IngredientType[]
-  instructions: string[] | null
+  instructions: InstructionType[] | null
   createdAt: Date
 }
