@@ -6,7 +6,7 @@ type Props = {
 
 const SectionWrapper = ({ children }: Props) => {
   return (
-    <section className="w-full flex flex-col gap-x-2 border border-primary-text rounded"> 
+    <section className="w-full flex flex-col gap-2 border border-primary-text rounded"> 
       {children}
     </section>
   );

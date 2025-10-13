@@ -17,7 +17,18 @@ const recipeFormSlice = createSlice({
   name: 'recipeFormSlice',
   initialState,
   reducers: {
-    updateField: () => {
+    updateMetadataField: <
+      K extends keyof RecipeFormState["recipeDraft"]
+    >(
+      state: RecipeFormState,
+      action: PayloadAction<{ key: K; value: RecipeFormState["recipeDraft"][K] }>
+    ) => {
+      state.recipeDraft[action.payload.key] = action.payload.value
+    },
+    updateIngredientField: () => {
+
+    },
+    updateInstructionField: () => {
 
     },
     addIngredient: () => {
@@ -38,5 +49,13 @@ const recipeFormSlice = createSlice({
   }
 })
 
-export const { updateField, addIngredient, removeIngredient, addInstruction, removeInstruction, setCurrentSection } = recipeFormSlice.actions
+export const { 
+  updateMetadataField,
+  updateIngredientField,
+  updateInstructionField, 
+  addIngredient, 
+  removeIngredient, 
+  addInstruction, 
+  removeInstruction, 
+  setCurrentSection, } = recipeFormSlice.actions
 export default recipeFormSlice.reducer

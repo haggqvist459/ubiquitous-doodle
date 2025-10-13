@@ -1,25 +1,34 @@
+import { useState, useEffect } from "react";
 import { MetaDataSection, IngredientSection, InstructionSection } from "./shared";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 
 const CreateRecipeForm = () => {
 
   const currentSection = useAppSelector(state => state.recipeForm.currentSection)
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsLargeScreen(window.innerWidth >= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <form>
-      {/* display all sections on larger screens */}
       <h2 className="section-header">Add Recipe</h2>
-      <div className="hidden md:flex flex-row space-x-2 mt-2">
-        <MetaDataSection />
-        <IngredientSection />
-        <InstructionSection />
-      </div>
-      {/* display sections one by one on smaller screens */}
-      <div className="md:hidden mt-2">
-        {currentSection === "metadata" && <MetaDataSection />}
-        {currentSection === "ingredients" && <IngredientSection />}
-        {currentSection === "instructions" && <InstructionSection />}
-      </div>
+      {isLargeScreen ? (
+        <div className="flex flex-row space-x-2 mt-2">
+          <MetaDataSection />
+          <IngredientSection />
+          <InstructionSection />
+        </div>
+      ) : (
+        <div className="mt-2">
+          {currentSection === "metadata" && <MetaDataSection />}
+          {currentSection === "ingredients" && <IngredientSection />}
+          {currentSection === "instructions" && <InstructionSection />}
+        </div>
+      )}
     </form>
   );
 }
