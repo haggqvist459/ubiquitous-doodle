@@ -7,9 +7,5 @@ export const mapToDropdownOptions = <
 }
 
 // util/createDropdownOptions.ts
-export const createDropdownOptions = <T extends string>(
-  values: readonly (T | null)[]
-) => 
-  values
-    .filter((value): value is T => value !== null)
-    .map((value) => ({ label: value, value }))
+export const createDropdownOptions = (values: readonly string[]) =>
+  values.map((value) => ({ label: value, value }));

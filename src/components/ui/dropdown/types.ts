@@ -1,4 +1,4 @@
 export type DropdownOption = {
   label: string
-  value: string
+  value: string | null
 }

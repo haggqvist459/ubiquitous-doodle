@@ -28,7 +28,7 @@ const Dropdown = ({
           className="dropdown-text pr-4 truncate"
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
+            <option key={opt.value} value={opt.value ?? ''}>
               {opt.label}
             </option>
           ))}

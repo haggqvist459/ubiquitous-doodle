@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { updateMetadataField, selectMetadata } from "@/features/recipeForm";
+import { updateMetadataField, selectMetadata, CUISINE_OPTIONS, TYPE_OPTIONS } from "@/features/recipeForm";
 import SectionWrapper from "./SectionWrapper";
-import { Input, Dropdown, createDropdownOptions } from "@/components";
+import { Input, Dropdown, createDropdownOptions, DropdownOption } from "@/components";
 
 
 
@@ -13,6 +13,15 @@ const MetaDataSection = () => {
   const dispatch = useAppDispatch()
 
   const [localMetadata, setLocalMetadata] = useState(metadata);
+
+  const cuisineOptions: DropdownOption[] = [
+    { label: "None", value: null },
+    ...createDropdownOptions(CUISINE_OPTIONS),
+  ];
+  const typeOptions: DropdownOption[] = [
+    { label: "None", value: null },
+    ...createDropdownOptions(TYPE_OPTIONS),
+  ]
 
   return (
     <SectionWrapper>
@@ -44,6 +53,26 @@ const MetaDataSection = () => {
             dispatch(updateMetadataField({ key: "title", value: localMetadata.title }));
           }
         }}
+      />
+      <Dropdown
+        id="cuisineDropdown"
+        label="Select cuisine"
+        onChange={(e) => {
+          const selected = e.target.value === "" ? null : e.target.value;
+          dispatch(updateMetadataField({ key: "cuisine", value: selected }));
+        }}
+        options={cuisineOptions}
+        value={metadata.cuisine ?? ''}
+      />
+      <Dropdown
+        id="typeDropdown"
+        label="Select type*"
+        onChange={(e) => {
+          const selected = e.target.value === "" ? null : e.target.value;
+          dispatch(updateMetadataField({ key: "type", value: selected }));
+        }}
+        options={typeOptions}
+        value={metadata.type ?? ''}
       />
     </SectionWrapper>
   );
