@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { updateMetadataField, selectMetadata, CUISINE_OPTIONS, TYPE_OPTIONS } from "@/features/recipeForm";
 import SectionWrapper from "./SectionWrapper";
-import { Input, Dropdown, createDropdownOptions, DropdownOption } from "@/components";
+import { Input, Dropdown, createDropdownOptions, DropdownOption, ToggleButton } from "@/components";
 
 
 
@@ -12,7 +12,10 @@ const MetaDataSection = () => {
   const metadata = useAppSelector(selectMetadata)
   const dispatch = useAppDispatch()
 
-  const [localMetadata, setLocalMetadata] = useState(metadata);
+  const [localMetadata, setLocalMetadata] = useState({
+    title: metadata.title,
+    subtitle: metadata.subtitle,
+  });
 
   const cuisineOptions: DropdownOption[] = [
     { label: "None", value: null },
@@ -44,9 +47,9 @@ const MetaDataSection = () => {
         label="Recipe description"
         multiline={true}
         placeholder="Meatballs & potatoes with gravy, lingonberry jam & pickles. "
-        value={localMetadata.title}
+        value={localMetadata.subtitle ?? ""}
         onChange={(e) =>
-          setLocalMetadata(prev => ({ ...prev, title: e.target.value }))
+          setLocalMetadata(prev => ({ ...prev, subtitle: e.target.value }))
         }
         onBlur={() => {
           if (localMetadata.title !== metadata.title) {
@@ -74,6 +77,13 @@ const MetaDataSection = () => {
         options={typeOptions}
         value={metadata.type ?? ''}
       />
+      <div className="flex flex-col">
+        <label htmlFor="includeWeekly" className="label">Include in weekly lists:</label>
+        <ToggleButton
+          isToggled={metadata.includeWeekly}
+          onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
+        />
+      </div>
     </SectionWrapper>
   );
 }
