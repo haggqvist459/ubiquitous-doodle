@@ -13,9 +13,9 @@ const CreateRecipeForm = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  
   return (
-    <form>
-      <h2 className="section-header">Add Recipe</h2>
+    <form onSubmit={(e) => e.preventDefault()}>
       {isLargeScreen ? (
         <div className="flex flex-row space-x-2 mt-2">
           <MetaDataSection />
@@ -29,6 +29,9 @@ const CreateRecipeForm = () => {
           {currentSection === "instructions" && <InstructionSection />}
         </div>
       )}
+      <button className="display:none" type="submit">
+
+      </button>
     </form>
   );
 }

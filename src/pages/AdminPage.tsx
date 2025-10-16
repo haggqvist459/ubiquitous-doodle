@@ -4,7 +4,7 @@ import { CreateRecipeForm } from "@/features/recipeForm";
 const AdminPage = () => {
   return (
     <PageContainer>
-      <CreateRecipeForm/>
+        <CreateRecipeForm />
     </PageContainer>
   );
 }

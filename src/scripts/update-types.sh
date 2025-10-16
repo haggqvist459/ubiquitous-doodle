@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_REF="wbqylhxcetnowucuhaqf"
 
 # load .env from project root
 if [ -f "$(dirname "$0")/../../.env" ]; then
-  export $(grep SUPABASE_ACCESS_TOKEN "$(dirname "$0")/../../.env" | xargs)
+  export $(grep -E 'SUPABASE_ACCESS_TOKEN|PROJECT_REF' "$(dirname "$0")/../../.env" | xargs)
 fi
 
 ACCESS_TOKEN="${SUPABASE_ACCESS_TOKEN:?Token not set}"

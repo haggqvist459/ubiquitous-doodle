@@ -20,7 +20,7 @@ const Input = ({
   placeholder,
   id,
   inputType = 'text',
-  required = true,
+  required = false,
   allowDecimals = false,
   onChange,
   onBlur,

@@ -12,16 +12,8 @@ export const selectMetadata = createSelector(
   })
 );
 
-export const SelectIngredients = createSelector(
-  (state: RootState) => state.recipeForm.recipeDraft,
-  (recipeDraft) => ({
-    ingredients: recipeDraft.ingredients
-  })
-)
+export const selectIngredients = (state: RootState) =>
+  state.recipeForm.recipeDraft.ingredients;
 
-export const selectInstructions = createSelector(
-  (state: RootState) => state.recipeForm.recipeDraft,
-  (recipeDraft) => ({
-    instructions: recipeDraft.instructions
-  })
-)
+export const selectInstructions = (state: RootState) =>
+  state.recipeForm.recipeDraft.instructions;

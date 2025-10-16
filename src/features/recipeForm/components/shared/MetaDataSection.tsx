@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { updateMetadataField, selectMetadata, CUISINE_OPTIONS, TYPE_OPTIONS } from "@/features/recipeForm";
 import SectionWrapper from "./SectionWrapper";
-import { Input, Dropdown, createDropdownOptions, DropdownOption, ToggleButton } from "@/components";
+import { Input, Dropdown, createDropdownOptions, ToggleButton, Header } from "@/components";
 
 
 
@@ -17,17 +17,20 @@ const MetaDataSection = () => {
     subtitle: metadata.subtitle,
   });
 
-  const cuisineOptions: DropdownOption[] = [
+  const cuisineOptions = [
     { label: "None", value: null },
     ...createDropdownOptions(CUISINE_OPTIONS),
   ];
-  const typeOptions: DropdownOption[] = [
+
+  const typeOptions = [
     { label: "None", value: null },
     ...createDropdownOptions(TYPE_OPTIONS),
-  ]
+  ];
+  
 
   return (
     <SectionWrapper>
+      <Header title="Create Recipe"/>
       <Input
         id="recipeTitle"
         label="Recipe name"

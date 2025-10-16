@@ -1,28 +1,20 @@
 import { Database, Tables } from "./database.types"
-
+import { UNITS } from "@/utils"
 export type RecipeDbType = Tables<"recipes">
 
-export type Unit =
-  | "-"
-  | "tsp"
-  | "tbsp"
-  | "pcs"
-  | "g"
-  | "kg"
-  | "ml"
-  | "cl"
-  | "dl"
-  | "l"
+export type Unit = (typeof UNITS)[number];
 
 export type IngredientType = {
-  id: number
+  id: string
   name: string
-  amount: number
+  amount: string
   unit: Unit
 }
 
 export type InstructionType = {
-  id: number,
+  id: string,
+  order: number,
+  title: string,
   text: string,
 }
 
@@ -34,6 +26,6 @@ export type RecipeType = {
   type: Database["public"]["Enums"]["main_ingredient"]
   includeWeekly: boolean
   ingredients: IngredientType[]
-  instructions: InstructionType[] | null
+  instructions: InstructionType[]
   createdAt: Date
 }
