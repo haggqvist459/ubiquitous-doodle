@@ -1,4 +1,5 @@
 import { RecipeType } from "@/types"
+import { SECTIONS } from "./constants"
 
 export type RecipeDraftType = Omit<RecipeType, "id" | "createdAt" | "type"> & {
   type: RecipeType["type"] | null
@@ -6,5 +7,5 @@ export type RecipeDraftType = Omit<RecipeType, "id" | "createdAt" | "type"> & {
 
 export type RecipeFormState = {
   recipeDraft: RecipeDraftType
-  currentSection: "metadata" | "ingredients" | "instructions"
+  currentSection: (typeof SECTIONS)[number]
 }

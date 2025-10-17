@@ -12,6 +12,7 @@ type Props = {
   allowDecimals?: boolean
   autoComplete?: string
   multiline?: boolean
+  rows?: number
 }
 
 const Input = ({
@@ -26,7 +27,8 @@ const Input = ({
   onBlur,
   onFocus,
   autoComplete,
-  multiline = false
+  multiline = false,
+  rows
 }: Props) => {
   return (
     <div className="flex flex-col w-full">
@@ -37,6 +39,7 @@ const Input = ({
       )}
       {multiline ? (
         <textarea
+          rows={rows}
           className="input-text no-spinner"
           id={id}
           placeholder={placeholder}

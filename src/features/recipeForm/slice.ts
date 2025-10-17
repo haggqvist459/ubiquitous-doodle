@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { RecipeFormState } from "./types";
 import { IngredientType, InstructionType } from "@/types";
+import { SECTIONS } from "./constants";
 
 const initialState: RecipeFormState = {
   recipeDraft: {
@@ -23,7 +24,7 @@ const initialState: RecipeFormState = {
       text: "",
     }]
   },
-  currentSection: 'instructions'
+  currentSection: 'Metadata'
 }
 const recipeFormSlice = createSlice({
   name: 'recipeFormSlice',
@@ -96,7 +97,7 @@ const recipeFormSlice = createSlice({
           order: index + 1,
         }));
     },
-    setCurrentSection: (state, action: PayloadAction<"metadata" | "ingredients" | "instructions">) => {
+    setCurrentSection: (state, action: PayloadAction<(typeof SECTIONS)[number]>) => {
       state.currentSection = action.payload;
     },
   }
