@@ -5,7 +5,12 @@ import { Input, Dropdown, createDropdownOptions, Header, Trashcan, } from "@/com
 import { UNITS } from "@/utils";
 import SectionWrapper from "../shared/SectionWrapper";
 
-const IngredientSection = () => {
+
+type Props = {
+  handleNavigation?: (action: () => void) => void;
+};
+
+const IngredientSection = ({ handleNavigation }: Props) => {
 
   const ingredients = useAppSelector(selectIngredients)
   const dispatch = useAppDispatch()
@@ -40,8 +45,8 @@ const IngredientSection = () => {
   return (
     <SectionWrapper>
       <Header title="Add Ingredients" />
-      <div className="h-[50vh] flex flex-col">
-        <div className="flex-grow overflow-y-auto">
+      <div className="h-[60vh] flex flex-col">
+        <div className="flex-grow overflow-y-auto space-y-2">
           {localIngredients.map((ingredient) => (
             <div
               className="flex flex-col xs:flex-row xs:items-end w-full space-x-1 mt-2"
@@ -66,6 +71,8 @@ const IngredientSection = () => {
                 label="Amount"
                 required={true}
                 autoComplete="off"
+                inputType="number"
+                allowDecimals={true}
               />
               <Dropdown
                 id={`${ingredient.id}-ingredientUnit`}
@@ -75,6 +82,7 @@ const IngredientSection = () => {
                 }
                 options={unitOptions}
                 value={ingredient.unit}
+                required={true}
               />
               <button
                 type="button"
@@ -89,28 +97,30 @@ const IngredientSection = () => {
         </div>
         <button
           type="button"
-          className="primary-button"
+          className="primary-button mt-2"
           onClick={() => dispatch(addIngredient())}
         >
           Add Ingredient
         </button>
       </div>
+      {handleNavigation && (
         <div className="w-full flex space-x-2 md:hidden">
           <button
             type="button"
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
-            onClick={() => dispatch(setCurrentSection('Metadata'))}
+            onClick={() => handleNavigation(() => dispatch(setCurrentSection("Ingredients")))}
           >
             Back
           </button>
           <button
             type="button"
             className="w-1/2 bg-primary font-medium text-primary-text rounded"
-            onClick={() => dispatch(setCurrentSection('Instructions'))}
+            onClick={() => handleNavigation(() => dispatch(setCurrentSection("Instructions")))}
           >
             Next
           </button>
         </div>
+      )}
     </SectionWrapper>
   );
 }

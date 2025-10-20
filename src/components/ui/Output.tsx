@@ -1,7 +1,7 @@
 
 type Props = {
   label?: string,
-  value: string | number
+  value: string | number | null
 }
 
 const Output = ({
@@ -13,7 +13,9 @@ const Output = ({
       {label !== undefined && (
         <span className="label">{label || '\u00A0'}</span>
       )}
-      <span className="output-text ">{value || '\u00A0'}</span>
+      <span className="output-text">
+        {value || `No ${label?.toLowerCase() || 'value'} added for this recipe.`}
+      </span>
     </div>
   )
 }

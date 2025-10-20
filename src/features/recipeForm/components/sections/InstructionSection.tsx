@@ -4,8 +4,12 @@ import { addInstruction, updateInstructionField, removeInstruction, selectInstru
 import { Input, Header, Trashcan, } from "@/components";
 import SectionWrapper from "../shared/SectionWrapper";
 
+type Props = {
+  handleNavigation?: (action: () => void) => void;
+};
 
-const InstructionSection = () => {
+
+const InstructionSection = ({ handleNavigation}: Props) => {
 
   const instructions = useAppSelector(selectInstructions);
   const [localInstructions, setLocalInstructions] = useState(instructions);
@@ -39,8 +43,8 @@ const InstructionSection = () => {
   return (
     <SectionWrapper>
       <Header title="Add instructions" />
-      <div className="h-[50vh] flex flex-col">
-        <div className="flex-grow overflow-y-auto">
+      <div className="h-[60vh] flex flex-col">
+        <div className="flex-grow overflow-y-auto space-y-2">
           {localInstructions.map((instruction) => (
             <div
               key={`${instruction.id}-instruction`}
@@ -53,6 +57,7 @@ const InstructionSection = () => {
                   value={instruction.title}
                   onChange={(e) => handleInstructionChange(instruction.id, "title", e.target.value)}
                   onBlur={() => handleInstructionDispatch(instruction.id, "title")}
+                  required={true}
                 />
                 <button
                   type="button"
@@ -69,6 +74,7 @@ const InstructionSection = () => {
                   placeholder="Boil water, add potaoes, cook until done."
                   value={instruction.text}
                   multiline={true}
+                  required={true}
                   rows={3}
                   onChange={(e) => handleInstructionChange(instruction.id, 'text', e.target.value)}
                   onBlur={() => handleInstructionDispatch(instruction.id, 'text')}
@@ -79,28 +85,30 @@ const InstructionSection = () => {
         </div>
         <button
           type="button"
-          className="primary-button"
+          className="primary-button mt-2"
           onClick={() => dispatch(addInstruction())}
         >
           Add Instruction
         </button>
       </div>
+      {handleNavigation && (
         <div className="w-full flex space-x-2 md:hidden">
           <button
             type="button"
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
-            onClick={() => dispatch(setCurrentSection('Ingredients'))}
+            onClick={() => handleNavigation(() => dispatch(setCurrentSection("Ingredients")))}
           >
             Back
           </button>
           <button
             type="button"
             className="w-1/2 bg-primary font-medium text-primary-text rounded"
-            onClick={() => dispatch(setCurrentSection('Preview'))}
+            onClick={() => handleNavigation(() => dispatch(setCurrentSection("Preview")))}
           >
             Preview
           </button>
-      </div>
+        </div>
+      )}
     </SectionWrapper>
   );
 }

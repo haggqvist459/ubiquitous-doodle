@@ -51,6 +51,16 @@ textarea {
   --color-primary-bg: #FCFBF4;
 
   --color-primary-text: #262626;
+
+  --color-lightblue: #AEDCD5;
+  --color-darkblue: #AEBBDC;
+  --color-purple: #C8AEDC;
+  --color-pink: #DCAEC8;
+  --color-orange: #DCBBAE;
+  --color-yellow: #D5DCAE;  
+
+
+
 }
 
 @layer components {
@@ -84,7 +94,7 @@ textarea {
   }
 
   .primary-button {
-    @apply w-full mx-auto px-4 my-2 rounded border-2 border-primary bg-primary text-primary-text font-medium hover:border-primary-text disabled:opacity-50 disabled:hover:border-primary
+    @apply w-full mx-auto px-4 my-2 rounded border-2 border-lightblue bg-lightblue text-primary-text font-medium hover:border-primary-text disabled:opacity-50 disabled:hover:border-lightblue
   }
 
   .section-form {

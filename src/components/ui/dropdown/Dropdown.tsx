@@ -4,6 +4,7 @@ type Props = {
   id: string
   label: string
   value: string | number
+  required?: boolean
   options: DropdownOption[]
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
@@ -12,6 +13,7 @@ const Dropdown = ({
   id,
   label,
   value,
+  required = false,
   options,
   onChange
 }: Props) => {
@@ -22,6 +24,7 @@ const Dropdown = ({
       <label htmlFor={id} className="label">{label}</label>
       <div className='w-full relative'>
         <select
+          required={required}
           id={id}
           value={value}
           onChange={onChange}

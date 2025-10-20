@@ -4,10 +4,11 @@ import { updateMetadataField, selectMetadata, CUISINE_OPTIONS, TYPE_OPTIONS, set
 import SectionWrapper from "../shared/SectionWrapper";
 import { Input, Dropdown, createDropdownOptions, ToggleButton, Header } from "@/components";
 
+type Props = {
+  handleNavigation?: (action: () => void) => void;
+};
 
-
-
-const MetaDataSection = () => {
+const MetaDataSection = ({ handleNavigation }: Props) => {
 
   const metadata = useAppSelector(selectMetadata)
   const dispatch = useAppDispatch()
@@ -27,15 +28,15 @@ const MetaDataSection = () => {
     ...createDropdownOptions(TYPE_OPTIONS),
   ];
 
-
   return (
     <SectionWrapper>
       <Header title="Create Recipe" />
-      <div className="h-[50vh] flex flex-col">
+      <div className="h-[60vh] flex flex-col">
         <div className="flex-grow space-y-2">
           <Input
+            required={true}
             id="recipeTitle"
-            label="Recipe name"
+            label="Recipe title"
             placeholder="Meatballs"
             value={localMetadata.title}
             onChange={(e) =>
@@ -75,6 +76,7 @@ const MetaDataSection = () => {
           <Dropdown
             id="typeDropdown"
             label="Select type*"
+            required={true}
             onChange={(e) => {
               const selected = e.target.value === "" ? null : e.target.value;
               dispatch(updateMetadataField({ key: "type", value: selected }));
@@ -83,7 +85,7 @@ const MetaDataSection = () => {
             value={metadata.type ?? ''}
           />
           <div className="flex flex-col">
-            <label htmlFor="includeWeekly" className="label">Include in weekly lists:</label>
+            <span className="label">Include in weekly lists:</span>
             <ToggleButton
               isToggled={metadata.includeWeekly}
               onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
@@ -91,15 +93,19 @@ const MetaDataSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-end space-x-2 md:hidden">
-        <button
-          type="button"
-          className="w-1/2 bg-primary font-medium text-primary-text rounded"
-          onClick={() => dispatch(setCurrentSection('Ingredients'))}
-        >
-          Next
-        </button>
-      </div>
+      {handleNavigation && (
+        <div className="w-full flex justify-end space-x-2 md:hidden">
+          <button
+            type="button"
+            className="w-1/2 bg-primary font-medium text-primary-text rounded"
+            onClick={() =>
+              handleNavigation(() => dispatch(setCurrentSection("Ingredients")))
+            }
+          >
+            Next
+          </button>
+        </div>
+      )}
     </SectionWrapper>
   );
 }
