@@ -96,7 +96,7 @@ const InstructionSection = ({ handleNavigation}: Props) => {
           <button
             type="button"
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
-            onClick={() => handleNavigation(() => dispatch(setCurrentSection("Ingredients")))}
+            onClick={() => dispatch(setCurrentSection("Ingredients"))}
           >
             Back
           </button>

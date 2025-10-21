@@ -21,7 +21,7 @@ textarea {
 @font-face {
   font-family: 'Rubik';
   src: url('./assets/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
-  font-weight: 300 900;
+  font-weight: 250 900;
   font-style: normal;
   font-display: swap;
 }
@@ -191,11 +191,11 @@ textarea {
   }
 
   .animate-slide-in-from-right {
-    animation: slide-in-from-right 300ms ease-out forwards;
+    animation: slide-in-from-right 250ms ease-out forwards;
   }
 
   .animate-slide-in-from-left {
-    animation: slide-in-from-left 300ms ease-out forwards;
+    animation: slide-in-from-left 250ms ease-out forwards;
   }
 
   .animate-fade-in {
@@ -203,10 +203,10 @@ textarea {
   }
 
   .animate-slide-out-to-left {
-    animation: slide-out-to-left 300ms ease-out forwards;
+    animation: slide-out-to-left 250ms ease-out forwards;
   }
 
   .animate-slide-out-to-right {
-    animation: slide-out-to-right 300ms ease-out forwards;
+    animation: slide-out-to-right 250ms ease-out forwards;
   }
 }
