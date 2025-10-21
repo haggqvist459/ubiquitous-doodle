@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
-import { MetaDataSection, IngredientSection, InstructionSection } from "./sections";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import PreviewSection from "./sections/PreviewSection";
-import { SlideWrapper } from "@/components";
+import { useAppSelector } from "@/redux/hooks";
+import { createRecipe } from "@/utils/backend/api";
+import { MetaDataSection, IngredientSection, InstructionSection, PreviewSection } from "./sections";
+import { SlideWrapper, Modal, ModalStateType } from "@/components";
+
 
 const CreateRecipeForm = () => {
 
   const currentSection = useAppSelector(state => state.recipeForm.currentSection)
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
   const [viewMode, setViewMode] = useState<"Edit" | "Preview">("Edit");
+  const recipeDraft = useAppSelector((state) => state.recipeForm.recipeDraft);
+
+  const [modalState, setModalState] = useState<ModalStateType>({
+    isOpen: false,
+    message: '',
+    title: '',
+    onConfirm: () => { },
+    onCancel: undefined
+  })
 
 
   useEffect(() => {
@@ -33,11 +43,32 @@ const CreateRecipeForm = () => {
     { key: "Preview", component: <PreviewSection /> },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("recipe submit clicked")
-  };
+    try {
+      const result = await createRecipe(recipeDraft);
 
+      if (result.success) {
+        setModalState({
+          isOpen: true,
+          title: "Recipe Created",
+          message: "Your recipe was successfully saved!",
+          onConfirm: () => setModalState((prev) => ({ ...prev, isOpen: false })),
+          onCancel: undefined
+        });
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (err) {
+      setModalState({
+        isOpen: true,
+        title: "Error Creating Recipe",
+        message: (err as Error).message || "Something went wrong while saving your recipe.",
+        onConfirm: () => setModalState((prev) => ({ ...prev, isOpen: false })),
+        onCancel: undefined
+      });
+    }
+  };
   const desktopSlides = [
     {
       key: "Edit", component: (
@@ -86,12 +117,21 @@ const CreateRecipeForm = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit}>
-      <SlideWrapper
-        activeKey={isLargeScreen ? viewMode : currentSection}
-        slides={isLargeScreen ? desktopSlides : mobileSlides}
+    <div className="">
+      <form onSubmit={handleSubmit}>
+        <SlideWrapper
+          activeKey={isLargeScreen ? viewMode : currentSection}
+          slides={isLargeScreen ? desktopSlides : mobileSlides}
+        />
+      </form>
+      <Modal
+        title={modalState.title}
+        description={modalState.message}
+        isOpen={modalState.isOpen}
+        onConfirm={modalState.onConfirm}
+        onCancel={modalState.onCancel}
       />
-    </form>
+    </div>
   );
 }
 

@@ -4,5 +4,5 @@ export type ModalStateType = {
   isOpen: boolean
   showCancel?: boolean
   onConfirm: () => void
-  onCancel?: () => void
+  onCancel?: () => void | undefined
 }

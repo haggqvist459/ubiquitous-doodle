@@ -1,9 +1,9 @@
-import { createRecipe as createRecipeService } from "@/utils/backend/services/recipes/createRecipe";
+import { processRecipe } from "@/utils/backend/services/recipes/createRecipe";
 import type { RecipeDraftType } from "@/features/recipeForm/types";
 
 export const createRecipe = async (draft: RecipeDraftType) => {
   try {
-    const data = await createRecipeService(draft);
+    const data = await processRecipe(draft);
     return { success: true, data };
   } catch (error) {
     console.error("Failed to create recipe:", error);

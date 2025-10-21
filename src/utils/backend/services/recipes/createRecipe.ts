@@ -2,7 +2,7 @@ import { insertRecipe } from "@/utils/backend/db";
 import { mapRecipeDraftToDb } from "./mapRecipeDraft";
 import type { RecipeDraftType } from "@/features/recipeForm/types";
 
-export const createRecipe = async (draft: RecipeDraftType) => {
+export const processRecipe = async (draft: RecipeDraftType) => {
   // --- validation ---
   if (!draft.title.trim()) {
     throw new Error("Recipe title is required.");

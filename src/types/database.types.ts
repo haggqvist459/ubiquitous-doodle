@@ -29,6 +29,21 @@ export type Database = {
         }
         Relationships: []
       }
+      main_ingredients: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       recipe_cuisines: {
         Row: {
           cuisine_id: string
@@ -59,20 +74,27 @@ export type Database = {
           },
         ]
       }
-      recipe_type_links: {
+      recipe_main_ingredients: {
         Row: {
+          main_ingredient_id: string
           recipe_id: string
-          type_id: string
         }
         Insert: {
+          main_ingredient_id: string
           recipe_id: string
-          type_id: string
         }
         Update: {
+          main_ingredient_id?: string
           recipe_id?: string
-          type_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "recipe_type_links_main_ingredient_id_fkey"
+            columns: ["main_ingredient_id"]
+            isOneToOne: false
+            referencedRelation: "main_ingredients"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "recipe_type_links_recipe_id_fkey"
             columns: ["recipe_id"]
@@ -80,29 +102,7 @@ export type Database = {
             referencedRelation: "recipes"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "recipe_type_links_type_id_fkey"
-            columns: ["type_id"]
-            isOneToOne: false
-            referencedRelation: "recipe_types"
-            referencedColumns: ["id"]
-          },
         ]
-      }
-      recipe_types: {
-        Row: {
-          id: string
-          name: string
-        }
-        Insert: {
-          id?: string
-          name: string
-        }
-        Update: {
-          id?: string
-          name?: string
-        }
-        Relationships: []
       }
       recipes: {
         Row: {
@@ -112,9 +112,9 @@ export type Database = {
           include_weekly: boolean
           ingredients: Json[]
           instructions: Json[]
+          main_ingredient: Database["public"]["Enums"]["main_ingredient"]
           subtitle: string | null
           title: string
-          type: Database["public"]["Enums"]["main_ingredient"]
         }
         Insert: {
           created_at?: string
@@ -123,9 +123,9 @@ export type Database = {
           include_weekly?: boolean
           ingredients: Json[]
           instructions: Json[]
+          main_ingredient: Database["public"]["Enums"]["main_ingredient"]
           subtitle?: string | null
           title: string
-          type: Database["public"]["Enums"]["main_ingredient"]
         }
         Update: {
           created_at?: string
@@ -134,9 +134,9 @@ export type Database = {
           include_weekly?: boolean
           ingredients?: Json[]
           instructions?: Json[]
+          main_ingredient?: Database["public"]["Enums"]["main_ingredient"]
           subtitle?: string | null
           title?: string
-          type?: Database["public"]["Enums"]["main_ingredient"]
         }
         Relationships: []
       }

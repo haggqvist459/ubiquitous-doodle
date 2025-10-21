@@ -1,12 +1,9 @@
-
 import { Header } from "@/components"
-
 
 type Props = {
   title: string
   description: string
   isOpen: boolean
-  showCancel?: boolean
   onCancel?: () => void
   onConfirm: () => void
 }
@@ -15,7 +12,6 @@ const Modal = ({
   title,
   description,
   isOpen,
-  showCancel = false,
   onCancel,
   onConfirm
 }: Props) => {
@@ -32,10 +28,10 @@ const Modal = ({
         <Header title={title} />
         <p className="my-2">{description}</p>
         <div className="flex justify-end space-x-2">
-          {showCancel && (
-            <button onClick={onCancel} className="px-4 py-2 bg-secondary rounded">Cancel</button>
+          {onCancel && (
+            <button onClick={onCancel} className="px-4 py-2 bg-secondary text-primary-text rounded">Cancel</button>
           )}
-          <button onClick={onConfirm} className="px-4 py-2 bg-primary text-blue-50 rounded">Confirm</button>
+          <button onClick={onConfirm} className="px-4 py-2 bg-primary text-primary-text rounded">Confirm</button>
         </div>
       </div>
     </div>

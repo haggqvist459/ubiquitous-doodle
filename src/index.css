@@ -94,7 +94,7 @@ textarea {
   }
 
   .primary-button {
-    @apply w-full mx-auto px-4 my-2 rounded border-2 border-lightblue bg-lightblue text-primary-text font-medium hover:border-primary-text disabled:opacity-50 disabled:hover:border-lightblue
+    @apply w-full mx-auto px-4 my-2 rounded border-2 border-primary bg-primary text-primary-text font-medium hover:border-primary-text disabled:opacity-50 disabled:hover:border-lightblue
   }
 
   .section-form {
