@@ -54,9 +54,9 @@ const recipeFormSlice = createSlice({
       K extends keyof InstructionType
     >(
       state: RecipeFormState,
-      action: PayloadAction<{ id: string, key: K, value: InstructionType[K]}>
+      action: PayloadAction<{ id: string, key: K, value: InstructionType[K] }>
     ) => {
-      const { id, key, value} = action.payload;
+      const { id, key, value } = action.payload;
       const instruction = state.recipeDraft.instructions.find(i => i.id === id)
       if (instruction) {
         instruction[key] = value
@@ -100,6 +100,7 @@ const recipeFormSlice = createSlice({
     setCurrentSection: (state, action: PayloadAction<(typeof SECTIONS)[number]>) => {
       state.currentSection = action.payload;
     },
+    resetState: () => initialState
   }
 })
 
@@ -111,5 +112,7 @@ export const {
   removeIngredient,
   addInstruction,
   removeInstruction,
-  setCurrentSection, } = recipeFormSlice.actions
+  setCurrentSection,
+  resetState
+} = recipeFormSlice.actions
 export default recipeFormSlice.reducer

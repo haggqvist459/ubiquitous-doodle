@@ -3,6 +3,8 @@ import { selectIngredients, selectInstructions, selectMetadata, setCurrentSectio
 import SectionWrapper from "../shared/SectionWrapper";
 import { Header, Output } from '@/components'
 
+
+
 const PreviewSection = () => {
 
   const dispatch = useAppDispatch()
@@ -12,7 +14,7 @@ const PreviewSection = () => {
 
   return (
     <SectionWrapper>
-      <div className="md:px-5 md:pt-2">
+      <div className="px-16 md:px-5 md:pt-2">
         <Header title="Preview recipe" />
         <div className="h-[60vh] flex flex-col flex-grow overflow-y-auto space-y-4 md:flex-row md:justify-between">
           <div className="space-y-2 w-full">
@@ -65,22 +67,22 @@ const PreviewSection = () => {
             ))}
           </div>
         </div>
-        <div className="w-full mt-2 flex space-x-2 md:hidden">
-          <button
-            type="button"
-            className="w-1/2 bg-secondary font-medium text-primary-text rounded"
-            onClick={() => dispatch(setCurrentSection('Instructions'))}
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            className="w-1/2 bg-primary font-medium text-primary-text rounded"
-            onClick={() => { }}
-          >
-            Submit
-          </button>
-        </div>
+          <div className="w-full mt-2 flex space-x-2 md:hidden">
+            <button
+              type="button"
+              className="w-1/2 bg-secondary font-medium text-primary-text rounded"
+              onClick={() => dispatch(setCurrentSection('Instructions'))}
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              form="create-recipe-form"
+              className="w-1/2 bg-primary font-medium text-primary-text rounded"
+            >
+              Submit
+            </button>
+          </div>
       </div>
     </SectionWrapper>
   );
