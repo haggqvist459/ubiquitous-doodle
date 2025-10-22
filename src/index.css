@@ -52,12 +52,13 @@ textarea {
 
   --color-primary-text: #262626;
 
+  --color-green: #AEDCAE;
   --color-lightblue: #AEDCD5;
   --color-darkblue: #AEBBDC;
   --color-purple: #C8AEDC;
   --color-pink: #DCAEC8;
   --color-orange: #DCBBAE;
-  --color-yellow: #D5DCAE;  
+  --color-yellow: #D5DCAE;
 
 
 
@@ -157,6 +158,14 @@ textarea {
 
 
 @layer utilities {
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border-width: 2px;
+  }
 
   /* Hides scrollbar */
   ::-webkit-scrollbar {

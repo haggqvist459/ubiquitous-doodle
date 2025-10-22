@@ -14,7 +14,7 @@
 - [ ] Delete functionality 
 
 ## Auth: 
-- [ ] Move auth from AdminLayout to backend
+- [x] Move auth from AdminLayout to backend
 
 ### Main Page: 
 - [ ] List all recipes 

@@ -85,7 +85,7 @@ const InstructionSection = ({ handleNavigation}: Props) => {
         </div>
         <button
           type="button"
-          className="primary-button mt-2"
+          className="mt-2 w-full bg-lightblue text-primary-text font-medium my-2 rounded border-2 border-lightblue hover:border-primary-text"
           onClick={() => dispatch(addInstruction())}
         >
           Add Instruction
