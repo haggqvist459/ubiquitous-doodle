@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+#### To Do:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Admin Page: 
+## Create Form
+- [ ] Re-work cuisine and type, move away from enum to join tables 
+  - [ ] backend functionality to fetch the main_ingredients and cuisines 
+- [ ] Replace dropdowns with buttons for multple choice 
+- [ ] Re-work inserts into db 
 
-Currently, two official plugins are available:
+## Add / Update / Remove filter options
+- [ ] Add form for editing these filter options
+- [ ] Add form for creation of new filters 
+- [ ] Delete functionality 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Auth: 
+- [ ] Move auth from AdminLayout to backend
 
-## React Compiler
+### Main Page: 
+- [ ] List all recipes 
+- [ ] Add the filters as dropdowns 
+- [ ] Details view => link to edit form for admins? 
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Weekly lists: 
+- [ ] Generate lists based on full randomisation 
+ - [ ] Pick number of days  
+ - [ ] Change number of people
+ - [ ] Add filter options here too 
+ 
+### Grocery list: 
+- [ ] Re-use previous list project, add here 
+ - [ ] Localstorage persist grocery list
+ - [ ] Add new items to list 
+ - [ ] share lists?

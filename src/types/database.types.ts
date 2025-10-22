@@ -16,45 +16,45 @@ export type Database = {
     Tables: {
       cuisines: {
         Row: {
-          id: string
+          id: number
           name: string
         }
         Insert: {
-          id?: string
+          id?: number
           name: string
         }
         Update: {
-          id?: string
+          id?: number
           name?: string
         }
         Relationships: []
       }
       main_ingredients: {
         Row: {
-          id: string
+          id: number
           name: string
         }
         Insert: {
-          id?: string
+          id?: number
           name: string
         }
         Update: {
-          id?: string
+          id?: number
           name?: string
         }
         Relationships: []
       }
       recipe_cuisines: {
         Row: {
-          cuisine_id: string
+          cuisine_id: number
           recipe_id: string
         }
         Insert: {
-          cuisine_id: string
+          cuisine_id: number
           recipe_id: string
         }
         Update: {
-          cuisine_id?: string
+          cuisine_id?: number
           recipe_id?: string
         }
         Relationships: [
@@ -76,27 +76,27 @@ export type Database = {
       }
       recipe_main_ingredients: {
         Row: {
-          main_ingredient_id: string
+          main_ingredient_id: number
           recipe_id: string
         }
         Insert: {
-          main_ingredient_id: string
+          main_ingredient_id: number
           recipe_id: string
         }
         Update: {
-          main_ingredient_id?: string
+          main_ingredient_id?: number
           recipe_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "recipe_type_links_main_ingredient_id_fkey"
+            foreignKeyName: "recipe_main_ingredients_main_ingredient_id_fkey"
             columns: ["main_ingredient_id"]
             isOneToOne: false
             referencedRelation: "main_ingredients"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "recipe_type_links_recipe_id_fkey"
+            foreignKeyName: "recipe_main_ingredients_recipe_id_fkey"
             columns: ["recipe_id"]
             isOneToOne: false
             referencedRelation: "recipes"
