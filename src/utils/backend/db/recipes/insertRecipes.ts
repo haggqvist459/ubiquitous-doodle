@@ -1,4 +1,4 @@
-import { supabase } from "@/supabase";
+import { supabase } from "../client";
 
 export async function insertRecipe(recipe: unknown) {
   const {
@@ -22,22 +22,3 @@ export async function insertRecipe(recipe: unknown) {
   }
 }
 
-
-
-// import { supabase } from "@/supabase";
-
-// export async function insertRecipe(recipe: unknown) {
-//   console.log(await supabase.auth.getSession());
-//   try {
-//     const { data, error } = await supabase
-//       .from("recipes")
-//       .insert([recipe])
-//       .select();
-
-//     if (error) throw error;
-//     return data;
-//   } catch (err) {
-//     console.error("Error inserting recipe:", err);
-//     throw err;
-//   }
-// }

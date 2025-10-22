@@ -6,6 +6,7 @@
   - [ ] backend functionality to fetch the main_ingredients and cuisines 
 - [ ] Replace dropdowns with buttons for multple choice 
 - [ ] Re-work inserts into db 
+- [ ] look into as unkown on insert db query
 
 ## Add / Update / Remove filter options
 - [ ] Add form for editing these filter options
