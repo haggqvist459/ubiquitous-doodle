@@ -26,14 +26,22 @@ const PreviewSection = () => {
               label="Description"
               value={metaData.subtitle}
             />
-            <Output
-              label="Main ingredient"
-              value={metaData.type}
-            />
-            <Output
-              label="Cuisine"
-              value={metaData.cuisine}
-            />
+            <Header title="Types" headerType="sub-header" />
+            <div className="flex">
+              {metaData.types?.map((type) => (
+                <Output
+                  value={type.name}
+                />
+              ))}
+            </div>
+            <Header title="Cuisines" headerType="sub-header" />
+            <div className="flex">
+              {metaData.cuisines?.map((cuisine) => (
+                <Output
+                  value={cuisine.name}
+                />
+              ))}
+            </div>
             <Output
               label="Include in weekly suggestions"
               value={metaData.includeWeekly ? "Yes" : "No"}
@@ -67,22 +75,22 @@ const PreviewSection = () => {
             ))}
           </div>
         </div>
-          <div className="w-full mt-2 flex space-x-2 md:hidden">
-            <button
-              type="button"
-              className="w-1/2 bg-secondary font-medium text-primary-text rounded"
-              onClick={() => dispatch(setCurrentSection('Instructions'))}
-            >
-              Back
-            </button>
-            <button
-              type="submit"
-              form="create-recipe-form"
-              className="w-1/2 bg-primary font-medium text-primary-text rounded"
-            >
-              Submit
-            </button>
-          </div>
+        <div className="w-full mt-2 flex space-x-2 md:hidden">
+          <button
+            type="button"
+            className="w-1/2 bg-secondary font-medium text-primary-text rounded"
+            onClick={() => dispatch(setCurrentSection('Instructions'))}
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            form="create-recipe-form"
+            className="w-1/2 bg-primary font-medium text-primary-text rounded"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </SectionWrapper>
   );

@@ -1,20 +1,19 @@
 import { supabase } from "../client";
+import { DB_TABLES, DB_TABLE_ROWS } from "@/utils/backend/constants";
+import { InsertRecipeType } from "../types";
 
-export const insertRecipe = async (recipe: unknown) => {
+export const insertRecipe = async (recipe: InsertRecipeType) => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
   if (!session) throw new Error("No active Supabase session");
 
-  const authClient = supabase.from("recipes").insert([recipe]).select();
+  const { data, error } = await supabase
+    .from(DB_TABLES.RECIPES)
+    .insert([recipe])
+    .select(DB_TABLE_ROWS.RECIPES.ID)
+    .single();
 
-  try {
-    const { data, error } = await authClient;
-    if (error) throw error;
-    return data;
-  } catch (err) {
-    console.error("Error inserting recipe:", err);
-    throw err;
-  }
+  if (error) throw error;
+  return data.id as string;
 };

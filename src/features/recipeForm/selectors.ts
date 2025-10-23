@@ -6,8 +6,8 @@ export const selectMetadata = createSelector(
   (recipeDraft) => ({
     title: recipeDraft.title,
     subtitle: recipeDraft.subtitle,
-    type: recipeDraft.type,
-    cuisine: recipeDraft.cuisine,
+    types: recipeDraft.types,
+    cuisines: recipeDraft.cuisines,
     includeWeekly: recipeDraft.includeWeekly,
   })
 );

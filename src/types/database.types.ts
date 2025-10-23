@@ -16,45 +16,45 @@ export type Database = {
     Tables: {
       cuisines: {
         Row: {
-          id: number
+          id: string
           name: string
         }
         Insert: {
-          id?: number
+          id?: string
           name: string
         }
         Update: {
-          id?: number
+          id?: string
           name?: string
         }
         Relationships: []
       }
       main_ingredients: {
         Row: {
-          id: number
+          id: string
           name: string
         }
         Insert: {
-          id?: number
+          id?: string
           name: string
         }
         Update: {
-          id?: number
+          id?: string
           name?: string
         }
         Relationships: []
       }
       recipe_cuisines: {
         Row: {
-          cuisine_id: number
+          cuisine_id: string
           recipe_id: string
         }
         Insert: {
-          cuisine_id: number
+          cuisine_id: string
           recipe_id: string
         }
         Update: {
-          cuisine_id?: number
+          cuisine_id?: string
           recipe_id?: string
         }
         Relationships: [
@@ -76,15 +76,15 @@ export type Database = {
       }
       recipe_main_ingredients: {
         Row: {
-          main_ingredient_id: number
+          main_ingredient_id: string
           recipe_id: string
         }
         Insert: {
-          main_ingredient_id: number
+          main_ingredient_id: string
           recipe_id: string
         }
         Update: {
-          main_ingredient_id?: number
+          main_ingredient_id?: string
           recipe_id?: string
         }
         Relationships: [
@@ -107,34 +107,28 @@ export type Database = {
       recipes: {
         Row: {
           created_at: string
-          cuisine: Database["public"]["Enums"]["cuisine"] | null
           id: string
           include_weekly: boolean
           ingredients: Json[]
           instructions: Json[]
-          main_ingredient: Database["public"]["Enums"]["main_ingredient"]
           subtitle: string | null
           title: string
         }
         Insert: {
           created_at?: string
-          cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: string
           include_weekly?: boolean
           ingredients: Json[]
           instructions: Json[]
-          main_ingredient: Database["public"]["Enums"]["main_ingredient"]
           subtitle?: string | null
           title: string
         }
         Update: {
           created_at?: string
-          cuisine?: Database["public"]["Enums"]["cuisine"] | null
           id?: string
           include_weekly?: boolean
           ingredients?: Json[]
           instructions?: Json[]
-          main_ingredient?: Database["public"]["Enums"]["main_ingredient"]
           subtitle?: string | null
           title?: string
         }

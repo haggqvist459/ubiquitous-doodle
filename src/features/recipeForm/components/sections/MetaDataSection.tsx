@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import * as filtersApi from "@/utils/backend/api/";
-import { updateMetadataField, selectMetadata, setCurrentSection } from "@/features/recipeForm";
+import { FilterOptionType } from "@/types";
+import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } from "@/features/recipeForm";
 import SectionWrapper from "../shared/SectionWrapper";
 import { Input, ToggleButton, Header, Loading, Error, ButtonRow } from "@/components";
 
@@ -19,10 +20,14 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
     subtitle: metadata.subtitle,
   });
 
-  const [typeOptions, setTypeOptions] = useState<{ id: string; name: string }[]>([]);
-  const [cuisineOptions, setCuisineOptions] = useState<{ id: string; name: string }[]>([]);
+  const [typeOptions, setTypeOptions] = useState<FilterOptionType[]>([]);
+  const [cuisineOptions, setCuisineOptions] = useState<FilterOptionType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const handleFilterToggle = (filterCategory: "types" | "cuisines", filter: FilterOptionType) => {
+    dispatch(toggleFilter({ filterCategory, filter }));
+  };
 
   useEffect(() => {
     const loadFilters = async () => {
@@ -87,8 +92,8 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                     setLocalMetadata(prev => ({ ...prev, subtitle: e.target.value }))
                   }
                   onBlur={() => {
-                    if (localMetadata.title !== metadata.title) {
-                      dispatch(updateMetadataField({ key: "title", value: localMetadata.title }));
+                    if (localMetadata.subtitle !== metadata.subtitle) {
+                      dispatch(updateMetadataField({ key: "subtitle", value: localMetadata.subtitle }));
                     }
                   }}
                 />
@@ -99,10 +104,20 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                     onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
                   />
                 </div>
-                <Header title="Select types" headerType="sub-header"/>
-                <ButtonRow items={typeOptions} largePattern={true}/>
-                <Header title="Select cuisines" headerType="sub-header"/>
-                <ButtonRow items={cuisineOptions} reverse={true}/>
+                <Header title="Select types" headerType="sub-header" />
+                <ButtonRow
+                  selected={metadata.types}
+                  items={typeOptions}
+                  onClick={handleFilterToggle}
+                  filterCategory="types"
+                />
+                <Header title="Select cuisines" headerType="sub-header" />
+                <ButtonRow
+                  selected={metadata.cuisines}
+                  items={cuisineOptions} 
+                  onClick={handleFilterToggle}
+                  filterCategory="cuisines"
+                />
               </>}
         </div>
       </div>

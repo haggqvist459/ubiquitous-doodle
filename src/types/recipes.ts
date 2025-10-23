@@ -1,5 +1,6 @@
-import { Database, Tables } from "./database.types"
+import { Tables } from "./database.types"
 import { UNITS } from "@/utils"
+
 export type RecipeDbType = Tables<"recipes">
 
 export type Unit = (typeof UNITS)[number];
@@ -22,10 +23,15 @@ export type RecipeType = {
   id: number
   title: string
   subtitle: string | null
-  cuisine: Database["public"]["Enums"]["cuisine"] | null
-  type: Database["public"]["Enums"]["main_ingredient"]
+  cuisines: FilterOptionType[] | null
+  types: FilterOptionType[] | null
   includeWeekly: boolean
   ingredients: IngredientType[]
   instructions: InstructionType[]
   createdAt: Date
+}
+
+export type FilterOptionType = {
+  id: string
+  name: string
 }

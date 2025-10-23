@@ -1,9 +1,4 @@
-type ButtonRowProps = {
-  items: { id: string; name: string }[]
-  reverse?: boolean
-  largePattern?: boolean
-  selectedIds?: string[]
-};
+import { FilterOptionType } from "@/types";
 
 const BG_CLASSES = [
   "bg-lightblue",
@@ -25,36 +20,38 @@ const BORDER_CLASSES = [
   "border-green",
 ] as const;
 
-const ButtonRow = ({ items, reverse = false, largePattern = false, selectedIds }: ButtonRowProps) => {
+type Props = {
+  items: FilterOptionType[];
+  selected: FilterOptionType[] | null;
+  filterCategory: "types" | "cuisines";
+  onClick: (filterCategory: "types" | "cuisines", filter: FilterOptionType) => void;
+};
 
+const ButtonRow = ({ items, selected = [], filterCategory, onClick }: Props) => {
   const rows: React.ReactNode[] = [];
-
-  const pattern = largePattern ? [4, 5] : [3, 4];
+  const pattern = [4, 5];
   let index = 0;
+  let patternIndex = 0;
 
   while (index < items.length) {
-    const rowSize = pattern[rows.length % pattern.length];
+    const rowSize = pattern[patternIndex % pattern.length];
     const rowItems = items.slice(index, index + rowSize);
 
     rows.push(
-      <div
-        key={`row-${rows.length}`}
-        className="flex flex-wrap justify-center gap-2 my-2"
-      >
+      <div key={index} className="flex flex-wrap justify-center gap-2 my-2">
         {rowItems.map((item, i) => {
-          const isSelected = selectedIds?.includes(item.id);
           const colorIndex = (index + i) % BG_CLASSES.length;
-          const pick = reverse ? BG_CLASSES.length - 1 - colorIndex : colorIndex;
-
-          const backgroundClass = BG_CLASSES[pick];
-          const borderClass = isSelected
-            ? "border-primary-text"
-            : BORDER_CLASSES[pick];
+          const bg = BG_CLASSES[colorIndex];
+          const border = selected?.some((s) => s.id === item.id)
+            ? "border-primary-text font-medium"
+            : BORDER_CLASSES[colorIndex];
 
           return (
             <button
               key={item.id}
-              className={`${backgroundClass} ${borderClass} text-primary-text text-sm py-1 px-2.5 border-2 rounded-2xl hover:font-medium`}
+              type="button"
+              onClick={() => onClick(filterCategory, item)}
+              className={`${bg} ${border} text-primary-text text-sm py-1 px-2.5 border-2 rounded-2xl`}
             >
               {item.name}
             </button>
@@ -64,6 +61,7 @@ const ButtonRow = ({ items, reverse = false, largePattern = false, selectedIds }
     );
 
     index += rowSize;
+    patternIndex++;
   }
 
   return <>{rows}</>;

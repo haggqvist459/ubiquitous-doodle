@@ -1,4 +1,4 @@
-import { fetchMainIngredients, fetchCuisines } from "@/utils/backend/db/filters";
+import { fetchMainIngredients, fetchCuisines } from "@/utils/backend/db/filters/fetchFilters";
 
 export const getMainIngredients = async () => {
   const data = await fetchMainIngredients();

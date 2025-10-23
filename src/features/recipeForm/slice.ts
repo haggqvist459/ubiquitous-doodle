@@ -1,15 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { RecipeFormState } from "./types";
-import { IngredientType, InstructionType } from "@/types";
+import { IngredientType, InstructionType, FilterOptionType } from "@/types";
 import { SECTIONS } from "./constants";
 
 const initialState: RecipeFormState = {
   recipeDraft: {
     title: "",
     subtitle: "",
-    cuisine: null,
-    type: null,
+    cuisines: null,
+    types: null,
     includeWeekly: true,
     ingredients: [{
       id: uuidv4(),
@@ -37,6 +37,21 @@ const recipeFormSlice = createSlice({
       action: PayloadAction<{ key: K; value: RecipeFormState["recipeDraft"][K] }>
     ) => {
       state.recipeDraft[action.payload.key] = action.payload.value
+    },
+    toggleFilter: (
+      state,
+      action: PayloadAction<{ filterCategory: "types" | "cuisines"; filter: FilterOptionType }>
+    ) => {
+      const { filterCategory, filter } = action.payload;
+      const existing = state.recipeDraft[filterCategory] ?? [];
+
+      const index = existing.findIndex(f => f.id === filter.id);
+
+      state.recipeDraft[filterCategory] =
+        index >= 0
+          ? existing.filter(f => f.id !== filter.id)
+          : [...existing, filter];
+
     },
     updateIngredientField: <
       K extends keyof IngredientType
@@ -106,6 +121,7 @@ const recipeFormSlice = createSlice({
 
 export const {
   updateMetadataField,
+  toggleFilter,
   updateIngredientField,
   updateInstructionField,
   addIngredient,

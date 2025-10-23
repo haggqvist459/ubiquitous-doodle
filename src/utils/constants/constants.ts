@@ -18,14 +18,6 @@ export const NAVBAR_OPTIONS = {
 } as const ;
 
 
-export const DB_TABLES = {
-
-} as const;
-
-export const DB_COLUMNS = {
-
-} as const;
-
 export const LOCALSTORAGE_KEYS = { 
 
 } as const;
