@@ -25,11 +25,13 @@ type Props = {
   selected: FilterOptionType[] | null;
   filterCategory: "types" | "cuisines";
   onClick: (filterCategory: "types" | "cuisines", filter: FilterOptionType) => void;
+  reverse?: boolean
+  largePattern?: boolean
 };
 
-const ButtonRow = ({ items, selected = [], filterCategory, onClick }: Props) => {
+const ButtonRow = ({ items, selected = [], filterCategory, onClick, reverse = false, largePattern = false }: Props) => {
   const rows: React.ReactNode[] = [];
-  const pattern = [4, 5];
+  const pattern = largePattern ? [4,5] : [3,4];
   let index = 0;
   let patternIndex = 0;
 
@@ -41,10 +43,10 @@ const ButtonRow = ({ items, selected = [], filterCategory, onClick }: Props) => 
       <div key={index} className="flex flex-wrap justify-center gap-2 my-2">
         {rowItems.map((item, i) => {
           const colorIndex = (index + i) % BG_CLASSES.length;
-          const bg = BG_CLASSES[colorIndex];
+          const bg = (reverse ? [...BG_CLASSES].reverse() : BG_CLASSES)[colorIndex];
           const border = selected?.some((s) => s.id === item.id)
             ? "border-primary-text font-medium"
-            : BORDER_CLASSES[colorIndex];
+            : (reverse ? [...BORDER_CLASSES].reverse() : BORDER_CLASSES)[colorIndex];
 
           return (
             <button

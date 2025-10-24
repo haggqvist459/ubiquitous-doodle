@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import * as filtersApi from "@/utils/backend/api/";
 import { FilterOptionType } from "@/types";
-import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } from "@/features/recipeForm";
+import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter, setFilterList } from "@/features/recipeForm";
 import SectionWrapper from "../shared/SectionWrapper";
 import { Input, ToggleButton, Header, Loading, Error, ButtonRow } from "@/components";
 
@@ -13,6 +13,9 @@ type Props = {
 const MetaDataSection = ({ handleNavigation }: Props) => {
 
   const metadata = useAppSelector(selectMetadata)
+  const typeFilters = useAppSelector(state => state.recipeForm.typeFilterList);
+  const cuisineFilters = useAppSelector(state => state.recipeForm.cuisineFilterList);
+
   const dispatch = useAppDispatch()
 
   const [localMetadata, setLocalMetadata] = useState({
@@ -20,8 +23,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
     subtitle: metadata.subtitle,
   });
 
-  const [typeOptions, setTypeOptions] = useState<FilterOptionType[]>([]);
-  const [cuisineOptions, setCuisineOptions] = useState<FilterOptionType[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -30,38 +32,48 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
   };
 
   useEffect(() => {
+    const shouldFetchTypes = typeFilters.length === 0;
+    const shouldFetchCuisines = cuisineFilters.length === 0;
+
+    if (!shouldFetchTypes && !shouldFetchCuisines) {
+      setLoading(false);
+      return;
+    }
+
     const loadFilters = async () => {
       setError(false);
       setLoading(true);
-      const [typesRes, cuisinesRes] = await Promise.all([
-        filtersApi.getMainIngredients(),
-        filtersApi.getCuisines(),
-      ]);
-      if (typesRes.success && typesRes.data)
-        setTypeOptions(typesRes.data);
-      else {
-        console.error("Failed to load type filters:", typesRes.error);
-        setTypeOptions([]);
-        setError(true)
+
+      try {
+        const [typesResult, cuisinesResult] = await Promise.all([
+          filtersApi.getMainIngredients(),
+          filtersApi.getCuisines(),
+        ]);
+
+        if (typesResult.success && typesResult.data) {
+          dispatch(setFilterList({ filterCategory: "types", list: typesResult.data }));
+        }
+
+        if (cuisinesResult.success && cuisinesResult.data) {
+          dispatch(setFilterList({ filterCategory: "cuisines", list: cuisinesResult.data }));
+        }
+
+      } catch (err) {
+        console.error("Failed to fetch filter options", err);
+        setError(true);
       }
 
-      if (cuisinesRes.success && cuisinesRes.data)
-        setCuisineOptions(cuisinesRes.data);
-      else {
-        console.error("Failed to load cuisine filters:", cuisinesRes.error);
-        setCuisineOptions([]);
-        setError(true)
-      }
       setLoading(false);
     };
+
     loadFilters();
-  }, []);
+  }, [typeFilters, cuisineFilters]);
 
   return (
     <SectionWrapper>
       <Header title="Create Recipe" />
       <div className="h-[60vh] flex flex-col">
-        <div className="flex-grow space-y-2">
+        <div className="flex-grow overflow-y-auto space-y-2">
           {loading ?
             <Loading />
             :
@@ -107,16 +119,18 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                 <Header title="Select types" headerType="sub-header" />
                 <ButtonRow
                   selected={metadata.types}
-                  items={typeOptions}
+                  items={typeFilters}
                   onClick={handleFilterToggle}
                   filterCategory="types"
+                  largePattern={true}
                 />
                 <Header title="Select cuisines" headerType="sub-header" />
                 <ButtonRow
                   selected={metadata.cuisines}
-                  items={cuisineOptions} 
+                  items={cuisineFilters}
                   onClick={handleFilterToggle}
                   filterCategory="cuisines"
+                  reverse={true}
                 />
               </>}
         </div>

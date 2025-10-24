@@ -2,16 +2,24 @@
 
 ### Admin Page: 
 ## Create Form
-- [ ] Re-work cuisine and type, move away from enum to join tables 
-  - [ ] backend functionality to fetch the main_ingredients and cuisines 
-- [ ] Replace dropdowns with buttons for multple choice 
-- [ ] Re-work inserts into db 
-- [ ] look into as unkown on insert db query
+- [x] Re-work cuisine and type, move away from enum to join tables 
+  - [x] backend functionality to fetch the main_ingredients and cuisines 
+- [x] Replace dropdowns with buttons for multple choice 
+- [x] Re-work inserts into db 
+- [x] look into as unkown on insert db query
+- [x] Persist filters in Redux
 
-## Add / Update / Remove filter options
-- [ ] Add form for editing these filter options
-- [ ] Add form for creation of new filters 
-- [ ] Delete functionality 
+## Edit Form 
+- [ ] Edit, remove & Add for metadata
+- [ ] Edit, Remove & Add features for ingredients 
+- [ ] Edit, Remove & Add features for instructions 
+- [ ] Delete entire recipe 
+
+## Filters
+- [ ] Edit existing filter text
+- [ ] Add new filters
+- [ ] Remove filters
+ - [ ] Cascade into join table
 
 ## Auth: 
 - [x] Move auth from AdminLayout to backend
@@ -20,7 +28,6 @@
 - [ ] List all recipes 
 - [ ] Add the filters as dropdowns 
 - [ ] Details view => link to edit form for admins? 
-
 
 ### Weekly lists: 
 - [ ] Generate lists based on full randomisation 
