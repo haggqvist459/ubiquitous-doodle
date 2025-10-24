@@ -116,22 +116,26 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                     onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
                   />
                 </div>
-                <Header title="Select types" headerType="sub-header" />
-                <ButtonRow
-                  selected={metadata.types}
-                  items={typeFilters}
-                  onClick={handleFilterToggle}
-                  filterCategory="types"
-                  largePattern={true}
-                />
-                <Header title="Select cuisines" headerType="sub-header" />
-                <ButtonRow
-                  selected={metadata.cuisines}
-                  items={cuisineFilters}
-                  onClick={handleFilterToggle}
-                  filterCategory="cuisines"
-                  reverse={true}
-                />
+                <div className="">
+                  <Header title="Select types" headerType="sub-header" />
+                  <ButtonRow
+                    selected={metadata.types}
+                    items={typeFilters}
+                    onClick={handleFilterToggle}
+                    filterCategory="types"
+                    largePattern={true}
+                  />
+                </div>
+                <div className="">
+                  <Header title="Select cuisines" headerType="sub-header" />
+                  <ButtonRow
+                    selected={metadata.cuisines}
+                    items={cuisineFilters}
+                    onClick={handleFilterToggle}
+                    filterCategory="cuisines"
+                    reverse={true}
+                  />
+                </div>
               </>}
         </div>
       </div>
