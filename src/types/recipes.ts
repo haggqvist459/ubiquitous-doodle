@@ -9,7 +9,7 @@ export type IngredientType = {
   id: string
   name: string
   amount: string
-  unit: Unit
+  unit: Unit | ''
 }
 
 export type InstructionType = {

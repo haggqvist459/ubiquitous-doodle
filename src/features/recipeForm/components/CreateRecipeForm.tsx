@@ -9,7 +9,6 @@ import { SlideWrapper, Modal, ModalStateType } from "@/components";
 const CreateRecipeForm = () => {
 
   const currentSection = useAppSelector(state => state.recipeForm.currentSection)
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
   const [viewMode, setViewMode] = useState<"Edit" | "Preview">("Edit");
   const recipeDraft = useAppSelector((state) => state.recipeForm.recipeDraft);
   const dispatch = useAppDispatch()
@@ -22,11 +21,16 @@ const CreateRecipeForm = () => {
     onCancel: undefined
   })
 
+  const [isLargeScreen, setIsLargeScreen] = useState(() =>
+    window.matchMedia('(min-width: 1024px)').matches
+  );
 
   useEffect(() => {
-    const handleResize = () => setIsLargeScreen(window.innerWidth >= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handler = () =>
+      setIsLargeScreen(window.matchMedia('(min-width: 1024px)').matches);
+
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
   }, []);
 
   const handleNavigation = (action: () => void) => {
@@ -42,10 +46,9 @@ const CreateRecipeForm = () => {
   const resetForm = () => {
     setViewMode("Edit")
     dispatch(resetState())
-
   }
 
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -89,7 +92,7 @@ const CreateRecipeForm = () => {
       });
     }
   };
-  
+
   const mobileSlides = [
     { key: "Metadata", component: <MetaDataSection handleNavigation={handleNavigation} /> },
     { key: "Ingredients", component: <IngredientSection handleNavigation={handleNavigation} /> },
@@ -147,10 +150,21 @@ const CreateRecipeForm = () => {
   return (
     <div className="">
       <form onSubmit={handleSubmit} id="create-recipe-form">
-        <SlideWrapper
-          activeKey={isLargeScreen ? viewMode : currentSection}
-          slides={isLargeScreen ? desktopSlides : mobileSlides}
-        />
+        {isLargeScreen ?
+          <>
+            <SlideWrapper
+              activeKey={viewMode}
+              slides={desktopSlides}
+            />
+          </>
+          :
+          <>
+            <SlideWrapper
+              activeKey={currentSection}
+              slides={mobileSlides}
+            />
+          </>
+        }
       </form>
       <Modal
         title={modalState.title}

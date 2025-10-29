@@ -4,16 +4,17 @@ import { NAVBAR_OPTIONS } from "@/utils";
 
 type Props = {
   isExpanded: boolean
+  onClick: () => void
 }
 
-const NavMenu = ({ isExpanded }: Props) => {
+const NavMenu = ({ isExpanded, onClick }: Props) => {
 
   const linkClass = ({ isActive }: { isActive: boolean }) => isActive
     ? 'text-primary-text underline decoration-2 hover:text-primary-text' //active link classes 
     : 'text-primary-text' //inactive` link classes 
 
   const menuItems = Object.values(NAVBAR_OPTIONS).map(({ route, id, text }) => (
-    <NavLink to={route} key={id} className={linkClass}>
+    <NavLink to={route} key={id} className={linkClass} onClick={onClick}>
       <span className="text-lg font-semibold hover:font-bold">{text}</span>
     </NavLink>
   ))

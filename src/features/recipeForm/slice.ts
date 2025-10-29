@@ -15,7 +15,7 @@ const initialState: RecipeFormState = {
       id: uuidv4(),
       name: "",
       amount: "",
-      unit: "-"
+      unit: ""
     }],
     instructions: [{
       id: uuidv4(),
@@ -67,6 +67,22 @@ const recipeFormSlice = createSlice({
         ingredient[key] = value;
       }
     },
+    setIngredients: (state, action: PayloadAction<IngredientType[]>) => {
+      state.recipeDraft.ingredients = action.payload;
+    },
+    addIngredient: (state) => {
+      state.recipeDraft.ingredients.push({
+        id: uuidv4(),
+        name: "",
+        amount: "",
+        unit: "",
+      });
+    },
+    removeIngredient: (state, action: PayloadAction<{ id: string }>) => {
+      state.recipeDraft.ingredients = state.recipeDraft.ingredients.filter(
+        (ingredient) => ingredient.id !== action.payload.id
+      );
+    },
     updateInstructionField: <
       K extends keyof InstructionType
     >(
@@ -79,18 +95,8 @@ const recipeFormSlice = createSlice({
         instruction[key] = value
       }
     },
-    addIngredient: (state) => {
-      state.recipeDraft.ingredients.push({
-        id: uuidv4(),
-        name: "",
-        amount: "",
-        unit: "-",
-      });
-    },
-    removeIngredient: (state, action: PayloadAction<{ id: string }>) => {
-      state.recipeDraft.ingredients = state.recipeDraft.ingredients.filter(
-        (ingredient) => ingredient.id !== action.payload.id
-      );
+    setInstructions: (state, action: PayloadAction<InstructionType[]>) => {
+      state.recipeDraft.instructions = action.payload;
     },
     addInstruction: (state) => {
       const lastOrder =
@@ -138,9 +144,11 @@ export const {
   updateMetadataField,
   toggleFilter,
   updateIngredientField,
-  updateInstructionField,
+  setIngredients,
   addIngredient,
   removeIngredient,
+  updateInstructionField,
+  setInstructions,
   addInstruction,
   removeInstruction,
   setCurrentSection,

@@ -83,7 +83,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   required={true}
                   id="recipeTitle"
                   label="Recipe title"
-                  placeholder="Meatballs"
+                  placeholder="..."
                   value={localMetadata.title}
                   onChange={(e) =>
                     setLocalMetadata(prev => ({ ...prev, title: e.target.value }))
@@ -98,7 +98,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   id="recipeSubtitle"
                   label="Recipe description"
                   multiline={true}
-                  placeholder="Meatballs & potatoes with gravy, lingonberry jam & pickles. "
+                  placeholder="..."
                   value={localMetadata.subtitle ?? ""}
                   onChange={(e) =>
                     setLocalMetadata(prev => ({ ...prev, subtitle: e.target.value }))
@@ -140,7 +140,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
         </div>
       </div>
       {handleNavigation && (
-        <div className="w-full flex justify-end space-x-2 md:hidden">
+        <div className="w-full flex justify-end space-x-2 lg:hidden">
           <button
             type="button"
             disabled={loading || error}

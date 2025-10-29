@@ -10,6 +10,7 @@
 - [x] Persist filters in Redux
 - [ ] Preview section output validation
 - [ ] Simplify ingredients and instruction input - copy paste friendly
+- [ ] Form validation, ensure non-empty fields are not left empty for required inputs
 
 ## Edit Form 
 - [ ] Edit, remove & Add for metadata
@@ -22,6 +23,9 @@
 - [ ] Add new filters
 - [ ] Remove filters
  - [ ] Cascade into join table
+
+## Search function
+- [ ] search function should include matches on recipe titles, descriptions, and from the ingredient lists
 
 ## Auth: 
 - [x] Move auth from AdminLayout to backend
@@ -42,3 +46,8 @@
  - [ ] Localstorage persist grocery list
  - [ ] Add new items to list 
  - [ ] share lists?
+
+ ### MISC:
+ - [ ] Language options
+  - [ ] Translate web elements between ENG/SWE
+  - [ ] Translate recipes between ENG/SWE

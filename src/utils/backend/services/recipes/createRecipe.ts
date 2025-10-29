@@ -1,15 +1,13 @@
 import { insertRecipe } from "@/utils/backend/db";
 import { mapRecipeDraftToDb } from "./mapRecipeDraft";
 import type { RecipeDraftType } from "@/features/recipeForm/types";
-import { attachRecipeFilters } from "../filters";
+import { attachRecipeCuisines, attachRecipeMainIngredients } from "../filters";
 
 export const processRecipe = async (draft: RecipeDraftType) => {
   if (!draft.title.trim()) throw new Error("Recipe title is required.");
-  if (draft.types === null) throw new Error("A main ingredient must be selected.");
-  if (draft.cuisines === null) throw new Error("A cuisine filter must be selected");
   if (
     draft.ingredients.length === 0 ||
-    draft.ingredients.some((i) => !i.name.trim() || !i.amount.trim() || i.unit === "-")
+    draft.ingredients.some((i) => !i.name.trim() || !i.amount.trim() || i.unit === "")
   ) {
     throw new Error("Each ingredient must have a name, amount, and unit.");
   }
@@ -23,7 +21,15 @@ export const processRecipe = async (draft: RecipeDraftType) => {
   try {
     const dbRecipe = mapRecipeDraftToDb(draft);
     const recipeId = await insertRecipe(dbRecipe);
-    await attachRecipeFilters(recipeId, draft.types, draft.cuisines);
+    if (draft.types) {
+      const typeIds = draft.types.map(type => type.id);
+      await attachRecipeMainIngredients(recipeId, typeIds)
+    }
+    if (draft.cuisines) {
+      const cuisineIds = draft.cuisines.map(cuisine => cuisine.id)
+      await attachRecipeCuisines(recipeId, cuisineIds)
+    }
+    
     return recipeId;
   } catch (error) {
     console.error("Recipe creation failed:", error);

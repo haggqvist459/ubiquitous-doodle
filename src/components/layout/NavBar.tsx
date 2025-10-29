@@ -16,9 +16,9 @@ const NavBar = () => {
             <span className='text-xl md:text-2xl font-bold'>List</span>
           </div>
         </NavLink>
-        <NavButton isExpanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />
+        <NavButton isExpanded={isExpanded} onClick={() => setIsExpanded(prev => !prev)} />
       </div>
-      <NavMenu isExpanded={isExpanded}/>
+      <NavMenu isExpanded={isExpanded} onClick={() => setIsExpanded(prev => !prev)} />
     </header>
   )
 }

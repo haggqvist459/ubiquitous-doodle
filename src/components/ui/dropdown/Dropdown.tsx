@@ -3,6 +3,7 @@ import type { DropdownOption } from './types';
 type Props = {
   id: string
   label: string
+  defaultValue?: string
   value: string | number
   required?: boolean
   options: DropdownOption[]
@@ -12,6 +13,7 @@ type Props = {
 const Dropdown = ({
   id,
   label,
+  defaultValue = '',
   value,
   required = false,
   options,
@@ -30,6 +32,7 @@ const Dropdown = ({
           onChange={onChange}
           className="dropdown-text pr-4 truncate"
         >
+          <option value="">{defaultValue}</option>
           {options.map((opt) => (
             <option key={opt.value} value={opt.value ?? ''}>
               {opt.label}
