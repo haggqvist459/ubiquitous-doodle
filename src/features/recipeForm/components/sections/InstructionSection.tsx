@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { addInstruction, updateInstructionField, removeInstruction, selectInstructions, setCurrentSection, setInstructions } from "@/features/recipeForm";
 import { Input, Header, Trashcan, ToggleButton, FadeWrapper } from "@/components";
 import SectionWrapper from "../shared/SectionWrapper";
-import { parseInstructionList } from "../../utils/ParseInstructions";
+import { parseInstructionList } from "../../utils/parseInstructions";
 
 type Props = {
   handleNavigation?: (action: () => void) => void;
