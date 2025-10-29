@@ -8,6 +8,8 @@
 - [x] Re-work inserts into db 
 - [x] look into as unkown on insert db query
 - [x] Persist filters in Redux
+- [ ] Preview section output validation
+- [ ] Simplify ingredients and instruction input - copy paste friendly
 
 ## Edit Form 
 - [ ] Edit, remove & Add for metadata
