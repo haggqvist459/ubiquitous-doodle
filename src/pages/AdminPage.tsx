@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { PageContainer } from "@/components";
-// import { CreateRecipeForm } from "@/features/recipeForm";
 import { CreateRecipeMobile, CreateRecipeDesktop } from "@/features/recipeForm/components";
 
 const AdminPage = () => {
@@ -19,7 +18,6 @@ const AdminPage = () => {
 
   return (
     <PageContainer>
-      {/* <CreateRecipeForm /> */}
       {isLargeScreen ? 
       <CreateRecipeDesktop />
       : <CreateRecipeMobile />  

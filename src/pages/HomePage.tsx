@@ -1,13 +1,16 @@
-import { PageContainer } from "@/components";
+import { PageContainer, Header } from "@/components";
+import { RecipeList } from "@/features/recipeList/components";
+
 
 const HomePage = () => {
+
   return (
     <PageContainer>
-      <div>
-        HomePage
-      </div>
+      <Header title="Recipes"/>
+      <RecipeList />
     </PageContainer>
   );
+  
 }
 
 export default HomePage;

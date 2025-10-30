@@ -8,3 +8,9 @@ export type FilterOptionType = {
   id: string;
   name: string;
 };
+
+export type RecipeListType = {
+  title: string
+  description: string
+  
+}
