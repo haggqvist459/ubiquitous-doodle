@@ -14,7 +14,7 @@ const PreviewSection = () => {
 
   return (
     <SectionWrapper>
-      <div className="px-16 md:px-5 md:pt-2">
+      <div className="md:px-5 md:pt-2">
         <Header title="Preview recipe" />
         <div className="h-[60vh] flex flex-col flex-grow overflow-y-auto space-y-4 md:flex-row md:justify-between">
           <div className="space-y-2 w-full">
@@ -30,6 +30,7 @@ const PreviewSection = () => {
             <div className="flex">
               {metaData.types?.map((type) => (
                 <Output
+                  key={type.id}
                   value={type.name}
                 />
               ))}
@@ -38,6 +39,7 @@ const PreviewSection = () => {
             <div className="flex">
               {metaData.cuisines?.map((cuisine) => (
                 <Output
+                  key={cuisine.id}
                   value={cuisine.name}
                 />
               ))}
@@ -97,9 +99,3 @@ const PreviewSection = () => {
 }
 
 export default PreviewSection;
-
-
-
-/** 
- <div className="w-full md:w-2/3 md:mx-auto border border-primary-text rounded shadow-xl p-1 bg-white md:px-5 md:pt-2">
- */

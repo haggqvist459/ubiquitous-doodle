@@ -71,7 +71,17 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
 
   return (
     <SectionWrapper>
-      <Header title="Create Recipe" />
+      <div className="flex justify-between">
+        <Header title="Create Recipe" />
+        <div className="flex flex-col items-end pr-2">
+          <span className="text-sm font-medium">Weekly list inclusion:</span>
+          <ToggleButton
+            isToggled={metadata.includeWeekly}
+            onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
+          />
+        </div>
+      </div>
+
       <div className="h-[60vh] flex flex-col">
         <div className="flex-grow overflow-y-auto space-y-2">
           {loading ?
@@ -109,13 +119,6 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                     }
                   }}
                 />
-                <div className="flex flex-col">
-                  <span className="label">Include in weekly lists:</span>
-                  <ToggleButton
-                    isToggled={metadata.includeWeekly}
-                    onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}
-                  />
-                </div>
                 <div className="">
                   <Header title="Select types" headerType="sub-header" />
                   <ButtonRow

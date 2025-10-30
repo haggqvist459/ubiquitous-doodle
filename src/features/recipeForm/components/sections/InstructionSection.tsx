@@ -83,8 +83,10 @@ const InstructionSection = ({ handleNavigation }: Props) => {
             <>
               <div className="flex-grow overflow-y-auto space-y-2">
                 {localInstructions.map((instruction) => (
-                  <div key={`${instruction.id}-instruction`}>
-                    <div className="flex items-end space-between space-x-1 mt-2">
+                  <div
+                    className="mb-4"
+                    key={`${instruction.id}-instruction`}>
+                    <div className="flex items-end space-x-1">
                       <Input
                         id={`${instruction.id}-instructionTitle`}
                         placeholder="..."

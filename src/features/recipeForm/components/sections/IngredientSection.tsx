@@ -6,8 +6,6 @@ import { addIngredient, updateIngredientField, removeIngredient, selectIngredien
 import { parseIngredientList } from "../../utils/parseIngredients";
 import SectionWrapper from "../shared/SectionWrapper";
 
-
-
 type Props = {
   handleNavigation?: (action: () => void) => void;
 };
@@ -87,62 +85,66 @@ const IngredientSection = ({ handleNavigation }: Props) => {
               <div className="flex-grow overflow-y-auto space-y-2">
                 {localIngredients.map((ingredient) => (
                   <div
-                    className="flex flex-col xs:flex-row xs:items-end w-full space-x-1 mt-2"
+                    className="flex flex-col w-full space-x-1 mb-4"
                     key={`${ingredient.id}-ingredient`}
                   >
-                    <Input
-                      id={`${ingredient.id}-ingredientText`}
-                      onChange={(e) =>
-                        handleIngredientChange(ingredient.id, "name", e.target.value)
-                      }
-                      onBlur={() => handleIngredientDispatch(ingredient.id, "name")}
-                      placeholder="..."
-                      value={ingredient.name}
-                      label="Ingredient"
-                      required
-                      autoComplete="off"
-                    />
-                    <Input
-                      id={`${ingredient.id}-ingredientAmount`}
-                      onChange={(e) =>
-                        handleIngredientChange(ingredient.id, "amount", e.target.value)
-                      }
-                      onBlur={() => handleIngredientDispatch(ingredient.id, "amount")}
-                      placeholder="0"
-                      value={ingredient.amount}
-                      label="Amount"
-                      required
-                      autoComplete="off"
-                      inputType="number"
-                      allowDecimals
-                    />
-                    <Dropdown
-                      id={`${ingredient.id}-ingredientUnit`}
-                      label="Unit"
-                      onChange={(e) =>
-                        dispatch(
-                          updateIngredientField({
-                            id: ingredient.id,
-                            key: "unit",
-                            value: e.target.value,
-                          })
-                        )
-                      }
-                      options={unitOptions}
-                      defaultValue={'-'}
-                      value={ingredient.unit}
-                      required={true}
-                    />
-                    <button
-                      type="button"
-                      className="mb-0.5 mr-1 disabled:opacity-50"
-                      onClick={() =>
-                        dispatch(removeIngredient({ id: ingredient.id }))
-                      }
-                      disabled={localIngredients.length === 1}
-                    >
-                      <Trashcan />
-                    </button>
+                    <div className="flex items-end w-full space-x-1">
+                      <Input
+                        id={`${ingredient.id}-ingredientText`}
+                        onChange={(e) =>
+                          handleIngredientChange(ingredient.id, "name", e.target.value)
+                        }
+                        onBlur={() => handleIngredientDispatch(ingredient.id, "name")}
+                        placeholder="..."
+                        value={ingredient.name}
+                        label="Ingredient"
+                        required
+                        autoComplete="off"
+                      />
+                      <button
+                        type="button"
+                        className="mb-0.5 mr-1 disabled:opacity-50"
+                        onClick={() =>
+                          dispatch(removeIngredient({ id: ingredient.id }))
+                        }
+                        disabled={localIngredients.length === 1}
+                      >
+                        <Trashcan />
+                      </button>
+                    </div>
+                    <div className="flex flex-col xs:flex-row space-x-1 mt-1">
+                      <Input
+                        id={`${ingredient.id}-ingredientAmount`}
+                        onChange={(e) =>
+                          handleIngredientChange(ingredient.id, "amount", e.target.value)
+                        }
+                        onBlur={() => handleIngredientDispatch(ingredient.id, "amount")}
+                        placeholder="0"
+                        value={ingredient.amount}
+                        label="Amount"
+                        required
+                        autoComplete="off"
+                        inputType="number"
+                        allowDecimals
+                      />
+                      <Dropdown
+                        id={`${ingredient.id}-ingredientUnit`}
+                        label="Unit"
+                        onChange={(e) =>
+                          dispatch(
+                            updateIngredientField({
+                              id: ingredient.id,
+                              key: "unit",
+                              value: e.target.value,
+                            })
+                          )
+                        }
+                        options={unitOptions}
+                        defaultValue={'-'}
+                        value={ingredient.unit}
+                        required={true}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

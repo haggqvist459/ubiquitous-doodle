@@ -8,9 +8,9 @@
 - [x] Re-work inserts into db 
 - [x] look into as unkown on insert db query
 - [x] Persist filters in Redux
-- [ ] Preview section output validation
-- [ ] Simplify ingredients and instruction input - copy paste friendly
-- [ ] Form validation, ensure non-empty fields are not left empty for required inputs
+- [x] Preview section output validation
+- [x] Simplify ingredients and instruction input - copy paste friendly
+- [x] Form validation, ensure non-empty fields are not left empty for required inputs
 
 ## Edit Form 
 - [ ] Edit, remove & Add for metadata
