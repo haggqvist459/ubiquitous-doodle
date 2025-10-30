@@ -1,26 +1,27 @@
 import { supabase } from "../client";
 import { DB_TABLES } from "@/utils/backend/constants";
+import { DbRecipeWithRelations } from "../../types";
 
-export const fetchRecipesWithRelationsFromDB = async () => {
+
+export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRelations[]> => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
   if (!session) throw new Error("No active Supabase session");
 
-  const selectRelations = `
-  *,
-  ${DB_TABLES.RECIPE_MAIN_INGREDIENTS} (
-    ${DB_TABLES.MAIN_INGREDIENTS} (*)
-  ),
-  ${DB_TABLES.RECIPE_CUISINES} (
-    ${DB_TABLES.CUISINES} (*)
-  )
-`;
-
   const { data, error } = await supabase
     .from(DB_TABLES.RECIPES)
-    .select(selectRelations);
+    .select(`
+    *,
+    recipe_main_ingredients (
+      main_ingredients (*)
+    ),
+    recipe_cuisines (
+      cuisines (*)
+    )
+  `);
 
   if (error) throw error;
-  return data;
+  if (data.length === 0) throw new Error("No recipes found or access denied");
+  return data as DbRecipeWithRelations[];
 };

@@ -1,3 +1,5 @@
+export const UNITS = ["tsp", "tbsp", "pcs", "g", "kg", "ml", "cl", "dl", "l", "pinch", "dash"] as const;
+
 export const DB_TABLES = {
   RECIPES: 'recipes',
   RECIPE_MAIN_INGREDIENTS: 'recipe_main_ingredients',
