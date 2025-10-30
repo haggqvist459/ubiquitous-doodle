@@ -32,7 +32,6 @@ export const processRecipe = async (draft: RecipeDraftType) => {
     
     return recipeId;
   } catch (error) {
-    console.error("Recipe creation failed:", error);
     throw new Error("Recipe creation failed — database changes may be incomplete.");
   }
 };

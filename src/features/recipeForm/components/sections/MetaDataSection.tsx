@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import * as filtersApi from "@/utils/backend/api/";
 import { FilterOptionType } from "@/types";

@@ -7,7 +7,6 @@ export const fetchRecipesFromService = async () => {
     const dbData = await fetchRecipesWithRelationsFromDB()
     return mapRecipesDbToUI(dbData)
   } catch (error) {
-    console.error('fetchRecipesFromService failed', error)
     throw error
   }
 }

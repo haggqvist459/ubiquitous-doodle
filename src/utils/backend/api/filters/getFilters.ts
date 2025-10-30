@@ -1,8 +1,8 @@
-import * as filtersService from "@/utils/backend/services/";
+import { getCuisinesService, getMainIngredientsService} from "@/utils/backend/services/";
 
 export const getMainIngredients = async () => {
   try {
-    const data = await filtersService.getMainIngredients();
+    const data = await getMainIngredientsService();
     return { success: true, data };
   } catch (error) {
     console.error("Failed to fetch main ingredients:", error);
@@ -12,7 +12,7 @@ export const getMainIngredients = async () => {
 
 export const getCuisines = async () => {
   try {
-    const data = await filtersService.getCuisines();
+    const data = await getCuisinesService();
     return { success: true, data };
   } catch (error) {
     console.error("Failed to fetch cuisines:", error);

@@ -4,7 +4,10 @@ export const attachRecipeMainIngredients = async (
   recipeId: string,
   mainIngredientIds: string[]
 ) => {
-  if (!mainIngredientIds?.length) return;
+  
+  if (!mainIngredientIds?.length) {
+    throw new Error("attachRecipeMainIngredients called without any IDs");
+  }
 
   try {
     await insertRecipeMainIngredients(recipeId, mainIngredientIds);
@@ -18,7 +21,9 @@ export const attachRecipeCuisines = async (
   recipeId: string,
   cuisineIds: string[]
 ) => {
-  if (!cuisineIds?.length) return;
+  if (!cuisineIds?.length) {
+    throw new Error("attachRecipeCuisines called without any IDs");
+  }
 
   try {
     await insertRecipeCuisines(recipeId, cuisineIds);
