@@ -6,10 +6,6 @@ import { DbRecipeWithRelations } from "../../types";
 export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRelations[]> => {
 
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (!session) throw new Error("No active Supabase session");
 
     const { data, error } = await supabase
       .from(DB_TABLES.RECIPES)

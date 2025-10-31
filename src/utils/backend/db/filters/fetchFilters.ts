@@ -4,10 +4,6 @@ import { DB_TABLES } from "@/utils/backend/constants";
 
 export const fetchMainIngredients = async (): Promise<FilterOptionType[]> => {
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (!session) throw new Error("No active Supabase session");
 
     const { data, error } = await supabase
       .from(DB_TABLES.MAIN_INGREDIENTS)
@@ -26,10 +22,6 @@ export const fetchMainIngredients = async (): Promise<FilterOptionType[]> => {
 export const fetchCuisines = async (): Promise<FilterOptionType[]> => {
 
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (!session) throw new Error("No active Supabase session");
 
     const { data, error } = await supabase
       .from(DB_TABLES.CUISINES)
