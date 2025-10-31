@@ -1,4 +1,4 @@
-import { PageContainer, Header } from "@/components";
+import { PageContainer } from "@/components";
 import { useLocation } from "react-router-dom";
 import { RecipeType } from "@/types";
 import { RecipeDetails } from "@/features/recipeList/components";
