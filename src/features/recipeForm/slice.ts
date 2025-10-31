@@ -7,7 +7,7 @@ import { SECTIONS } from "./constants";
 const initialState: RecipeFormState = {
   recipeDraft: {
     title: "",
-    subtitle: "",
+    description: "",
     cuisines: null,
     types: null,
     includeWeekly: true,

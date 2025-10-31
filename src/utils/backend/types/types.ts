@@ -21,15 +21,15 @@ export type InstructionType = {
   text: string,
 }
 
-export type RecipeListType = {
+export type RecipeType = {
   id: string
   createdAt: Date
   title: string
-  description: string
+  description: string | null
+  cuisines: FilterOptionType[] | null
+  types: FilterOptionType[] | null
   includeWeekly: boolean
-  types: FilterOptionType[] | []
-  cuisines: FilterOptionType[] | []
-  instructions: InstructionType[]
   ingredients: IngredientType[]
+  instructions: InstructionType[]
 }
 

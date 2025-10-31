@@ -5,7 +5,7 @@ export const selectMetadata = createSelector(
   (state: RootState) => state.recipeForm.recipeDraft,
   (recipeDraft) => ({
     title: recipeDraft.title,
-    subtitle: recipeDraft.subtitle,
+    description: recipeDraft.description,
     types: recipeDraft.types,
     cuisines: recipeDraft.cuisines,
     includeWeekly: recipeDraft.includeWeekly,

@@ -107,29 +107,29 @@ export type Database = {
       recipes: {
         Row: {
           created_at: string
+          description: string | null
           id: string
           include_weekly: boolean
           ingredients: Json[]
           instructions: Json[]
-          subtitle: string | null
           title: string
         }
         Insert: {
           created_at?: string
+          description?: string | null
           id?: string
           include_weekly?: boolean
           ingredients: Json[]
           instructions: Json[]
-          subtitle?: string | null
           title: string
         }
         Update: {
           created_at?: string
+          description?: string | null
           id?: string
           include_weekly?: boolean
           ingredients?: Json[]
           instructions?: Json[]
-          subtitle?: string | null
           title?: string
         }
         Relationships: []

@@ -2,6 +2,9 @@ export const ROUTES = {
   HOME: '/',
   ADMIN: '/admin',
   ERROR: '/*',
+  DETAILS: "/recipes/:id",
+  DETAILS_PAGE: '/recipes/',
+  PROFILE: '/profile'
 } as const;
 
 export const NAVBAR_OPTIONS = {

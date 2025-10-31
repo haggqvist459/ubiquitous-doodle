@@ -1,8 +1,17 @@
-type Props = {}
+import { RecipeType } from '@/types';
+import RecipeCard from './RecipeCard';
 
-const RecipeList = (props: Props) => {
+type Props = {
+  recipeList: RecipeType[]
+}
+
+const RecipeList = ({ recipeList }: Props) => {
   return (
-    <div>RecipeList</div>
+    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
+      {recipeList.map((recipe) => (
+        <RecipeCard recipe={recipe}/>
+      ))}
+    </div>
   )
 }
 

@@ -71,7 +71,10 @@ const CreateRecipeDesktop = () => {
         title={modalState.title}
         description={modalState.message}
         isOpen={modalState.isOpen}
-        onConfirm={modalState.onConfirm}
+        onConfirm={() => {
+          modalState.onConfirm();
+          setViewMode("Edit");
+        }}
         onCancel={modalState.onCancel}
       />
     </div>

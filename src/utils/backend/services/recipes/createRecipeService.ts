@@ -21,17 +21,17 @@ export const processRecipe = async (draft: RecipeDraftType) => {
   try {
     const dbRecipe = mapRecipeDraftToDb(draft);
     const recipeId = await insertRecipe(dbRecipe);
-    if (draft.types) {
+    if (draft.types && draft.types.length > 0) {
       const typeIds = draft.types.map(type => type.id);
       await attachRecipeMainIngredients(recipeId, typeIds)
     }
-    if (draft.cuisines) {
+    if (draft.cuisines && draft.cuisines.length > 0) {
       const cuisineIds = draft.cuisines.map(cuisine => cuisine.id)
       await attachRecipeCuisines(recipeId, cuisineIds)
     }
     
     return recipeId;
   } catch (error) {
-    throw new Error("Recipe creation failed — database changes may be incomplete.");
+    throw error;
   }
 };

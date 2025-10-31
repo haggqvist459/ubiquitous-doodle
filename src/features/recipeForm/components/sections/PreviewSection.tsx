@@ -24,7 +24,7 @@ const PreviewSection = () => {
             />
             <Output
               label="Description"
-              value={metaData.subtitle ?? 'No description added for this recipe.'}
+              value={metaData.description ?? 'No description added for this recipe.'}
             />
             <Header title="Types" headerType="sub-header" />
             <div className="flex">

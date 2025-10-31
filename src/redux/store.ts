@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { saveData, LOCALSTORAGE_KEYS } from "@/utils";
+// import { saveData, LOCALSTORAGE_KEYS } from "@/utils";
 import recipeForm from '@/features/recipeForm';
 
 
@@ -9,14 +9,14 @@ export const store = configureStore({
   }
 })
 
-store.subscribe(() => {
-  const state = store.getState();
+// store.subscribe(() => {
+//   const state = store.getState();
 
-  // Object.values(LOCALSTORAGE_KEYS).forEach((key) => {
-  //   saveData(key, state.appState[key]);
-  // });
+//   // Object.values(LOCALSTORAGE_KEYS).forEach((key) => {
+//   //   saveData(key, state.appState[key]);
+//   // });
 
-});
+// });
 
 
 export type RootState = ReturnType<typeof store.getState>;

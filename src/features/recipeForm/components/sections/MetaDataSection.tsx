@@ -20,7 +20,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
 
   const [localMetadata, setLocalMetadata] = useState({
     title: metadata.title,
-    subtitle: metadata.subtitle,
+    description: metadata.description,
   });
 
 
@@ -105,17 +105,17 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   }}
                 />
                 <Input
-                  id="recipeSubtitle"
+                  id="recipeDescription"
                   label="Recipe description"
                   multiline={true}
                   placeholder="..."
-                  value={localMetadata.subtitle ?? ""}
+                  value={localMetadata.description ?? ""}
                   onChange={(e) =>
-                    setLocalMetadata(prev => ({ ...prev, subtitle: e.target.value }))
+                    setLocalMetadata(prev => ({ ...prev, description: e.target.value }))
                   }
                   onBlur={() => {
-                    if (localMetadata.subtitle !== metadata.subtitle) {
-                      dispatch(updateMetadataField({ key: "subtitle", value: localMetadata.subtitle }));
+                    if (localMetadata.description !== metadata.description) {
+                      dispatch(updateMetadataField({ key: "description", value: localMetadata.description }));
                     }
                   }}
                 />

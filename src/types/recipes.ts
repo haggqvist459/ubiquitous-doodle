@@ -22,7 +22,7 @@ export type InstructionType = {
 export type RecipeType = {
   id: string
   title: string
-  subtitle: string | null
+  description: string | null
   cuisines: FilterOptionType[] | null
   types: FilterOptionType[] | null
   includeWeekly: boolean

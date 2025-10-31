@@ -1,6 +1,6 @@
-import { RecipeListType, DbRecipeWithRelations, InstructionType, IngredientType } from '../../types'
+import { RecipeType, DbRecipeWithRelations, InstructionType, IngredientType } from '../../types'
 
-export const mapRecipesDbToUI = (dbRecipes: DbRecipeWithRelations[]): RecipeListType[] => {
+export const mapRecipesDbToUI = (dbRecipes: DbRecipeWithRelations[]): RecipeType[] => {
   return dbRecipes.map((dbRecipe) => {
     const safeMainIngredients = Array.isArray(dbRecipe.recipes_main_ingredients)
       ? dbRecipe.recipes_main_ingredients
@@ -31,7 +31,7 @@ export const mapRecipesDbToUI = (dbRecipes: DbRecipeWithRelations[]): RecipeList
       id: dbRecipe.id,
       createdAt: new Date(dbRecipe.created_at),
       title: dbRecipe.title,
-      description: dbRecipe.subtitle ?? '',
+      description: dbRecipe.description ?? '',
       includeWeekly: dbRecipe.include_weekly,
       types: mappedTypes,
       cuisines: mappedCuisines,
