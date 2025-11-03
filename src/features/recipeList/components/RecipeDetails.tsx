@@ -9,6 +9,15 @@ type Props = {
 const RecipeDetails = ({ recipe }: Props) => {
 
   const [view, setView] = useState<"ingredients" | "instructions">("ingredients");
+  const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
+
+  const toggleCompleted = (instructionId: string) => {
+    setCompletedIds((prev) => {
+      const next = new Set(prev);
+      next.has(instructionId) ? next.delete(instructionId) : next.add(instructionId);
+      return next;
+    });
+  };
 
   return (
     <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto px-2 pb-5">
@@ -33,21 +42,23 @@ const RecipeDetails = ({ recipe }: Props) => {
           </div>
         </button>
         {view === "ingredients" ? (
-          <div>
+          <ul className="list-disc list-inside px-2">
             {recipe.ingredients.map((ingredient) => (
-              <div key={ingredient.id}>
-                <span>
-                  {ingredient.amount} {ingredient.unit} of {ingredient.name}
-                </span>
-              </div>
+              <li
+                className="py-1"
+                key={ingredient.id}>
+                {ingredient.amount} {ingredient.unit} {ingredient.name}
+              </li>
             ))}
-          </div>
+          </ul>
         ) : (
           <div>
             {recipe.instructions.map((instruction) => (
               <div
                 key={instruction.id}
-                className="flex flex-col mt-2"
+                className={`flex flex-col mt-2 cursor-pointer ${completedIds.has(instruction.id) ? "line-through bg-primary-bg" : ""
+                  }`}
+                onClick={() => toggleCompleted(instruction.id)}
               >
                 <span className="label">{instruction.title}</span>
                 <span>{instruction.text}</span>
