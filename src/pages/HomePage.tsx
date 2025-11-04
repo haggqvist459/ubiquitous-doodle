@@ -5,8 +5,6 @@ import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { RecipeType } from '@/types';
 
 
-
-
 const HomePage = () => {
 
   const [recipeList, setRecipeList] = useState<RecipeType[]>([])
@@ -34,6 +32,13 @@ const HomePage = () => {
 
     loadRecipes();
   }, []);
+
+
+  // const menuOptions = Object.values(DAY_KEYS).map((key) => (
+  //   <button key={key} onClick={() => {}} className='text-primary-text font-semibold text-base hover:font-bold'>
+  //     {DAY_TITLES[key]}
+  //   </button>
+  // ))
 
 
   return (
