@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { PageContainer, Header, Loading, Error } from "@/components";
 import { RecipeList } from "@/features/recipeList/components";
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
+import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
 import { RecipeType } from '@/types';
 
 
@@ -34,25 +35,33 @@ const HomePage = () => {
   }, []);
 
 
-  // const menuOptions = Object.values(DAY_KEYS).map((key) => (
-  //   <button key={key} onClick={() => {}} className='text-primary-text font-semibold text-base hover:font-bold'>
-  //     {DAY_TITLES[key]}
-  //   </button>
-  // ))
 
-  
+
 
   return (
     <PageContainer>
-      <Header title="Recipes" />
-      <div className="">
-        {loading ?
-          <Loading />
-          : error ?
-            <Error /> :
-            <>
-              <RecipeList recipeList={recipeList} />
-            </>}
+      <div className="px-3 w-full h-9 bg-primary flex items-center justify-center space-x-5">
+        <button>
+          Types
+        </button>
+        <button>
+          Cuisines
+        </button>
+        <button>
+          Sort by
+        </button>
+      </div>
+      <div className="my-3 px-3">
+        <Header title="Recipes" />
+        <div className="">
+          {loading ?
+            <Loading />
+            : error ?
+              <Error /> :
+              <>
+                <RecipeList recipeList={recipeList} />
+              </>}
+        </div>
       </div>
     </PageContainer>
   );

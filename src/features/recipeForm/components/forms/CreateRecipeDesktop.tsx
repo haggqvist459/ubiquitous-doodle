@@ -60,7 +60,7 @@ const CreateRecipeDesktop = () => {
 
 
   return (
-    <div>
+    <div className="my-2">
       <form onSubmit={handleSubmit} id="create-recipe-form">
         <SlideWrapper
           activeKey={viewMode}
