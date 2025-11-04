@@ -5,6 +5,8 @@ import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { RecipeType } from '@/types';
 
 
+
+
 const HomePage = () => {
 
   const [recipeList, setRecipeList] = useState<RecipeType[]>([])
