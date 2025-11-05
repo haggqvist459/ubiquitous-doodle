@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "@/components";
+import { Heading } from "@/components";
 import { RecipeType } from "@/types";
 
 type Props = {
@@ -21,8 +21,8 @@ const RecipeDetails = ({ recipe }: Props) => {
 
   return (
     <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto mt-5 px-2 pb-5">
-      <Header title={recipe.title} />
-      <Header title={recipe.description ?? ''} headerType="sub-header" />
+      <Heading title={recipe.title} />
+      <Heading title={recipe.description ?? ''} headingType="sub-heading" />
       <div className="md:hidden">
         <button
           onClick={() => setView(view === "ingredients" ? "instructions" : "ingredients")}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PageContainer, Header, Loading, Error } from "@/components";
+import { PageContainer, Heading, Loading, Error } from "@/components";
 import { RecipeList } from "@/features/recipeList/components";
 import { Filters } from '@/features/filters/components'
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
@@ -46,7 +46,7 @@ const HomePage = () => {
     <PageContainer>
       <Filters />
       <div className="my-3 px-3">
-        <Header title="Recipes" />
+        <Heading title="Recipes" />
         <div className="">
           {loading ?
             <Loading />

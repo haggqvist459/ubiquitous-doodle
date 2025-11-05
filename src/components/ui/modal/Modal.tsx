@@ -1,4 +1,4 @@
-import { Header } from "@/components"
+import { Heading } from "@/components"
 
 type Props = {
   title: string
@@ -25,7 +25,7 @@ const Modal = ({
         className="bg-white p-5 rounded shadow-lg w-full max-w-md mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <Header title={title} />
+        <Heading title={title} />
         <p className="my-2">{description}</p>
         <div className="flex justify-end space-x-2">
           {onCancel && (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { UNITS } from "@/utils";
-import { Input, Dropdown, createDropdownOptions, Header, Trashcan, ToggleButton, FadeWrapper } from "@/components";
+import { Input, Dropdown, createDropdownOptions, Heading, Trashcan, ToggleButton, FadeWrapper } from "@/components";
 import { addIngredient, updateIngredientField, removeIngredient, selectIngredients, setCurrentSection, setIngredients } from "@/features/recipeForm";
 import { parseIngredientList } from "../../utils/parseIngredients";
 import SectionWrapper from "../shared/SectionWrapper";
@@ -51,7 +51,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Header title="Add Ingredients" />
+        <Heading title="Add Ingredients" />
         <div className="flex flex-col items-end pr-2">
           <span className="text-sm font-medium">Simplified entry</span>
           <ToggleButton isToggled={displayPasteView} onToggle={() => { setDisplayPasteView(prev => !prev) }} />

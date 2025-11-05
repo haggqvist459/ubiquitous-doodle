@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { addInstruction, updateInstructionField, removeInstruction, selectInstructions, setCurrentSection, setInstructions } from "@/features/recipeForm";
-import { Input, Header, Trashcan, ToggleButton, FadeWrapper } from "@/components";
+import { Input, Heading, Trashcan, ToggleButton, FadeWrapper } from "@/components";
 import SectionWrapper from "../shared/SectionWrapper";
 import { parseInstructionList } from "../../utils/parseInstructions";
 
@@ -50,7 +50,7 @@ const InstructionSection = ({ handleNavigation }: Props) => {
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Header title="Add Instructions" />
+        <Heading title="Add Instructions" />
         <div className="flex flex-col items-end pr-2">
           <span className="text-sm font-medium">Simplified entry</span>
           <ToggleButton isToggled={displayPasteView} onToggle={() => { setDisplayPasteView(prev => !prev) }} />

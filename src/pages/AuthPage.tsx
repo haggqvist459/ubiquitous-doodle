@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "@/components";
+import { Heading } from "@/components";
 import * as authApi from "@/utils/backend/api/auth";
 
 const AuthPage = () => {
@@ -24,7 +24,7 @@ const AuthPage = () => {
   return (
     <form onSubmit={handleSignIn} className="max-w-sm mx-auto mt-10">
       <div className="border rounded border-neutral-800 bg-white shadow-sm flex flex-col gap-3 p-5 items-center">
-        <Header title="Sign In" />
+        <Heading title="Sign In" />
         <input
           type="email"
           value={email}

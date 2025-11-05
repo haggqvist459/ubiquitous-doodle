@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { selectIngredients, selectInstructions, selectMetadata, setCurrentSection } from "@/features/recipeForm";
 import SectionWrapper from "../shared/SectionWrapper";
-import { Header, Output } from '@/components'
+import { Heading, Output } from '@/components'
 
 
 
@@ -15,7 +15,7 @@ const PreviewSection = () => {
   return (
     <SectionWrapper>
       <div className="md:px-5 md:pt-2">
-        <Header title="Preview recipe" />
+        <Heading title="Preview recipe" />
         <div className="h-[60vh] flex flex-col flex-grow overflow-y-auto space-y-4 md:flex-row md:justify-between">
           <div className="space-y-2 w-full">
             <Output
@@ -26,7 +26,7 @@ const PreviewSection = () => {
               label="Description"
               value={metaData.description ?? 'No description added for this recipe.'}
             />
-            <Header title="Types" headerType="sub-header" />
+            <Heading title="Types" headingType="sub-heading" />
             <div className="flex">
               {metaData.types?.map((type) => (
                 <Output
@@ -35,7 +35,7 @@ const PreviewSection = () => {
                 />
               ))}
             </div>
-            <Header title="Cuisines" headerType="sub-header" />
+            <Heading title="Cuisines" headingType="sub-heading" />
             <div className="flex">
               {metaData.cuisines?.map((cuisine) => (
                 <Output
@@ -50,7 +50,7 @@ const PreviewSection = () => {
             />
           </div>
           <div className="space-y-2 w-full">
-            <Header title="Ingredients" headerType="sub-header" />
+            <Heading title="Ingredients" headingType="sub-heading" />
             {ingredients.map((ingredient) => (
               <div
                 key={ingredient.id}
@@ -62,7 +62,7 @@ const PreviewSection = () => {
             ))}
           </div>
           <div className="space-y-2 w-full">
-            <Header title="Instructions" headerType="sub-header" />
+            <Heading title="Instructions" headingType="sub-heading" />
             {instructions.map((instruction) => (
               <div
                 key={instruction.id}

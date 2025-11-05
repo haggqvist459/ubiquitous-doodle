@@ -5,7 +5,7 @@ import { FilterOptionType } from "@/types";
 import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } from "@/features/recipeForm";
 import { setFilterList } from "@/features/filters";
 import SectionWrapper from "../shared/SectionWrapper";
-import { Input, ToggleButton, Header, Loading, Error } from "@/components";
+import { Input, ToggleButton, Heading, Loading, Error } from "@/components";
 import { ButtonRow } from '@/features/filters/components'
 
 type Props = {
@@ -74,7 +74,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Header title="Create Recipe" />
+        <Heading title="Create Recipe" />
         <div className="flex flex-col items-end pr-2">
           <span className="text-sm font-medium">Weekly list inclusion:</span>
           <ToggleButton
@@ -122,7 +122,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   }}
                 />
                 <div className="">
-                  <Header title="Select types" headerType="sub-header" />
+                  <Heading title="Select types" headingType="sub-heading" />
                   <ButtonRow
                     selected={metadata.types}
                     items={typeFilters}
@@ -132,7 +132,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   />
                 </div>
                 <div className="">
-                  <Header title="Select cuisines" headerType="sub-header" />
+                  <Heading title="Select cuisines" headingType="sub-heading" />
                   <ButtonRow
                     selected={metadata.cuisines}
                     items={cuisineFilters}
