@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { PageContainer, Header, Loading, Error, Filters } from "@/components";
+import { PageContainer, Header, Loading, Error } from "@/components";
 import { RecipeList } from "@/features/recipeList/components";
+import { Filters } from '@/features/filters/components'
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
 import { RecipeType } from '@/types';

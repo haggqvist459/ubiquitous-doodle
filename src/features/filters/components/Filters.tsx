@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowIcon } from '../icons'
+import { ArrowIcon } from '../../../components/icons'
 type Props = {
 
 }

@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import * as filtersApi from "@/utils/backend/api/";
 import { FilterOptionType } from "@/types";
-import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter, setFilterList } from "@/features/recipeForm";
+import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } from "@/features/recipeForm";
+import { setFilterList } from "@/features/filters";
 import SectionWrapper from "../shared/SectionWrapper";
-import { Input, ToggleButton, Header, Loading, Error, ButtonRow } from "@/components";
+import { Input, ToggleButton, Header, Loading, Error } from "@/components";
+import { ButtonRow } from '@/features/filters/components'
 
 type Props = {
   handleNavigation?: (action: () => void) => void
@@ -13,8 +15,8 @@ type Props = {
 const MetaDataSection = ({ handleNavigation }: Props) => {
 
   const metadata = useAppSelector(selectMetadata)
-  const typeFilters = useAppSelector(state => state.recipeForm.typeFilterList);
-  const cuisineFilters = useAppSelector(state => state.recipeForm.cuisineFilterList);
+  const typeFilters = useAppSelector(state => state.filters.typeFilters);
+  const cuisineFilters = useAppSelector(state => state.filters.cuisineFilters);
 
   const dispatch = useAppDispatch()
 

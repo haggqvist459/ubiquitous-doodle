@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import { saveData, LOCALSTORAGE_KEYS } from "@/utils";
-import recipeForm from '@/features/recipeForm';
+import recipeFormReducer from '@/features/recipeForm';
+import filterReducer from '@/features/filters';
 
 
 export const store = configureStore({
   reducer: {
-    recipeForm: recipeForm
+    recipeForm: recipeFormReducer,
+    filters: filterReducer
   }
 })
 
