@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { FilterStateType } from "./types";
+import { FilterStateType, SortingFilterType } from "./types";
 import { FilterOptionType } from "@/types";
 
 
@@ -36,8 +36,43 @@ const filterSlice = createSlice({
           break;
       }
     },
-    setActiveFilter: () => {},
-    setActiveSorting: () => {},
+    setActiveFilter: (
+      state,
+      action: PayloadAction<{ filterCategory: "types" | "cuisines"; filter: FilterOptionType }>
+    ) => {
+      const { filterCategory, filter } = action.payload;
+
+      switch (filterCategory) {
+        case 'types':
+          const typeSelected = state.selectedTypeFilters.some(
+            selected => selected.id === filter.id
+          );
+
+          state.selectedTypeFilters = typeSelected
+            ? state.selectedTypeFilters.filter(selected => selected.id !== filter.id)
+            : [...state.selectedTypeFilters, filter];
+          break;
+        case 'cuisines':
+          const cuisineSelected = state.selectedCuisineFilters.some(
+            selected => selected.id === filter.id
+          )
+
+          state.selectedCuisineFilters = cuisineSelected
+            ? state.selectedCuisineFilters.filter(selected => selected.id !== filter.id)
+            : [...state.selectedCuisineFilters, filter]
+          break;
+        default:
+          console.error("filterSlice - setActiveFiler error: incorrect filter category in payload")
+          break;
+      }
+    },
+    setActiveSorting: (
+      state,
+      action: PayloadAction<SortingFilterType>
+    ) => {
+      state.selectedSortingFilter =
+        state.selectedSortingFilter === action.payload ? "None" : action.payload;
+    },
     resetState: () => initialState
   }
 })

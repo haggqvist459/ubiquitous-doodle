@@ -51,3 +51,4 @@
  - [ ] Language options
   - [ ] Translate web elements between ENG/SWE
   - [ ] Translate recipes between ENG/SWE
+  - [ ] Clean up horizontal menu styles in NavMenu - follow Filters.tsx

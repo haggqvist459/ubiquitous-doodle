@@ -1,19 +1,32 @@
 import { useState } from 'react'
-import { ArrowIcon } from '../../../components/icons'
-type Props = {
+import { ArrowIcon } from '@/components'
+import { SORTING_FILTERS } from '../constants'
+import { FilterOptionType } from '@/types'
+import { SortingFilterType } from '../types'
 
+type Props = {
+  typeFilters: FilterOptionType[] | []
+  selectedTypeFilters: FilterOptionType[] | []
+  cuisineFilters: FilterOptionType[] | []
+  selectedCuisineFilters: FilterOptionType[] | []
+  selectedSortingFilter: SortingFilterType
+  onToggleFilter: (filterCategory: 'types' | 'cuisines', filter: FilterOptionType) => void,
+  onSetSorting: (sorting: SortingFilterType) => void
 }
 
-const Filters = (props: Props) => {
+const Filters = ({
+  typeFilters,
+  selectedTypeFilters,
+  cuisineFilters,
+  selectedCuisineFilters,
+  selectedSortingFilter,
+  onToggleFilter,
+  onSetSorting
+}: Props) => {
 
   const [showTypes, setShowTypes] = useState(false)
   const [showCuisines, setShowCuisines] = useState(false)
   const [showSort, setShowSort] = useState(false)
-
-  const linkClass = ({ isActive }: { isActive: boolean }) => isActive
-    ? 'text-primary-text underline decoration-2 hover:text-primary-text' //active link classes 
-    : 'text-primary-text' //inactive` link classes 
-
 
   return (
     <div className="px-3 w-full bg-primary flex flex-col items-center mx-auto">
@@ -24,7 +37,7 @@ const Filters = (props: Props) => {
         >
           Types
           <div
-            className={`transform transition-transform duration-300 ease-in-out ${showTypes ? 'rotate-0' : 'rotate-90'
+            className={`transform transition-transform duration-300 ease-in-out ${showTypes ? 'rotate-0' : '-rotate-90'
               }`}
           >
             <ArrowIcon strokeWidth={3} />
@@ -36,7 +49,7 @@ const Filters = (props: Props) => {
         >
           Cuisines
           <div
-            className={`transform transition-transform duration-300 ease-in-out ${showCuisines ? 'rotate-0' : 'rotate-90'
+            className={`transform transition-transform duration-300 ease-in-out ${showCuisines ? 'rotate-0' : '-rotate-90'
               }`}
           >
             <ArrowIcon strokeWidth={3} />
@@ -48,7 +61,7 @@ const Filters = (props: Props) => {
         >
           Sort by
           <div
-            className={`transform transition-transform duration-300 ease-in-out ${showSort ? 'rotate-0' : 'rotate-90'
+            className={`transform transition-transform duration-300 ease-in-out ${showSort ? 'rotate-0' : '-rotate-90'
               }`}
           >
             <ArrowIcon strokeWidth={3} />
@@ -56,30 +69,61 @@ const Filters = (props: Props) => {
         </button>
       </div>
 
-      <div
-        className={`transition-all duration-300 ease-in-out transform overflow-hidden ${showTypes ? "translate-y-0 h-[32px]" : "-translate-y-full h-0"
-          }`}
-      >
-        <div className="flex px-3 items-center justify-end overflow-x-auto whitespace-nowrap space-x-4">
-          <span>Types content</span>
+      <div className="relative w-full overflow-hidden transition-all duration-300 ease-in-out">
+        <div className={`flex px-2 items-center justify-start md:justify-center overflow-x-auto whitespace-nowrap space-x-4 duration-300 ease-in-out ${showTypes ? 'translate-y-0 h-[32px]' : '-translate-y-full h-0'}`}>
+          {typeFilters.map(typeFilter => (
+            <span
+              key={typeFilter.id}
+              className={
+                selectedTypeFilters.some(selected => selected.id === typeFilter.id)
+                  ? 'text-primary-text underline decoration-2'
+                  : 'text-primary-text font-light'
+              }
+              onClick={() => onToggleFilter("types", typeFilter)}
+            >
+              {typeFilter.name}
+            </span>
+          ))}
         </div>
+        <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-10 bg-gradient-to-r from-primary/80 to-transparent" />
+        <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-10 bg-gradient-to-l from-primary/80 to-transparent" />
       </div>
 
-      <div
-        className={`transition-all duration-300 ease-in-out transform overflow-hidden ${showCuisines ? "translate-y-0 h-[32px]" : "-translate-y-full h-0"
-          }`}
-      >
-        <div className="flex px-3 items-center justify-end overflow-x-auto whitespace-nowrap space-x-4">
-          <span>Cuisines content</span>
+      <div className="relative w-full overflow-hidden transition-all duration-300 ease-in-out">
+        <div className={`flex px-2 items-center justify-start md:justify-center overflow-x-auto whitespace-nowrap space-x-4 duration-300 ease-in-out ${showCuisines ? 'translate-y-0 h-[32px]' : '-translate-y-full h-0'}`}>
+          {cuisineFilters.map(cuisineFilter => (
+            <span
+              key={cuisineFilter.id}
+              className={
+                selectedCuisineFilters.some(selected => selected.id === cuisineFilter.id)
+                  ? 'text-primary-text underline decoration-2'
+                  : 'text-primary-text font-light'
+              }
+              onClick={() => onToggleFilter('cuisines', cuisineFilter)}
+            >
+              {cuisineFilter.name}
+            </span>
+          ))}
         </div>
+        <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-10 bg-gradient-to-r from-primary/80 to-transparent" />
+        <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-10 bg-gradient-to-l from-primary/80 to-transparent" />
       </div>
 
-      <div
-        className={`transition-all duration-300 ease-in-out transform overflow-hidden ${showSort ? "translate-y-0 h-[32px]" : "-translate-y-full h-0"
-          }`}
-      >
-        <div className="flex px-3 items-center justify-end overflow-x-auto whitespace-nowrap space-x-4">
-          <span>Sort content</span>
+      <div className="relative w-full overflow-hidden transition-all duration-300 ease-in-out">
+        <div className={`flex px-2 items-center justify-center overflow-x-auto whitespace-nowrap space-x-4 duration-300 ease-in-out ${showSort ? 'translate-y-0 h-[32px]' : '-translate-y-full h-0'}`}>
+          {SORTING_FILTERS.map(sortingFilter => (
+            <span
+              key={sortingFilter}
+              className={
+                selectedSortingFilter === sortingFilter
+                  ? 'text-primary-text underline decoration-2'
+                  : 'text-primary-text font-light'
+              }
+              onClick={() => onSetSorting(sortingFilter)}
+            >
+              {sortingFilter}
+            </span>
+          ))}
         </div>
       </div>
     </div>

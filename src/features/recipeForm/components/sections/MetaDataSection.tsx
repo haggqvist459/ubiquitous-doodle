@@ -71,6 +71,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
     loadFilters();
   }, [typeFilters, cuisineFilters]);
 
+
   return (
     <SectionWrapper>
       <div className="flex justify-between">

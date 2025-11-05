@@ -1,13 +1,14 @@
 import { FilterOptionType } from "@/types"
+import { SORTING_FILTERS } from "./constants";
 
-type SortingFilter = 'None' | 'NameAsc' | 'NameDesc' | 'CreatedAsc' | 'CreatedDesc'
 
+export type SortingFilterType = (typeof SORTING_FILTERS)[number];
 
 export type FilterStateType = {
   typeFilters: FilterOptionType[] | []
   selectedTypeFilters: FilterOptionType[] | []
   cuisineFilters: FilterOptionType[] | []
   selectedCuisineFilters: FilterOptionType[] | []
-  sortingFilters:  SortingFilter[]
-  selectedSortingFilter: SortingFilter
+  sortingFilters:  SortingFilterType[]
+  selectedSortingFilter: SortingFilterType
 }

@@ -123,19 +123,6 @@ const recipeFormSlice = createSlice({
     setCurrentSection: (state, action: PayloadAction<(typeof SECTIONS)[number]>) => {
       state.currentSection = action.payload;
     },
-    setFilterList: (
-      state,
-      action: PayloadAction<{
-        filterCategory: "types" | "cuisines";
-        list: FilterOptionType[];
-      }>
-    ) => {
-      if (action.payload.filterCategory === "types") {
-        state.typeFilterList = action.payload.list;
-      } else {
-        state.cuisineFilterList = action.payload.list;
-      }
-    },
     resetState: () => initialState
   }
 })
@@ -152,7 +139,6 @@ export const {
   addInstruction,
   removeInstruction,
   setCurrentSection,
-  setFilterList,
   resetState,
 } = recipeFormSlice.actions
 export default recipeFormSlice.reducer
