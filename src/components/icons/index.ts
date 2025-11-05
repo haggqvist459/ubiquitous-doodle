@@ -1,4 +1,5 @@
 export { default as ArrowCircle } from './ArrowCircle';
+export { default as ArrowIcon } from './ArrowIcon';
 export { default as CheckCircle } from './CheckCircle';
 export { default as CheckCross } from './CheckCross';
 export { default as EditIcon } from './EditIcon';

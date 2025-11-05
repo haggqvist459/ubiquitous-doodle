@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PageContainer, Header, Loading, Error } from "@/components";
+import { PageContainer, Header, Loading, Error, Filters } from "@/components";
 import { RecipeList } from "@/features/recipeList/components";
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
@@ -11,6 +11,9 @@ const HomePage = () => {
   const [recipeList, setRecipeList] = useState<RecipeType[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+
+
+
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -40,17 +43,7 @@ const HomePage = () => {
 
   return (
     <PageContainer>
-      <div className="px-3 w-full h-9 bg-primary flex items-center justify-center space-x-5">
-        <button>
-          Types
-        </button>
-        <button>
-          Cuisines
-        </button>
-        <button>
-          Sort by
-        </button>
-      </div>
+      <Filters />
       <div className="my-3 px-3">
         <Header title="Recipes" />
         <div className="">

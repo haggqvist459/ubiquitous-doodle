@@ -1,6 +1,6 @@
 type Props = {
   title: string,
-  headerType?: 'main-header' | 'sub-header'
+  headerType?: 'section-header' | 'main-header' | 'sub-header'
 }
 
 const Header = ({ 

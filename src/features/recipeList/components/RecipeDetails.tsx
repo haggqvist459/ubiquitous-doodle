@@ -20,7 +20,7 @@ const RecipeDetails = ({ recipe }: Props) => {
   };
 
   return (
-    <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto px-2 pb-5">
+    <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto mt-5 px-2 pb-5">
       <Header title={recipe.title} />
       <Header title={recipe.description ?? ''} headerType="sub-header" />
       <div className="md:hidden">
