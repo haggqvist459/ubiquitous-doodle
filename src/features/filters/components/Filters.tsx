@@ -34,10 +34,11 @@ const Filters = ({
         <button
           className="flex space-x-1 items-center"
           onClick={() => setShowTypes(prev => !prev)}
+          disabled={typeFilters.length === 0}
         >
           Types
           <div
-            className={`transform transition-transform duration-300 ease-in-out ${showTypes ? 'rotate-0' : '-rotate-90'
+            className={`transform transition-transform duration-300 ease-in-out disabled:opacity-50 ${showTypes ? 'rotate-0' : '-rotate-90'
               }`}
           >
             <ArrowIcon strokeWidth={3} />
@@ -46,10 +47,11 @@ const Filters = ({
         <button
           className="flex space-x-1 items-center"
           onClick={() => setShowCuisines(prev => !prev)}
+          disabled={cuisineFilters.length === 0}
         >
           Cuisines
           <div
-            className={`transform transition-transform duration-300 ease-in-out ${showCuisines ? 'rotate-0' : '-rotate-90'
+            className={`transform transition-transform duration-300 ease-in-out disabled:opacity-50 ${showCuisines ? 'rotate-0' : '-rotate-90'
               }`}
           >
             <ArrowIcon strokeWidth={3} />
