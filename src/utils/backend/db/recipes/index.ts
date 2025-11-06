@@ -1,2 +1,2 @@
-export * from './fetchRecipesAndRelations';
+export * from './selectRecipesRelations';
 export * from './insertRecipes';

@@ -9,7 +9,7 @@ export const DB_TABLES = {
   USER_ROLES: 'user_roles'
 } as const
 
-export const DB_TABLE_ROWS = {
+export const DB_COLUMNS = {
   RECIPES: {
     ID: 'id',
     TITLE: 'title',
@@ -42,3 +42,11 @@ export const DB_TABLE_ROWS = {
     ROLE: 'role'
   }
 } as const
+
+export const SORTING_FILTERS = [
+  "None",
+  "Name A-Z",
+  "Name Z-A",
+  "Newest",
+  "Oldest",
+] as const;

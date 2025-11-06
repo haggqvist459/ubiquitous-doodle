@@ -1,5 +1,5 @@
 import { supabase } from "../client";
-import { DB_TABLES, DB_TABLE_ROWS } from "@/utils/backend/constants";
+import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { InsertRecipeType } from "../../types";
 
 export const insertRecipe = async (recipe: InsertRecipeType) => {
@@ -13,7 +13,7 @@ export const insertRecipe = async (recipe: InsertRecipeType) => {
     const { data, error } = await supabase
       .from(DB_TABLES.RECIPES)
       .insert([recipe])
-      .select(DB_TABLE_ROWS.RECIPES.ID)
+      .select(DB_COLUMNS.RECIPES.ID)
       .single();
 
     if (error) throw error;

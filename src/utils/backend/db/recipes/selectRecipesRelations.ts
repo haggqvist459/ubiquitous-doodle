@@ -6,7 +6,6 @@ import { DbRecipeWithRelations } from "../../types";
 export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRelations[]> => {
 
   try {
-
     const { data, error } = await supabase
       .from(DB_TABLES.RECIPES)
       .select(`
