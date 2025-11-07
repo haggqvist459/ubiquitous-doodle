@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
+import { fetchFilteredRecipesAPI } from '@/utils/backend/api/recipes';
 import { RecipeType, FilterOptionType, } from '@/types';
 import { PageContainer, Heading, Loading, Error } from "@/components";
 import { RecipeList } from "@/features/recipeList";
@@ -25,18 +26,20 @@ const HomePage = () => {
 
   useEffect(() => {
     const loadRecipes = async () => {
-
       setLoading(true);
-      setError(false)
-      try {
-        const fetchedRecipes = await fetchRecipesAPI();
-        if (fetchedRecipes.data) {
-          setRecipeList(fetchedRecipes.data);
-        }
+      setError(false);
 
+      try {
+        const fetchedRecipes = await fetchFilteredRecipesAPI({
+          sortingFilter: selectedSortingFilter,
+          typeFilters: selectedTypeFilters,
+          cuisineFilters: selectedCuisineFilters,
+        });
+
+        setRecipeList(fetchedRecipes);
       } catch (error) {
         console.error("Failed to load recipes:", error);
-        setError(true)
+        setError(true);
       } finally {
         setLoading(false);
       }

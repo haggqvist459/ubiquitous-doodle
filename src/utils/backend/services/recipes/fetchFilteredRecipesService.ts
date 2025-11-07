@@ -1,2 +1,25 @@
-import { FilterOptionType } from "../../types";
+import { FilterOptionType, SortingFilterType } from "../../types";
+import { selectFilteredRecipes } from "@/utils/backend/db/recipes";
+import { mapRecipesDbToUI } from './mapRecipeUI'
 
+
+export const fetchFilteredRecipesService = async ({
+  typeFilters,
+  cuisineFilters,
+  sortingFilter
+}: {
+  typeFilters?: FilterOptionType[]
+  cuisineFilters?: FilterOptionType[]
+  sortingFilter: SortingFilterType
+}) => {
+
+  const typeIds = typeFilters?.map((type) => type.id);
+  const cuisineIds = cuisineFilters?.map((cuisine) => cuisine.id);
+
+  try {
+    const dbData = await selectFilteredRecipes({typeIds, cuisineIds, sortingFilter});
+    return mapRecipesDbToUI(dbData)
+  } catch (error) {
+    throw error
+  }
+}
