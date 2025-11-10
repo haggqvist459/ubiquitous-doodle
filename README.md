@@ -1,6 +1,13 @@
 #### To Do:
 
 ### Admin Page: 
+
+## Admin dashboard:
+- [ ] Move Create form here
+- [ ] Add navigation to Edit forms 
+- [ ] Delete functionality 
+- [ ] Filter admin 
+
 ## Create Form
 - [x] Re-work cuisine and type, move away from enum to join tables 
   - [x] backend functionality to fetch the main_ingredients and cuisines 
@@ -18,6 +25,11 @@
 - [ ] Edit, Remove & Add features for instructions 
 - [ ] Delete entire recipe 
 
+## Profile page
+- [ ] Update email adress
+- [ ] Change password
+- [ ] Modify list of favorite recipes
+ 
 ## Filters
 - [ ] Edit existing filter text
 - [ ] Add new filters
@@ -31,9 +43,12 @@
 - [x] Move auth from AdminLayout to backend
 
 ### Main Page: 
-- [ ] List all recipes 
-- [ ] Add the filters as dropdowns 
-- [ ] Details view => link to edit form for admins? 
+- [x] List all recipes 
+- [x] Add the filters as dropdowns 
+- [x] Details view 
+  - [ ] Add recipe to favorites
+  - [ ] Link to edit recipe for admins 
+
 
 ### Weekly lists: 
 - [ ] Generate lists based on full randomisation 
@@ -45,10 +60,10 @@
 - [ ] Re-use previous list project, add here 
  - [ ] Localstorage persist grocery list
  - [ ] Add new items to list 
- - [ ] share lists?
+ - [ ] share lists - how?
 
  ### MISC:
  - [ ] Language options
   - [ ] Translate web elements between ENG/SWE
   - [ ] Translate recipes between ENG/SWE
-  - [ ] Clean up horizontal menu styles in NavMenu - follow Filters.tsx
+  - [ ] Clean up horizontal menu classnames in NavMenu - follow Filters.tsx
