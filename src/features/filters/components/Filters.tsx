@@ -3,6 +3,8 @@ import { ArrowIcon } from '@/components'
 import { SORTING_FILTERS } from '../constants'
 import { FilterOptionType } from '@/types'
 import { SortingFilterType } from '../types'
+import { useLanguage } from '@/contexts'
+import { translateText } from '@/utils'
 
 type Props = {
   typeFilters: FilterOptionType[] | []
@@ -24,6 +26,7 @@ const Filters = ({
   onSetSorting
 }: Props) => {
 
+  const { language } = useLanguage()
   const [showTypes, setShowTypes] = useState(false)
   const [showCuisines, setShowCuisines] = useState(false)
   const [showSort, setShowSort] = useState(false)
@@ -36,7 +39,7 @@ const Filters = ({
           onClick={() => setShowTypes(prev => !prev)}
           disabled={typeFilters.length === 0}
         >
-          Types
+          {translateText('filter', 'category', language)}
           <div
             className={`transform transition-transform duration-300 ease-in-out disabled:opacity-50 ${showTypes ? 'rotate-0' : '-rotate-90'
               }`}
@@ -49,7 +52,7 @@ const Filters = ({
           onClick={() => setShowCuisines(prev => !prev)}
           disabled={cuisineFilters.length === 0}
         >
-          Cuisines
+          {translateText('filter', 'cuisines', language)}
           <div
             className={`transform transition-transform duration-300 ease-in-out disabled:opacity-50 ${showCuisines ? 'rotate-0' : '-rotate-90'
               }`}
@@ -61,7 +64,7 @@ const Filters = ({
           className="flex space-x-1 items-center"
           onClick={() => setShowSort(prev => !prev)}
         >
-          Sort by
+          {translateText('filter', 'sort', language)}
           <div
             className={`transform transition-transform duration-300 ease-in-out ${showSort ? 'rotate-0' : '-rotate-90'
               }`}

@@ -6,13 +6,17 @@ import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } 
 import { setFilterList } from "@/features/filters";
 import SectionWrapper from "../shared/SectionWrapper";
 import { Input, ToggleButton, Heading, Loading, Error } from "@/components";
-import { ButtonRow } from '@/features/filters/components'
+import { ButtonRow } from '@/features/filters/components';
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 type Props = {
   handleNavigation?: (action: () => void) => void
 };
 
 const MetaDataSection = ({ handleNavigation }: Props) => {
+
+  const { language } = useLanguage()
 
   const metadata = useAppSelector(selectMetadata)
   const typeFilters = useAppSelector(state => state.filters.typeFilters);
@@ -77,7 +81,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
       <div className="flex justify-between">
         <Heading title="Create Recipe" />
         <div className="flex flex-col items-end pr-2">
-          <span className="text-sm font-medium">Weekly list inclusion:</span>
+          <span className="text-sm font-medium">{translateText('metadata', 'weekly', language)}</span>
           <ToggleButton
             isToggled={metadata.includeWeekly}
             onToggle={() => { dispatch(updateMetadataField({ key: "includeWeekly", value: !metadata.includeWeekly })) }}

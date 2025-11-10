@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { NAVBAR_OPTIONS } from "@/utils";
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils/";
 
 
 type Props = {
@@ -9,13 +11,15 @@ type Props = {
 
 const NavMenu = ({ isExpanded, onClick }: Props) => {
 
+  const { language } = useLanguage()
+
   const linkClass = ({ isActive }: { isActive: boolean }) => isActive
     ? 'text-primary-text underline decoration-2 hover:text-primary-text' //active link classes 
-    : 'text-primary-text' //inactive` link classes 
+    : 'text-primary-text' //inactive link classes 
 
-  const menuItems = Object.values(NAVBAR_OPTIONS).map(({ route, id, text }) => (
+  const menuItems = Object.values(NAVBAR_OPTIONS).map(({ route, id, labelKey }) => (
     <NavLink to={route} key={id} className={linkClass} onClick={onClick}>
-      <span className="text-lg font-semibold hover:font-bold">{text}</span>
+      <span className="text-lg font-semibold hover:font-bold">{translateText('navMenu', labelKey, language)}</span>
     </NavLink>
   ))
 

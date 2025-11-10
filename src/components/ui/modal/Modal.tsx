@@ -1,4 +1,6 @@
-import { Heading } from "@/components"
+import { Heading } from "@/components";
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 type Props = {
   title: string
@@ -15,6 +17,9 @@ const Modal = ({
   onCancel,
   onConfirm
 }: Props) => {
+
+  const { language } = useLanguage()
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -29,9 +34,9 @@ const Modal = ({
         <p className="my-2">{description}</p>
         <div className="flex justify-end space-x-2">
           {onCancel && (
-            <button onClick={onCancel} className="px-4 py-2 bg-secondary text-primary-text rounded">Cancel</button>
+            <button onClick={onCancel} className="px-4 py-2 bg-secondary text-primary-text rounded">{translateText('modal', 'cancel', language)}</button>
           )}
-          <button onClick={onConfirm} className="px-4 py-2 bg-primary text-primary-text rounded">Confirm</button>
+          <button onClick={onConfirm} className="px-4 py-2 bg-primary text-primary-text rounded">{translateText('modal', 'confirm', language)}</button>
         </div>
       </div>
     </div>

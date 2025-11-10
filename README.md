@@ -52,3 +52,4 @@
   - [ ] Translate web elements between ENG/SWE
   - [ ] Translate recipes between ENG/SWE
   - [ ] Clean up horizontal menu styles in NavMenu - follow Filters.tsx
+- [ ] Output.tsx too tightly coupled to single parent. Perhaps not a useful component in this project?
