@@ -1,7 +1,13 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { loadData, saveData, LOCALSTORAGE_KEYS } from "@/utils";
 
-type Language = "sv" | "en";
+export const LANGUAGES = [
+  { code: 'sv', label: 'Svenska' },
+  { code: 'en', label: 'English' }
+] as const;
+
+type Language = (typeof LANGUAGES)[number]['code'];
+
 
 type LanguageContextType = {
   language: Language;

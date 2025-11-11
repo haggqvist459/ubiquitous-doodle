@@ -2,11 +2,13 @@ import { useState } from "react";
 import { MetaDataSection, IngredientSection, InstructionSection, PreviewSection } from "../sections";
 import { SlideWrapper, Modal } from "@/components";
 import { useRecipeFormHandlers } from "../../hooks";
-
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 const CreateRecipeDesktop = () => {
 
 
+  const { language } = useLanguage()
   const { handleNavigation, handleSubmit, modalState } = useRecipeFormHandlers();
   const [viewMode, setViewMode] = useState<"Edit" | "Preview">("Edit");
 
@@ -27,7 +29,7 @@ const CreateRecipeDesktop = () => {
               }
               className="w-1/3 bg-primary font-medium rounded border-primary border-2 hover:border-primary-text"
             >
-              Preview Recipe
+              {translateText('buttons', 'previewRecipe', language)}
             </button>
           </div>
         </div>
@@ -43,14 +45,14 @@ const CreateRecipeDesktop = () => {
               onClick={() => setViewMode("Edit")}
               className="w-1/3 bg-secondary font-medium rounded border-secondary border-2 text-primary-text hover:border-primary-text"
             >
-              Edit Recipe
+              {translateText('buttons', 'edit', language)}
             </button>
             <button
               type="submit"
               form="create-recipe-form"
               className="w-1/3 bg-primary font-medium rounded border-primary border-2 text-primary-text hover:border-primary-text"
             >
-              Submit
+              {translateText('buttons', 'submit', language)}
             </button>
           </div>
         </div>

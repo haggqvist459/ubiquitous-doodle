@@ -2,10 +2,13 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { selectIngredients, selectInstructions, selectMetadata, setCurrentSection } from "@/features/recipeForm";
 import SectionWrapper from "../shared/SectionWrapper";
 import { Heading, Output } from '@/components'
-
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 
 const PreviewSection = () => {
+
+  const { language } = useLanguage();
 
   const dispatch = useAppDispatch()
   const metaData = useAppSelector(selectMetadata);
@@ -15,18 +18,18 @@ const PreviewSection = () => {
   return (
     <SectionWrapper>
       <div className="md:px-5 md:pt-2">
-        <Heading title="Preview recipe" />
+        <Heading title={translateText('preview', 'title', language)} />
         <div className="h-[60vh] flex flex-col flex-grow overflow-y-auto space-y-4 md:flex-row md:justify-between">
           <div className="space-y-2 w-full">
             <Output
-              label="Title"
+              label={translateText('preview', 'recipeTitle', language)}
               value={metaData.title}
             />
             <Output
-              label="Description"
-              value={metaData.description ?? 'No description added for this recipe.'}
+              label={translateText('preview', 'description', language)}
+              value={metaData.description ?? translateText('preview', 'noDescription', language)}
             />
-            <Heading title="Types" headingType="sub-heading" />
+            <Heading title={translateText('preview', 'categories', language)} headingType="sub-heading" />
             <div className="flex">
               {metaData.types?.map((type) => (
                 <Output
@@ -35,7 +38,7 @@ const PreviewSection = () => {
                 />
               ))}
             </div>
-            <Heading title="Cuisines" headingType="sub-heading" />
+            <Heading title={translateText('preview', 'cuisines', language)} headingType="sub-heading" />
             <div className="flex">
               {metaData.cuisines?.map((cuisine) => (
                 <Output
@@ -50,19 +53,19 @@ const PreviewSection = () => {
             />
           </div>
           <div className="space-y-2 w-full">
-            <Heading title="Ingredients" headingType="sub-heading" />
+            <Heading title={translateText('preview', 'ingredients', language)} headingType="sub-heading" />
             {ingredients.map((ingredient) => (
               <div
                 key={ingredient.id}
                 className="">
                 <Output
-                  value={`- ${ingredient.amount} ${ingredient.unit} of ${ingredient.name}`}
+                  value={`- ${ingredient.amount} ${ingredient.unit} ${translateText('preview', 'of', language)} ${ingredient.name}`}
                 />
               </div>
             ))}
           </div>
           <div className="space-y-2 w-full">
-            <Heading title="Instructions" headingType="sub-heading" />
+            <Heading title={translateText('preview', 'instructions', language)} headingType="sub-heading" />
             {instructions.map((instruction) => (
               <div
                 key={instruction.id}
@@ -83,14 +86,14 @@ const PreviewSection = () => {
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
             onClick={() => dispatch(setCurrentSection('Instructions'))}
           >
-            Back
+            {translateText('buttons', 'back', language)}
           </button>
           <button
             type="submit"
             form="create-recipe-form"
             className="w-1/2 bg-primary font-medium text-primary-text rounded"
           >
-            Submit
+            {translateText('buttons', 'submit', language)}
           </button>
         </div>
       </div>

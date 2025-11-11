@@ -6,12 +6,14 @@ import { RecipeType, FilterOptionType, } from '@/types';
 import { PageContainer, Heading, Loading, Error } from "@/components";
 import { RecipeList } from "@/features/recipeList";
 import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterType } from '@/features/filters';
-
+import { useLanguage, } from '@/contexts';
+import { translateText } from '@/utils';
 
 
 
 const HomePage = () => {
 
+  const { language } = useLanguage()
   const dispatch = useAppDispatch();
   const typeFilters = useAppSelector(state => state.filters.typeFilters);
   const cuisineFilters = useAppSelector(state => state.filters.cuisineFilters);
@@ -104,7 +106,7 @@ const HomePage = () => {
         onSetSorting={handleSetSorting}
       />
       <div className="my-3 px-3">
-        <Heading title="Recipes" />
+        <Heading title={translateText('homePage', 'recipe', language)} />
         <div className="">
           {loading ?
             <Loading />

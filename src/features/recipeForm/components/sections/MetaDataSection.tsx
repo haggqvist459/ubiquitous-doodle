@@ -79,7 +79,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Heading title="Create Recipe" />
+        <Heading title={translateText('metadata', 'create', language)} />
         <div className="flex flex-col items-end pr-2">
           <span className="text-sm font-medium">{translateText('metadata', 'weekly', language)}</span>
           <ToggleButton
@@ -99,7 +99,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                 <Input
                   required={true}
                   id="recipeTitle"
-                  label="Recipe title"
+                  label={translateText("metadata", "title", language)}
                   placeholder="..."
                   value={localMetadata.title}
                   onChange={(e) =>
@@ -113,7 +113,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                 />
                 <Input
                   id="recipeDescription"
-                  label="Recipe description"
+                  label={translateText("metadata", "description", language)}
                   multiline={true}
                   placeholder="..."
                   value={localMetadata.description ?? ""}
@@ -127,7 +127,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   }}
                 />
                 <div className="">
-                  <Heading title="Select types" headingType="sub-heading" />
+                  <Heading title={translateText("metadata", "selectCategory", language)} headingType="sub-heading" />
                   <ButtonRow
                     selected={metadata.types}
                     items={typeFilters}
@@ -137,7 +137,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
                   />
                 </div>
                 <div className="">
-                  <Heading title="Select cuisines" headingType="sub-heading" />
+                  <Heading title={translateText("metadata", "selectCuisine", language)} headingType="sub-heading" />
                   <ButtonRow
                     selected={metadata.cuisines}
                     items={cuisineFilters}
@@ -159,7 +159,7 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
               handleNavigation(() => dispatch(setCurrentSection("Ingredients")))
             }
           >
-            Next
+            {translateText("buttons", "next", language)}
           </button>
         </div>
       )}

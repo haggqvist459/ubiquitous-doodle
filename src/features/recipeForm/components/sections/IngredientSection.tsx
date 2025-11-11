@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { UNITS } from "@/utils";
+import { UNITS, translateText } from "@/utils";
 import { Input, Dropdown, createDropdownOptions, Heading, Trashcan, ToggleButton, FadeWrapper } from "@/components";
 import { addIngredient, updateIngredientField, removeIngredient, selectIngredients, setCurrentSection, setIngredients } from "@/features/recipeForm";
 import { parseIngredientList } from "../../utils/parseIngredients";
 import SectionWrapper from "../shared/SectionWrapper";
+import { useLanguage } from "@/contexts";
+
 
 type Props = {
   handleNavigation?: (action: () => void) => void;
@@ -12,6 +14,8 @@ type Props = {
 
 const IngredientSection = ({ handleNavigation }: Props) => {
 
+
+  const { language } = useLanguage()
   const ingredients = useAppSelector(selectIngredients)
   const dispatch = useAppDispatch()
   const [localIngredients, setLocalIngredients] = useState(ingredients)
@@ -48,12 +52,20 @@ const IngredientSection = ({ handleNavigation }: Props) => {
     setDisplayPasteView(false)
   }
 
+  const hasValidIngredient = (ingredients: typeof localIngredients) => {
+    return ingredients.some(ingredient =>
+      ingredient.name.trim() !== "" &&
+      ingredient.amount.trim() !== "" &&
+      ingredient.unit.trim() !== ""
+    );
+  };
+
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Heading title="Add Ingredients" />
+        <Heading title={translateText('ingredients', 'title', language)} />
         <div className="flex flex-col items-end pr-2">
-          <span className="text-sm font-medium">Simplified entry</span>
+          <span className="text-sm font-medium">{translateText('ingredients', "simplify", language)}</span>
           <ToggleButton isToggled={displayPasteView} onToggle={() => { setDisplayPasteView(prev => !prev) }} />
         </div>
       </div>
@@ -66,8 +78,8 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                   multiline={true}
                   rows={15}
                   id="pasteIngredientField"
-                  placeholder="Paste the entire ingredient list here"
-                  label="Ingredients"
+                  placeholder={translateText('ingredients', 'paste', language)}
+                  label={translateText('ingredients', 'ingredients', language)}
                   value={pastedText}
                   onChange={(e) => setPastedText(e.target.value)}
                 />
@@ -77,7 +89,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                 className="my-2 w-full bg-lightblue text-primary-text font-medium rounded border-2 border-lightblue hover:border-primary-text"
                 onClick={() => handleParsedIngredients()}
               >
-                Parse Ingredients
+                {translateText('ingredients', 'parse', language)}
               </button>
             </>
           ) : (
@@ -97,7 +109,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                         onBlur={() => handleIngredientDispatch(ingredient.id, "name")}
                         placeholder="..."
                         value={ingredient.name}
-                        label="Ingredient"
+                        label={translateText('ingredients', 'ingredient', language)}
                         required
                         autoComplete="off"
                       />
@@ -121,7 +133,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                         onBlur={() => handleIngredientDispatch(ingredient.id, "amount")}
                         placeholder="0"
                         value={ingredient.amount}
-                        label="Amount"
+                        label={translateText('ingredients', 'amount', language)}
                         required
                         autoComplete="off"
                         inputType="number"
@@ -129,7 +141,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                       />
                       <Dropdown
                         id={`${ingredient.id}-ingredientUnit`}
-                        label="Unit"
+                        label={translateText('ingredients', 'unit', language)}
                         onChange={(e) =>
                           dispatch(
                             updateIngredientField({
@@ -153,7 +165,7 @@ const IngredientSection = ({ handleNavigation }: Props) => {
                 className="my-2 w-full bg-lightblue text-primary-text font-medium rounded border-2 border-lightblue hover:border-primary-text"
                 onClick={() => dispatch(addIngredient())}
               >
-                Add Ingredient
+                {translateText('ingredients', 'addIngredient', language)}
               </button>
             </>
           )}
@@ -166,14 +178,15 @@ const IngredientSection = ({ handleNavigation }: Props) => {
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
             onClick={() => dispatch(setCurrentSection("Metadata"))}
           >
-            Back
+            {translateText('buttons', 'back', language)}
           </button>
           <button
             type="button"
-            className="w-1/2 bg-primary font-medium text-primary-text rounded"
+            disabled={!hasValidIngredient(localIngredients)}
+            className="w-1/2 bg-primary font-medium text-primary-text rounded disabled:opacity-50"
             onClick={() => handleNavigation(() => dispatch(setCurrentSection("Instructions")))}
           >
-            Next
+            {translateText('buttons', 'next', language)}
           </button>
         </div>
       )}

@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { addInstruction, updateInstructionField, removeInstruction, selectInstructions, setCurrentSection, setInstructions } from "@/features/recipeForm";
 import { Input, Heading, Trashcan, ToggleButton, FadeWrapper } from "@/components";
 import SectionWrapper from "../shared/SectionWrapper";
 import { parseInstructionList } from "../../utils/parseInstructions";
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 type Props = {
   handleNavigation?: (action: () => void) => void;
@@ -12,6 +14,7 @@ type Props = {
 
 const InstructionSection = ({ handleNavigation }: Props) => {
 
+  const { language } = useLanguage()
   const instructions = useAppSelector(selectInstructions);
   const [localInstructions, setLocalInstructions] = useState(instructions);
   const [displayPasteView, setDisplayPasteView] = useState(true)
@@ -47,12 +50,19 @@ const InstructionSection = ({ handleNavigation }: Props) => {
     setDisplayPasteView(false)
   }
 
+  const hasValidInstruction = (ingredients: typeof localInstructions) => {
+    return ingredients.some(instruction =>
+      instruction.title.trim() !== "" &&
+      instruction.text.trim() !== ""
+    );
+  };
+
   return (
     <SectionWrapper>
       <div className="flex justify-between">
-        <Heading title="Add Instructions" />
+        <Heading title={translateText('instructions', 'title', language)} />
         <div className="flex flex-col items-end pr-2">
-          <span className="text-sm font-medium">Simplified entry</span>
+          <span className="text-sm font-medium">{translateText('instructions', 'simplify', language)}</span>
           <ToggleButton isToggled={displayPasteView} onToggle={() => { setDisplayPasteView(prev => !prev) }} />
         </div>
       </div>
@@ -64,9 +74,9 @@ const InstructionSection = ({ handleNavigation }: Props) => {
                 <Input
                   multiline={true}
                   rows={15}
-                  id="pasteIngredientField"
-                  placeholder="Paste the entire instruction set here"
-                  label="Ingredients"
+                  id="pasteInstructionField"
+                  placeholder={translateText('instructions', 'paste', language)}
+                  label={translateText('instructions', 'instructions', language)}
                   value={pastedText}
                   onChange={(e) => setPastedText(e.target.value)}
                 />
@@ -76,7 +86,7 @@ const InstructionSection = ({ handleNavigation }: Props) => {
                 className="my-2 w-full bg-lightblue text-primary-text font-medium rounded border-2 border-lightblue hover:border-primary-text"
                 onClick={() => handleParsedInstructions()}
               >
-                Parse Instructions
+                {translateText('instructions', 'parse', language)}
               </button>
             </>
           ) : (
@@ -90,7 +100,7 @@ const InstructionSection = ({ handleNavigation }: Props) => {
                       <Input
                         id={`${instruction.id}-instructionTitle`}
                         placeholder="..."
-                        label={`Instruction ${instruction.order}`}
+                        label={`${translateText('instructions', 'instruction', language)} ${instruction.order}`}
                         value={instruction.title}
                         onChange={(changeEvent) =>
                           handleInstructionChange(instruction.id, "title", changeEvent.target.value)
@@ -129,7 +139,7 @@ const InstructionSection = ({ handleNavigation }: Props) => {
                 className="my-2 w-full bg-lightblue text-primary-text font-medium rounded border-2 border-lightblue hover:border-primary-text"
                 onClick={() => dispatch(addInstruction())}
               >
-                Add Instruction
+                {translateText('instructions', 'addInstruction', language)}
               </button>
             </>
           )}
@@ -142,14 +152,15 @@ const InstructionSection = ({ handleNavigation }: Props) => {
             className="w-1/2 bg-secondary font-medium text-primary-text rounded"
             onClick={() => dispatch(setCurrentSection("Ingredients"))}
           >
-            Back
+            {translateText('buttons', 'back', language)}
           </button>
           <button
             type="button"
-            className="w-1/2 bg-primary font-medium text-primary-text rounded"
+            disabled={!hasValidInstruction(localInstructions)}
+            className="w-1/2 bg-primary font-medium text-primary-text rounded disabled:opacity-50"
             onClick={() => handleNavigation(() => dispatch(setCurrentSection("Preview")))}
           >
-            Preview
+            {translateText('buttons', 'preview', language)}
           </button>
         </div>
       )}

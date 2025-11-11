@@ -11,8 +11,19 @@ export const translateText = <
 
 export const UIText = {
   en: {
+    buttons: {
+      next: "Next",
+      back: 'Back',
+      preview: 'Preview',
+      previewRecipe: 'Preview recipe',
+      submit: 'Submit',
+      edit: 'Edit recipe',
+    },
     footer: {
       codeGitHub: 'Code on GitHub'
+    },
+    settings: {
+      title: 'Select language'
     },
     navBar: {
       recipe: 'Recipe',
@@ -24,7 +35,7 @@ export const UIText = {
     },
     modal: {
       confirm: 'Confirm',
-      cancel: 'Cancel'
+      cancel: 'Cancel',
     },
     filter: {
       cuisines: 'Cuisines',
@@ -32,19 +43,70 @@ export const UIText = {
       sort: 'Sort By'
     },
     metadata: {
+      create: 'Create recipe',
       weekly: 'Weekly list inclusion',
       title: 'Recipe title',
       description: 'Short description',
-      selectCategory: 'Select category',
+      selectCategory: 'Select categories',
       selectCuisine: 'Select cuisines'
     },
-    buttons: {
-      next: 'Next',
-    },    
+    ingredients: {
+      title: 'Add ingredients',
+      simplify: 'Simplified entry',
+      ingredients: 'Ingredients',
+      paste: 'Paste the entire ingredient list here',
+      parse: 'Parse ingredients',
+      ingredient: 'Ingredient',
+      amount: 'Amount',
+      unit: 'Unit',
+      addIngredient: 'Add ingredient',
+    },
+    instructions: {
+      title: 'Add instructions',
+      simplify: 'Simplified entry',
+      paste: 'Paste the entire instruction set here',
+      instructions: 'Instructions',
+      parse: 'Parse instructions',
+      instruction: 'Instruction',
+      addInstruction: 'Add instruction',
+    },
+    preview: {
+      title: 'Preview recipe',
+      recipeTitle: 'Title',
+      description: 'Description',
+      noDescription: 'No description added for this recipe',
+      categories: 'Categories',
+      cuisines: 'Cuisines',
+      includeWeekly: 'Include in weekly suggestions',
+      yes: 'Yes',
+      no: 'No',
+      of: 'of',
+      ingredients: 'Ingredients',
+      instructions: 'Instructions',
+    },
+    recipeDetailCard: {
+      ingredients: 'Ingredients',
+      instructions: 'Instructions',
+      of: 'of'
+    },
+    homePage: {
+      recipe: 'Recipes'
+    },
   },
   sv: {
+    buttons: {
+      next: "Nästa",
+      back: 'Bakåt',
+      preview: 'Granska',
+      previewRecipe: 'Granska recept',
+      submit: 'Spara',
+      edit: 'Ändra recept',
+    },
     footer: {
       codeGitHub: 'Länk till GitHub'
+    },
+    settings: {
+      title: 'Välj språk'
     },
     navBar: {
       recipe: 'Recipe',
@@ -60,18 +122,58 @@ export const UIText = {
     },
     filter: {
       cuisines: 'Kök',
-      kategori: 'Kategori',
+      category: 'Kategori',
       sort: 'Sortera'
     },
     metadata: {
+      create: 'Skapa recept',
       weekly: 'Inkludera i veckolistor:',
       title: 'Recepttitel',
       description: 'Kort beskrivning',
-      selectCategory: 'Välj kategori',
+      selectCategory: 'Välj kategorier',
       selectCuisine: 'Välj kök'
     },
-    buttons: {
-
+    ingredients: {
+      title: 'Lägg till',
+      simplify: 'Förenklad',
+      ingredients: 'Ingredienser',
+      paste: 'Klistra in hela ingredienslistan här',
+      parse: 'Formatera listan',
+      ingredient: 'Ingrediens',
+      amount: 'Mängd',
+      unit: 'Enhet',
+      addIngredient: 'Lägg till ingrediens',
+    },
+    instructions: {
+      title: 'Lägg till',
+      simplify: 'Förenklad',
+      paste: 'Klistra in hela listan med instruktioner här',
+      instructions: 'Instruktioner',
+      parse: 'Formatera listan',
+      instruction: 'Instruktion',
+      addInstruction: 'Lägg till instruktion',
+    },
+    preview: {
+      title: 'Förhandsgranska recept',
+      recipeTitle: 'Titel',
+      description: 'Beskrivning',
+      noDescription: 'Ingen beskrivning tillagd för detta recept.',
+      categories: 'Kategorier',
+      cuisines: 'Kök',
+      includeWeekly: 'Inkludera i veckolistor',
+      yes: 'Ja',
+      no: 'Nej',
+      of: '',
+      ingredients: 'Ingredienser',
+      instructions: 'Instruktioner',
+    },
+    recipeDetailCard: {
+      ingredients: 'Ingredienser',
+      instructions: 'Instruktioner',
+      of: ''
+    },
+    homePage: {
+      recipe: 'Recept'
     },
   }
 } as const

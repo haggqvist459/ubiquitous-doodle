@@ -10,4 +10,5 @@ export { default as Loading } from './Loading'
 export { default as NavButton } from './NavButton';
 export { default as NavMenu } from './NavMenu';
 export { default as Output } from './Output';
+export { default as Settings } from './Settings';
 export { default as ToggleButton } from './ToggleButton';

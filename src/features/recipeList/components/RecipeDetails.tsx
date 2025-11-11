@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Heading } from "@/components";
 import { RecipeType } from "@/types";
+import { useLanguage } from "@/contexts";
+import { translateText } from "@/utils";
 
 type Props = {
   recipe: RecipeType
 }
 
 const RecipeDetails = ({ recipe }: Props) => {
+
+  const { language } = useLanguage()
 
   const [view, setView] = useState<"ingredients" | "instructions">("ingredients");
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
@@ -20,7 +24,7 @@ const RecipeDetails = ({ recipe }: Props) => {
   };
 
   return (
-    <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto mt-5 px-2 pb-5">
+    <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto mt-5 mb-10 px-2 pb-5">
       <Heading title={recipe.title} />
       <Heading title={recipe.description ?? ''} headingType="sub-heading" />
       <div className="md:hidden">
@@ -32,13 +36,13 @@ const RecipeDetails = ({ recipe }: Props) => {
             className={`flex-1 text-center py-1 px-3 ${view === "ingredients" ? "bg-primary" : "bg-white"
               }`}
           >
-            Ingredients
+            {translateText('recipeDetailCard', 'ingredients', language)}
           </div>
           <div
             className={`flex-1 text-primary-text text-center py-1 px-3 border-l border-primary-text ${view === "instructions" ? "bg-primary" : "bg-white"
               }`}
           >
-            Instructions
+            {translateText('recipeDetailCard', 'instructions', language)}
           </div>
         </button>
         {view === "ingredients" ? (
@@ -47,12 +51,12 @@ const RecipeDetails = ({ recipe }: Props) => {
               <li
                 className="py-1"
                 key={ingredient.id}>
-                {ingredient.amount} {ingredient.unit} {ingredient.name}
+                {ingredient.amount} {ingredient.unit} {translateText('recipeDetailCard', 'of', language)} {ingredient.name}
               </li>
             ))}
           </ul>
         ) : (
-          <div>
+          <div className="">
             {recipe.instructions.map((instruction) => (
               <div
                 key={instruction.id}
@@ -74,7 +78,7 @@ const RecipeDetails = ({ recipe }: Props) => {
             <div
               key={ingredient.id}
               className="flex my-2">
-              <span>{ingredient.amount} {ingredient.unit} of {ingredient.name}</span>
+              <span>{ingredient.amount} {ingredient.unit} {translateText('recipeDetailCard', 'of', language)} {ingredient.name}</span>
             </div>
           ))}
         </div>

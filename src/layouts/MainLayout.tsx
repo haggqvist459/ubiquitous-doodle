@@ -1,10 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { NavBar, Footer, FadeWrapper } from '@/components';
+import { NavBar, Footer, FadeWrapper, } from '@/components';
 
 
 const MainLayout = () => {
+
   const location = useLocation()
   
+
   return (
     <div className="bg-primary-bg min-h-screen flex flex-col relative">
       <NavBar />
