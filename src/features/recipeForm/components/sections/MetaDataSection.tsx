@@ -5,7 +5,7 @@ import { FilterOptionType } from "@/types";
 import { updateMetadataField, selectMetadata, setCurrentSection, toggleFilter } from "@/features/recipeForm";
 import { setFilterList } from "@/features/filters";
 import SectionWrapper from "../shared/SectionWrapper";
-import { Input, ToggleButton, Heading, Loading, Error } from "@/components";
+import { Input, ToggleButton, Heading, LoadingComponent, ErrorComponent } from "@/components";
 import { ButtonRow } from '@/features/filters/components';
 import { useLanguage } from "@/contexts";
 import { translateText } from "@/utils";
@@ -86,9 +86,9 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
       <div className="h-[60vh] flex flex-col">
         <div className="flex-grow overflow-y-auto space-y-2">
           {loading ?
-            <Loading />
+            <LoadingComponent />
             :
-            error ? <Error />
+            error ? <ErrorComponent />
               : <>
                 <Input
                   required={true}

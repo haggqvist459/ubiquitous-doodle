@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
 import { RecipeType, FilterOptionType, } from '@/types';
-import { PageContainer, Heading, Loading, Error } from "@/components";
+import { PageContainer, Heading, LoadingComponent, ErrorComponent } from "@/components";
 import { RecipeList } from "@/features/recipeList";
 import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterType } from '@/features/filters';
 import { useLanguage, } from '@/contexts';
@@ -23,7 +23,7 @@ const HomePage = () => {
   const [recipeList, setRecipeList] = useState<RecipeType[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -68,8 +68,11 @@ const HomePage = () => {
         dispatch(setFilterList({ filterCategory: "types", list: typesResult }));
         dispatch(setFilterList({ filterCategory: "cuisines", list: cuisinesResult }));
 
-      } catch (err) {
-        console.error("Failed to fetch filter options", err);
+      } catch (error) {
+        console.error("Failed to fetch filter options", error);
+        if (error instanceof Error) {
+          setErrorMessage(error.message)
+        }
         setError(true);
       }
 
@@ -102,9 +105,9 @@ const HomePage = () => {
         <Heading title={translateText('homePage', 'recipe', language)} />
         <div className="">
           {loading ?
-            <Loading />
+            <LoadingComponent />
             : error ?
-              <Error /> :
+              <ErrorComponent errorMessage={errorMessage}/> :
               <>
                 <RecipeList recipeList={recipeList} />
               </>}

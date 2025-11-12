@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PageContainer, Error, Loading } from "@/components";
+import { PageContainer, ErrorComponent, LoadingComponent } from "@/components";
 import { useLocation, useParams } from "react-router-dom";
 import { RecipeType } from "@/types";
 import { RecipeDetails } from "@/features/recipeList/components";
@@ -28,9 +28,9 @@ const DetailsPage = () => {
         setRecipe(recipe)
 
       } catch (error) {
-        const typedError = error as Error;
-        console.error('Error fetching recipe:', typedError.message);
-        setErrorMessage(typedError.message);
+        if (error instanceof Error){
+          setErrorMessage(error.message)
+        }
       } finally {
         setLoading(false);
       }
@@ -44,11 +44,11 @@ const DetailsPage = () => {
   return (
     <PageContainer>
       {loading ?
-        <Loading />
+        <LoadingComponent />
         : recipe ?
           <RecipeDetails recipe={recipe} />
           :
-          <Error />
+          <ErrorComponent errorMessage={errorMessage}/>
       }
     </PageContainer>
   )

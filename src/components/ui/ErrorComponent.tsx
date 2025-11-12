@@ -4,7 +4,7 @@ type Props = {
   errorMessage?: string
 }
 
-const Error = ({ errorMessage }: Props) => {
+const ErrorComponent = ({ errorMessage }: Props) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[300px]">
       <ErrorIcon />
@@ -14,4 +14,4 @@ const Error = ({ errorMessage }: Props) => {
   );
 }
 
-export default Error;
+export default ErrorComponent;

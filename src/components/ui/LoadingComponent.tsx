@@ -1,6 +1,6 @@
 import { ArrowCircle } from "@/components/icons"
 
-const Loading = () => {
+const LoadingComponent = () => {
 
 
   return (
@@ -12,4 +12,4 @@ const Loading = () => {
   )
 }
 
-export default Loading;
+export default LoadingComponent;

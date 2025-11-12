@@ -11,7 +11,7 @@ export const useRecipeFormHandlers = () => {
     isOpen: false,
     title: "",
     message: "",
-    onConfirm: () => {},
+    onConfirm: () => { },
     onCancel: undefined,
   });
 
@@ -28,7 +28,7 @@ export const useRecipeFormHandlers = () => {
     event.preventDefault();
     try {
       const result = await createRecipe(recipeDraft);
-      if (result.success) {
+      if (result) {
         setModalState({
           isOpen: true,
           title: "Recipe Created",
@@ -39,14 +39,17 @@ export const useRecipeFormHandlers = () => {
           },
           onCancel: undefined,
         });
-      } else {
-        throw new Error(result.error);
       }
     } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred while creating the recipe.";
+
       setModalState({
         isOpen: true,
         title: "Error Creating Recipe",
-        message: (error as Error).message,
+        message,
         onConfirm: () => setModalState(prev => ({ ...prev, isOpen: false })),
         onCancel: undefined,
       });
