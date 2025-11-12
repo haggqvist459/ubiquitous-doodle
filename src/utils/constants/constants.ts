@@ -18,6 +18,11 @@ export const NAVBAR_OPTIONS = {
     id: 2,
     labelKey: 'admin'
   },
+  PROFILE: {
+    route: ROUTES.PROFILE,
+    id: 3,
+    labelKey: 'profile'
+  }
 } as const ;
 
 

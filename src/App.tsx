@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from '@/utils';
-import { MainLayout, AdminLayout } from '@/layouts';
-import { HomePage, AdminPage, ErrorPage, DetailsPage } from '@/pages';
+import { MainLayout, AuthLayout } from '@/layouts';
+import { HomePage, AdminPage, ErrorPage, DetailsPage, ProfilePage } from '@/pages';
 
 
 
@@ -14,8 +14,9 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path={ROUTES.DETAILS} element={<DetailsPage />} />
           <Route path={ROUTES.ERROR} element={<ErrorPage />} />
-          <Route path={ROUTES.ADMIN} element={<AdminLayout />}>
-            <Route index element={<AdminPage />} />
+          <Route element={<AuthLayout />}>
+            <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+            <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           </Route>
         </Route>
       </Routes>

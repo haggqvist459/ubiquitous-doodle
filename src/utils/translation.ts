@@ -10,6 +10,11 @@ export const translateText = <
 
 export const UIText = {
   en: {
+    navMenu: {
+      home: 'Recipes',
+      admin: 'Admin',
+      profile: 'Profile'
+    },
     buttons: {
       next: "Next",
       back: 'Back',
@@ -27,10 +32,6 @@ export const UIText = {
     navBar: {
       recipe: 'Recipe',
       list: 'List'
-    },
-    navMenu: {
-      home: 'Recipes',
-      admin: 'Admin'
     },
     modal: {
       confirm: 'Confirm',
@@ -93,6 +94,11 @@ export const UIText = {
     },
   },
   sv: {
+    navMenu: {
+      home: 'Recept',
+      admin: 'Admin',
+      profile: 'Profil'
+    },
     buttons: {
       next: "Nästa",
       back: 'Bakåt',
@@ -110,10 +116,6 @@ export const UIText = {
     navBar: {
       recipe: 'Recipe',
       list: 'List'
-    },
-    navMenu: {
-      home: 'Recept',
-      admin: 'Admin'
     },
     modal: {
       confirm: 'Bekräfta',

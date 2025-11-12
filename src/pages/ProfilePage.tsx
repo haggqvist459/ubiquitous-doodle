@@ -5,7 +5,12 @@ import { PageContainer, Heading } from "@/components";
 const ProfilePage = () => {
   return (
     <PageContainer>
-      <Heading title="Profile"/>
+      <div className="my-5 px-5">
+        <Heading title="Profile" />
+      </div>
+      {/* Update email  */}
+      {/* Update password */}
+      {/* Edit favorites */}
     </PageContainer>
   );
 }

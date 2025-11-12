@@ -4,7 +4,7 @@ import { AuthPage } from "@/pages";
 import { FadeWrapper } from "@/components";
 import * as authApi from "@/utils/backend/api/auth";
 
-const AdminLayout = () => {
+const AuthLayout = () => {
   const location = useLocation();
   const [isSignedIn, setIsSignedIn] = useState<boolean | null>(null);
 
@@ -35,4 +35,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default AuthLayout;
