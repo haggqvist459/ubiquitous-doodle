@@ -1,13 +1,12 @@
-
 export const translateText = <
-  Component extends keyof (typeof UIText)["en"],
-  Label extends keyof (typeof UIText)["en"][Component]
+  Lang extends keyof typeof UIText,
+  Component extends keyof typeof UIText[Lang],
+  Label extends keyof typeof UIText[Lang][Component]
 >(
   component: Component,
   label: Label,
-  lang: keyof typeof UIText
-) =>
-  (UIText[lang] as (typeof UIText)["en"])[component][label];
+  lang: Lang
+) => UIText[lang][component][label];
 
 export const UIText = {
   en: {
