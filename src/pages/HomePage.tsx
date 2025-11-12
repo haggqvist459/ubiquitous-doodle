@@ -32,9 +32,7 @@ const HomePage = () => {
       setError(false)
       try {
         const fetchedRecipes = await fetchRecipesAPI();
-        if (fetchedRecipes.data) {
-          setRecipeList(fetchedRecipes.data);
-        }
+        setRecipeList(fetchedRecipes)
 
       } catch (error) {
         console.error("Failed to load recipes:", error);
@@ -67,13 +65,8 @@ const HomePage = () => {
           getCuisines(),
         ]);
 
-        if (typesResult.success && typesResult.data) {
-          dispatch(setFilterList({ filterCategory: "types", list: typesResult.data }));
-        }
-
-        if (cuisinesResult.success && cuisinesResult.data) {
-          dispatch(setFilterList({ filterCategory: "cuisines", list: cuisinesResult.data }));
-        }
+        dispatch(setFilterList({ filterCategory: "types", list: typesResult }));
+        dispatch(setFilterList({ filterCategory: "cuisines", list: cuisinesResult }));
 
       } catch (err) {
         console.error("Failed to fetch filter options", err);

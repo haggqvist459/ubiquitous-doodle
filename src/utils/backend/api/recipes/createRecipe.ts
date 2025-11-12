@@ -4,9 +4,9 @@ import type { RecipeDraftType } from "@/features/recipeForm/types";
 export const createRecipe = async (draft: RecipeDraftType) => {
   try {
     const data = await processRecipe(draft);
-    return { success: true, data };
+    return data
   } catch (error) {
     console.error("Failed to create recipe:", error);
-    return { success: false, error: (error as Error).message };
+    throw error 
   }
 };

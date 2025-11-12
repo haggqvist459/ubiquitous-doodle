@@ -11,11 +11,11 @@ export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRel
       .from(DB_TABLES.RECIPES)
       .select(`
     *,
-    recipe_main_ingredients (
-      main_ingredients (*)
+    ${DB_TABLES.RECIPE_MAIN_INGREDIENTS} (
+      ${DB_TABLES.MAIN_INGREDIENTS} (*)
     ),
-    recipe_cuisines (
-      cuisines (*)
+    ${DB_TABLES.RECIPE_CUISINES} (
+      ${DB_TABLES.CUISINES} (*)
     )
   `);
 

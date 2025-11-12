@@ -9,7 +9,7 @@ export const DB_TABLES = {
   USER_ROLES: 'user_roles'
 } as const
 
-export const DB_TABLE_ROWS = {
+export const DB_COLUMNS = {
   RECIPES: {
     ID: 'id',
     TITLE: 'title',
