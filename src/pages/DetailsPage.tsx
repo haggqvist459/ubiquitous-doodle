@@ -3,7 +3,7 @@ import { PageContainer, Error, Loading } from "@/components";
 import { useLocation, useParams } from "react-router-dom";
 import { RecipeType } from "@/types";
 import { RecipeDetails } from "@/features/recipeList/components";
-import { fetchSingleRecipeAPI } from "@/utils/backend/api/recipes/fetchSingleRecipe";
+import { fetchSingleRecipeAPI } from "@/utils/backend/api/recipes/fetchSingleRecipeAPI";
 
 
 const DetailsPage = () => {

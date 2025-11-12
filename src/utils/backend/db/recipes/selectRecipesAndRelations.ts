@@ -1,6 +1,7 @@
 import { supabase } from "../client";
 import { DB_TABLES } from "@/utils/backend/constants";
 import { DbRecipeWithRelations } from "../../types";
+import { handleError } from "../../utils";
 
 
 export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRelations[]> => {
@@ -24,12 +25,7 @@ export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRel
     return data as DbRecipeWithRelations[];
 
   } catch (error) {
-    throw error
+    return handleError(error, 'fetchRecipesWithRelationsFromDB')
   }
-
-
-
-
-
 
 };

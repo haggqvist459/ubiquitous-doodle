@@ -1,9 +1,10 @@
 import { insertRecipe } from "@/utils/backend/db";
 import { mapRecipeDraftToDb } from "./mapRecipeDraft";
-import type { RecipeDraftType } from "@/features/recipeForm/types";
+import { RecipeDraftType } from "../../types";
 import { attachRecipeCuisines, attachRecipeMainIngredients } from "../filters";
+import { handleError } from "../../utils";
 
-export const processRecipe = async (draft: RecipeDraftType) => {
+export const processRecipe = async (draft: RecipeDraftType): Promise<string> => {
   if (!draft.title.trim()) throw new Error("Recipe title is required.");
   if (
     draft.ingredients.length === 0 ||
@@ -32,6 +33,6 @@ export const processRecipe = async (draft: RecipeDraftType) => {
     
     return recipeId;
   } catch (error) {
-    throw error;
+   return handleError(error, 'processRecipe')
   }
 };

@@ -33,3 +33,5 @@ export type RecipeType = {
   instructions: InstructionType[]
 }
 
+export type RecipeDraftType = Omit<RecipeType, "id" | "createdAt">
+

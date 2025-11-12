@@ -1,10 +1,10 @@
 import { supabase } from "@/utils/backend/db/client";
 import { FilterOptionType } from "../../types/types";
 import { DB_TABLES } from "@/utils/backend/constants";
+import { handleError } from "../../utils";
 
 export const fetchMainIngredients = async (): Promise<FilterOptionType[]> => {
   try {
-
     const { data, error } = await supabase
       .from(DB_TABLES.MAIN_INGREDIENTS)
       .select();
@@ -14,7 +14,7 @@ export const fetchMainIngredients = async (): Promise<FilterOptionType[]> => {
     return data as FilterOptionType[];
 
   } catch (error) {
-    throw error
+    return handleError(error, 'fetchMainIngredients')
   }
 
 };
@@ -32,7 +32,7 @@ export const fetchCuisines = async (): Promise<FilterOptionType[]> => {
     return data as FilterOptionType[];
 
   } catch (error) {
-    throw error
+    return handleError(error, 'fetchCuisines')
   }
 
 };

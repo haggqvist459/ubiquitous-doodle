@@ -1,8 +1,9 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { InsertRecipeType } from "../../types";
+import { handleError } from "../../utils";
 
-export const insertRecipe = async (recipe: InsertRecipeType) => {
+export const insertRecipe = async (recipe: InsertRecipeType): Promise<string> => {
 
   try {
     const {
@@ -21,7 +22,7 @@ export const insertRecipe = async (recipe: InsertRecipeType) => {
     return data.id as string;
 
   } catch (error) {
-    throw error
+    return handleError(error, 'insertRecipe')
   }
 
 

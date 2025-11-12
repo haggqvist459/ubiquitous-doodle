@@ -1,21 +1,22 @@
-import { getCuisinesService, getMainIngredientsService} from "@/utils/backend/services/";
+import { getCuisinesService, getMainIngredientsService } from "@/utils/backend/services/";
+import { handleError } from "../../utils";
+import { FilterOptionType } from "../../types";
 
-export const getMainIngredients = async () => {
+
+export const getMainIngredients = async (): Promise<FilterOptionType[]> => {
   try {
     const data = await getMainIngredientsService();
     return data
   } catch (error) {
-    console.error("Failed to fetch main ingredients:", error);
-    throw error
+    return handleError(error, 'getMainIngredients')
   }
 };
 
-export const getCuisines = async () => {
+export const getCuisines = async (): Promise<FilterOptionType[]> => {
   try {
     const data = await getCuisinesService();
     return data
   } catch (error) {
-    console.error("Failed to fetch cuisines:", error);
-    throw error
+   return handleError(error, 'getCuisines')
   }
 };

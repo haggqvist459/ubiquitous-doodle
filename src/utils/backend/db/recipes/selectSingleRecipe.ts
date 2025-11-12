@@ -1,6 +1,7 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { DbRecipeWithRelations } from "../../types";
+import { handleError } from "../../utils";
 
 export const selectSingleRecipe = async (
   id: string
@@ -22,13 +23,6 @@ export const selectSingleRecipe = async (
     return data;
 
   } catch (error) {
-
-    if (error instanceof Error) {
-      console.error('[selectSingleRecipe] Error:', error.message, error.stack);
-      throw new Error(`selectSingleRecipe failed: ${error.message}`);
-    } else {
-      console.error('[selectSingleRecipe] Non-Error thrown:', error);
-      throw new Error('selectSingleRecipe failed: Unknown error');
-    }
+    return handleError(error, 'selectSingleRecipe')
   }
 }

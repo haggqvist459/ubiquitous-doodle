@@ -1,11 +1,12 @@
 import { supabase } from "@/utils/backend/db/client";
 import { DB_TABLES } from "@/utils/backend/constants";
 import { InsertRecipeCuisine, InsertRecipeMainIngredient } from "../../types";
+import { handleError } from "../../utils";
 
 export const insertRecipeMainIngredients = async (
   recipeId: string,
   mainIngredientIds: string[]
-) => {
+): Promise<void> => {
 
   try {
     const {
@@ -26,7 +27,7 @@ export const insertRecipeMainIngredients = async (
     if (error) throw error;
 
   } catch (error) {
-    throw error;
+    handleError(error, 'insertRecipeMainIngredients')
   }
 };
 
@@ -34,7 +35,7 @@ export const insertRecipeMainIngredients = async (
 export const insertRecipeCuisines = async (
   recipeId: string,
   cuisineIds: string[]
-) => {
+): Promise<void> => {
 
   try {
     const {
@@ -55,7 +56,7 @@ export const insertRecipeCuisines = async (
     if (error) throw error;
 
   } catch (error) {
-    throw error;
+    handleError(error, 'insertRecipeCuisines')
   }
 
 };
