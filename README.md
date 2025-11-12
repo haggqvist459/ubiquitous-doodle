@@ -31,9 +31,17 @@
 - [x] Move auth from AdminLayout to backend
 
 ### Main Page: 
-- [ ] List all recipes 
-- [ ] Add the filters as dropdowns 
-- [ ] Details view => link to edit form for admins? 
+- [x] List all recipes 
+- [x] Add the filters as dropdowns 
+- [x] Details view 
+  - [ ] Link to edit form for admins 
+  - [ ] Mark recipe as favorite for users 
+
+### Profile Page: 
+- [ ] Change email
+- [ ] Change password 
+- [ ] Edit favorite lists 
+- [ ]
 
 ### Weekly lists: 
 - [ ] Generate lists based on full randomisation 
@@ -48,8 +56,8 @@
  - [ ] share lists?
 
  ### MISC:
- - [ ] Language options
-  - [ ] Translate web elements between ENG/SWE
+ - [x] Language options
+  - [x] Translate web elements between ENG/SWE (headings, menu labels etc)
   - [ ] Translate recipes between ENG/SWE
   - [ ] Clean up horizontal menu styles in NavMenu - follow Filters.tsx
 - [ ] Output.tsx too tightly coupled to single parent. Perhaps not a useful component in this project?
