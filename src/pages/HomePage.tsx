@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { fetchRecipesAPI } from '@/utils/backend/api/recipes';
+import { fetchFilteredRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
 import { RecipeType, FilterOptionType, } from '@/types';
 import { PageContainer, Heading, LoadingComponent, ErrorComponent } from "@/components";
@@ -26,17 +26,25 @@ const HomePage = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    const loadRecipes = async () => {
+    setLoading(true);
+    setError(false)
 
-      setLoading(true);
-      setError(false)
+    const loadRecipes = async () => {
       try {
-        const fetchedRecipes = await fetchRecipesAPI();
-        setRecipeList(fetchedRecipes)
+        const fetchedRecipes = await fetchFilteredRecipesAPI({
+          sortingFilter: selectedSortingFilter,
+          typeFilters: selectedTypeFilters,
+          cuisineFilters: selectedCuisineFilters,
+        });
+
+        setRecipeList(fetchedRecipes);
 
       } catch (error) {
-        console.error("Failed to load recipes:", error);
-        setError(true)
+        if (error instanceof Error) {
+          console.error("Failed to load recipes:", error);
+          setError(true)
+          setErrorMessage(error.message)
+        }
       } finally {
         setLoading(false);
       }
@@ -47,16 +55,16 @@ const HomePage = () => {
 
 
   useEffect(() => {
+    setError(false);
+    setLoading(false);
     const shouldFetchTypes = typeFilters.length === 0;
     const shouldFetchCuisines = cuisineFilters.length === 0;
 
     if (!shouldFetchTypes && !shouldFetchCuisines) {
-      setLoading(false);
       return;
     }
 
     const loadFilters = async () => {
-      setError(false);
       setLoading(true);
 
       try {
@@ -74,9 +82,9 @@ const HomePage = () => {
           setErrorMessage(error.message)
         }
         setError(true);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     loadFilters();
@@ -107,7 +115,7 @@ const HomePage = () => {
           {loading ?
             <LoadingComponent />
             : error ?
-              <ErrorComponent errorMessage={errorMessage}/> :
+              <ErrorComponent errorMessage={errorMessage} /> :
               <>
                 <RecipeList recipeList={recipeList} />
               </>}

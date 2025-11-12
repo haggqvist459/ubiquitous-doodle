@@ -11,12 +11,12 @@ export const fetchRecipesWithRelationsFromDB = async (): Promise<DbRecipeWithRel
     const { data, error } = await supabase
       .from(DB_TABLES.RECIPES)
       .select(`
-    *,
-    ${DB_TABLES.RECIPE_MAIN_INGREDIENTS} (
-      ${DB_TABLES.MAIN_INGREDIENTS} (*)
+     *,
+    recipe_main_ingredients (
+      main_ingredients (*)
     ),
-    ${DB_TABLES.RECIPE_CUISINES} (
-      ${DB_TABLES.CUISINES} (*)
+    recipe_cuisines (
+     cuisines (*)
     )
   `);
 
