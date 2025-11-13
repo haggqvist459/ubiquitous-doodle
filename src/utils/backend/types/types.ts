@@ -1,4 +1,4 @@
-import { UNITS, SORTING_FILTERS } from '../constants'
+import { UNITS, SORTING_FILTERS, LANGUAGES } from '../constants'
 
 export type Unit = (typeof UNITS)[number];
 export type SortingFilterType = (typeof SORTING_FILTERS)[number];
@@ -6,7 +6,7 @@ export type SortingFilterType = (typeof SORTING_FILTERS)[number];
 
 export type FilterOptionType = {
   id: string;
-  name: string;
+  text: string;
 };
 
 export type IngredientType = {
@@ -37,3 +37,4 @@ export type RecipeType = {
 
 export type RecipeDraftType = Omit<RecipeType, "id" | "createdAt">
 
+export type LanguageType = (typeof LANGUAGES)[number]['code'];

@@ -1,2 +1,2 @@
-export * from './fetchFilters';
+export * from './selectFilters';
 export * from './insertRecipeFilters';

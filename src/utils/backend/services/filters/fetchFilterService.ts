@@ -1,19 +1,19 @@
-import { fetchMainIngredients, fetchCuisines } from "@/utils/backend/db/filters/fetchFilters";
+import { selectMainIngredients, selectCuisines } from "@/utils/backend/db/filters/selectFilters";
 import { handleError } from "../../utils";
-import { FilterOptionType } from "../../types";
+import { FilterOptionType, LanguageType } from "../../types";
 
-export const getMainIngredientsService = async (): Promise<FilterOptionType[]> => {
+export const getMainIngredientsService = async (language: LanguageType): Promise<FilterOptionType[]> => {
   try {
-    const data = await fetchMainIngredients();
+    const data = await selectMainIngredients(language);
     return data;
   } catch (error) {
     return handleError(error, 'getMainIngredientsService')
   }
 };
 
-export const getCuisinesService = async (): Promise<FilterOptionType[]> => {
+export const getCuisinesService = async (language: LanguageType): Promise<FilterOptionType[]> => {
   try {
-    const data = await fetchCuisines();
+    const data = await selectCuisines(language);
     return data;
   } catch (error) {
     return handleError(error, 'getCuisinesService')

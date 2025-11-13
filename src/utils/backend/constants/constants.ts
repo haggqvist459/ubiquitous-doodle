@@ -29,11 +29,15 @@ export const DB_COLUMNS = {
   },
   CUISINES: {
     ID: 'id',
-    NAME: 'name'
+    NAME: 'name',
+    SV_TEXT: 'sv_text',
+    EN_TEXT: 'en_text',
   },
   MAIN_INGREDIENTS: {
     ID: 'id',
-    NAME: 'name'
+    NAME: 'name',
+    SV_TEXT: 'sv_text',
+    EN_TEXT: 'en_text',
   },
   USER_ROLES: {
     ID: 'id',
@@ -50,3 +54,10 @@ export const SORTING_FILTERS = [
   "Newest",
   "Oldest",
 ] as const;
+
+
+export const LANGUAGES = [
+  { code: 'sv', label: 'Svenska' },
+  { code: 'en', label: 'English' }
+] as const;
+
