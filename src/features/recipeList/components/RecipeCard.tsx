@@ -14,8 +14,8 @@ const RecipeCard = ({ recipe }: Props) => {
       state={{ recipe }}
       className="flex flex-col bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15"
     >
-      <span className="label">{recipe.title}</span>
-      <span>{recipe.description}</span>
+      <span className="label line-clamp-2">{recipe.title}</span>
+      <span className="line-clamp-3">{recipe.description}</span>
     </NavLink>
   )
 }

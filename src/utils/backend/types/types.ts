@@ -1,7 +1,11 @@
-import { UNITS, SORTING_FILTERS, LANGUAGES } from '../constants'
+import { UNITS, LANGUAGES } from '../constants'
 
 export type Unit = (typeof UNITS)[number];
-export type SortingFilterType = (typeof SORTING_FILTERS)[number];
+export type SortingFilterKey =
+  | "newest"
+  | "oldest"
+  | "a_z"
+  | "z_a";
 
 
 export type FilterOptionType = {

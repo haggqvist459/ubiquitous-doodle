@@ -1,15 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { FilterStateType, SortingFilterType } from "./types";
+import { FilterStateType, SortingFilterKey } from "./types";
 import { FilterOptionType } from "@/types";
 
 
 const initialState: FilterStateType = {
   typeFilters: [],
   cuisineFilters: [],
-  sortingFilters: [],
   selectedTypeFilters: [],
   selectedCuisineFilters: [],
-  selectedSortingFilter: 'None'
+  selectedSortingFilter: 'newest'
 }
 
 
@@ -68,10 +67,10 @@ const filterSlice = createSlice({
     },
     setActiveSorting: (
       state,
-      action: PayloadAction<SortingFilterType>
+      action: PayloadAction<SortingFilterKey>
     ) => {
       state.selectedSortingFilter =
-        state.selectedSortingFilter === action.payload ? "None" : action.payload;
+        state.selectedSortingFilter === action.payload ? "newest" : action.payload;
     },
     resetState: () => initialState
   }

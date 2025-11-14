@@ -1,4 +1,4 @@
-import { SortingFilterType, FilterOptionType, RecipeType } from "../../types"
+import { SortingFilterKey, FilterOptionType, RecipeType } from "../../types"
 import { fetchFilteredRecipesService } from "../../services/recipes/fetchFilteredRecipesService"
 import { handleError } from "../../utils"
 
@@ -10,7 +10,7 @@ export const fetchFilteredRecipesAPI = async (
 }:{
   typeFilters?: FilterOptionType[]
   cuisineFilters?: FilterOptionType[]
-  sortingFilter: SortingFilterType
+  sortingFilter: SortingFilterKey
 }
 ): Promise<RecipeType[]> => {
   try {

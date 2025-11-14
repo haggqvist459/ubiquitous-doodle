@@ -33,5 +33,5 @@ export type RecipeType = {
 
 export type FilterOptionType = {
   id: string
-  name: string
+  text: string
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ArrowIcon } from '@/components'
 import { SORTING_FILTERS } from '../constants'
 import { FilterOptionType } from '@/types'
-import { SortingFilterType } from '../types'
+import { SortingFilterKey } from '../types'
 import { useLanguage } from '@/contexts'
 import { translateText } from '@/utils'
 
@@ -11,9 +11,9 @@ type Props = {
   selectedTypeFilters: FilterOptionType[] | []
   cuisineFilters: FilterOptionType[] | []
   selectedCuisineFilters: FilterOptionType[] | []
-  selectedSortingFilter: SortingFilterType
+  selectedSortingFilter: SortingFilterKey
   onToggleFilter: (filterCategory: 'types' | 'cuisines', filter: FilterOptionType) => void,
-  onSetSorting: (sorting: SortingFilterType) => void
+  onSetSorting: (sorting: SortingFilterKey) => void
 }
 
 const Filters = ({
@@ -86,7 +86,7 @@ const Filters = ({
               }
               onClick={() => onToggleFilter("types", typeFilter)}
             >
-              {typeFilter.name}
+              {typeFilter.text}
             </span>
           ))}
         </div>
@@ -106,7 +106,7 @@ const Filters = ({
               }
               onClick={() => onToggleFilter('cuisines', cuisineFilter)}
             >
-              {cuisineFilter.name}
+              {cuisineFilter.text}
             </span>
           ))}
         </div>
@@ -116,17 +116,17 @@ const Filters = ({
 
       <div className="relative w-full overflow-hidden transition-all duration-300 ease-in-out">
         <div className={`flex px-2 items-center justify-center overflow-x-auto whitespace-nowrap space-x-4 duration-300 ease-in-out ${showSort ? 'translate-y-0 h-[32px]' : '-translate-y-full h-0'}`}>
-          {SORTING_FILTERS.map(sortingFilter => (
+          {Object.entries(SORTING_FILTERS).map(([sortingKey, sortingData]) => (
             <span
-              key={sortingFilter}
+              key={sortingKey}
               className={
-                selectedSortingFilter === sortingFilter
+                selectedSortingFilter === sortingKey
                   ? 'text-primary-text underline decoration-2'
                   : 'text-primary-text font-light'
               }
-              onClick={() => onSetSorting(sortingFilter)}
+              onClick={() => onSetSorting(sortingKey as SortingFilterKey)}
             >
-              {sortingFilter}
+              {sortingData[language]}
             </span>
           ))}
         </div>

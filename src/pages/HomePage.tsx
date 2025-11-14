@@ -57,20 +57,14 @@ const HomePage = () => {
   useEffect(() => {
     setError(false);
     setLoading(false);
-    const shouldFetchTypes = typeFilters.length === 0;
-    const shouldFetchCuisines = cuisineFilters.length === 0;
-
-    if (!shouldFetchTypes && !shouldFetchCuisines) {
-      return;
-    }
 
     const loadFilters = async () => {
       setLoading(true);
 
       try {
         const [typesResult, cuisinesResult] = await Promise.all([
-          getMainIngredients(),
-          getCuisines(),
+          getMainIngredients(language),
+          getCuisines(language),
         ]);
 
         dispatch(setFilterList({ filterCategory: "types", list: typesResult }));
@@ -88,7 +82,7 @@ const HomePage = () => {
     };
 
     loadFilters();
-  }, [typeFilters, cuisineFilters]);
+  }, [language]);
 
   const handleToggleFilter = (filterCategory: "types" | "cuisines", filter: FilterOptionType) => {
     dispatch(setActiveFilter({ filterCategory, filter }));

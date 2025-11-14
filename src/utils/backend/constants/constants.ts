@@ -47,17 +47,7 @@ export const DB_COLUMNS = {
   }
 } as const
 
-export const SORTING_FILTERS = [
-  "None",
-  "Name A-Z",
-  "Name Z-A",
-  "Newest",
-  "Oldest",
-] as const;
-
-
 export const LANGUAGES = [
   { code: 'sv', label: 'Svenska' },
   { code: 'en', label: 'English' }
 ] as const;
-

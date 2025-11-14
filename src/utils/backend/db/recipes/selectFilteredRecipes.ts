@@ -1,14 +1,13 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
-import { DbRecipeWithRelations, SortingFilterType } from "../../types";
+import { DbRecipeWithRelations, SortingFilterKey } from "../../types";
 import { handleError } from "../../utils";
 
-const sortConfigMap: Record<SortingFilterType, { column?: string; ascending?: boolean }> = {
-  "None": {},
-  "Name A-Z": { column: DB_COLUMNS.RECIPES.TITLE, ascending: true },
-  "Name Z-A": { column: DB_COLUMNS.RECIPES.TITLE, ascending: false },
-  "Newest": { column: DB_COLUMNS.RECIPES.TITLE, ascending: false },
-  "Oldest": { column: DB_COLUMNS.RECIPES.TITLE, ascending: true },
+const sortConfigMap: Record<SortingFilterKey, { column?: string; ascending?: boolean }> = {
+  "a_z": { column: DB_COLUMNS.RECIPES.TITLE, ascending: true },
+  "z_a": { column: DB_COLUMNS.RECIPES.TITLE, ascending: false },
+  "newest": { column: DB_COLUMNS.RECIPES.CREATED_AT, ascending: false },
+  "oldest": { column: DB_COLUMNS.RECIPES.CREATED_AT, ascending: true },
 };
 
 
@@ -19,7 +18,7 @@ export const selectFilteredRecipes = async ({
 }: {
   typeIds?: string[];
   cuisineIds?: string[];
-  sortingFilter: SortingFilterType;
+  sortingFilter: SortingFilterKey;
 }): Promise<DbRecipeWithRelations[]> => {
 
   try {
