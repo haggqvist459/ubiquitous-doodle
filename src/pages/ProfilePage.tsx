@@ -1,8 +1,9 @@
-import { useState } from "react";
-import * as authApi from "@/utils/backend/api/auth";
+// import { useState } from "react";
+// import * as authApi from "@/utils/backend/api/auth";
 import { PageContainer, Heading } from "@/components";
 
 const ProfilePage = () => {
+
   return (
     <PageContainer>
       <div className="my-5 px-5">

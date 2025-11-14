@@ -52,8 +52,8 @@ const MetaDataSection = ({ handleNavigation }: Props) => {
 
       try {
         const [typesResult, cuisinesResult] = await Promise.all([
-          filtersApi.getMainIngredients(),
-          filtersApi.getCuisines(),
+          filtersApi.getMainIngredients(language),
+          filtersApi.getCuisines(language),
         ]);
         dispatch(setFilterList({ filterCategory: "types", list: typesResult }));
         dispatch(setFilterList({ filterCategory: "cuisines", list: cuisinesResult }));

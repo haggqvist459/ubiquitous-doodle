@@ -18,19 +18,16 @@ export type Database = {
         Row: {
           en_text: string | null
           id: string
-          name: string
           sv_text: string | null
         }
         Insert: {
           en_text?: string | null
           id?: string
-          name: string
           sv_text?: string | null
         }
         Update: {
           en_text?: string | null
           id?: string
-          name?: string
           sv_text?: string | null
         }
         Relationships: []
@@ -39,19 +36,16 @@ export type Database = {
         Row: {
           en_text: string | null
           id: string
-          name: string
           sv_text: string | null
         }
         Insert: {
           en_text?: string | null
           id?: string
-          name: string
           sv_text?: string | null
         }
         Update: {
           en_text?: string | null
           id?: string
-          name?: string
           sv_text?: string | null
         }
         Relationships: []

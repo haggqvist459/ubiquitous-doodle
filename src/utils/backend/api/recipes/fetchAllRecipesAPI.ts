@@ -1,10 +1,10 @@
 import { fetchRecipesService } from '@/utils/backend/services/recipes/';
 import { handleError } from '../../utils';
-import { RecipeType } from '../../types';
+import { RecipeType, LanguageType } from '../../types';
 
-export const fetchRecipesAPI = async (): Promise<RecipeType[]> => {
+export const fetchRecipesAPI = async (language: LanguageType): Promise<RecipeType[]> => {
   try {
-    const recipes = await fetchRecipesService()
+    const recipes = await fetchRecipesService(language)
     return recipes
   } catch (error) {
     return handleError(error, 'fetchRecipesAPI')

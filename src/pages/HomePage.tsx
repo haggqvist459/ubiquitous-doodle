@@ -5,7 +5,7 @@ import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
 import { RecipeType, FilterOptionType, } from '@/types';
 import { PageContainer, Heading, LoadingComponent, ErrorComponent } from "@/components";
 import { RecipeList } from "@/features/recipeList";
-import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterType } from '@/features/filters';
+import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterKey } from '@/features/filters';
 import { useLanguage, } from '@/contexts';
 import { translateText } from '@/utils';
 
@@ -88,7 +88,7 @@ const HomePage = () => {
     dispatch(setActiveFilter({ filterCategory, filter }));
   };
 
-  const handleSetSorting = (sorting: SortingFilterType) => {
+  const handleSetSorting = (sorting: SortingFilterKey) => {
     dispatch(setActiveSorting(sorting));
   };
 

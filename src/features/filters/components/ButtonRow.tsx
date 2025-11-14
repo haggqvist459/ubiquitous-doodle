@@ -55,7 +55,7 @@ const ButtonRow = ({ items, selected = [], filterCategory, onClick, reverse = fa
               onClick={() => onClick(filterCategory, item)}
               className={`${bg} ${border} text-primary-text text-sm py-1 px-2.5 border-2 rounded-2xl`}
             >
-              {item.name}
+              {item.text}
             </button>
           );
         })}

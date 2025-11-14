@@ -2,21 +2,21 @@ import { RecipeType, DbRecipeWithRelations, InstructionType, IngredientType } fr
 
 export const mapRecipesDbToUI = (dbRecipes: DbRecipeWithRelations[]): RecipeType[] => {
   return dbRecipes.map((dbRecipe) => {
-    const safeMainIngredients = Array.isArray(dbRecipe.recipes_main_ingredients)
-      ? dbRecipe.recipes_main_ingredients
+    const safeMainIngredients = Array.isArray(dbRecipe.recipe_main_ingredients)
+      ? dbRecipe.recipe_main_ingredients
       : []
-    const safeCuisines = Array.isArray(dbRecipe.recipes_cuisines)
-      ? dbRecipe.recipes_cuisines
+    const safeCuisines = Array.isArray(dbRecipe.recipe_cuisines)
+      ? dbRecipe.recipe_cuisines
       : []
 
     const mappedTypes = safeMainIngredients.map((relation) => ({
       id: relation.main_ingredients.id,
-      name: relation.main_ingredients.name,
+      text: relation.main_ingredients.text,
     }))
 
     const mappedCuisines = safeCuisines.map((relation) => ({
       id: relation.cuisines.id,
-      name: relation.cuisines.name,
+      text: relation.cuisines.text,
     }))
 
     const mappedInstructions = Array.isArray(dbRecipe.instructions)
@@ -42,21 +42,21 @@ export const mapRecipesDbToUI = (dbRecipes: DbRecipeWithRelations[]): RecipeType
 }
 
 export const mapRecipeDbToUI = (dbRecipe: DbRecipeWithRelations): RecipeType => {
-  const safeMainIngredients = Array.isArray(dbRecipe.recipes_main_ingredients)
-    ? dbRecipe.recipes_main_ingredients
+  const safeMainIngredients = Array.isArray(dbRecipe.recipe_main_ingredients)
+    ? dbRecipe.recipe_main_ingredients
     : [];
-  const safeCuisines = Array.isArray(dbRecipe.recipes_cuisines)
-    ? dbRecipe.recipes_cuisines
+  const safeCuisines = Array.isArray(dbRecipe.recipe_cuisines)
+    ? dbRecipe.recipe_cuisines
     : [];
 
   const mappedTypes = safeMainIngredients.map((relation) => ({
     id: relation.main_ingredients.id,
-    name: relation.main_ingredients.name,
+    text: relation.main_ingredients.text,
   }));
 
   const mappedCuisines = safeCuisines.map((relation) => ({
     id: relation.cuisines.id,
-    name: relation.cuisines.name,
+    text: relation.cuisines.text,
   }));
 
   const mappedInstructions = Array.isArray(dbRecipe.instructions)

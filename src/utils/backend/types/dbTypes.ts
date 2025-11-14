@@ -5,10 +5,16 @@ export type InsertRecipeCuisine = TablesInsert<"recipe_cuisines">;
 export type InsertRecipeMainIngredient = TablesInsert<"recipe_main_ingredients">;
 
 export type DbRecipeWithRelations = Tables<'recipes'> & {
-  recipes_cuisines: {
-    cuisines: Tables<'cuisines'>
+  recipe_cuisines: {
+    cuisines: {
+      id: string,
+      text: string
+    }
   }[]
-  recipes_main_ingredients: {
-    main_ingredients: Tables<'main_ingredients'>
+  recipe_main_ingredients: {
+    main_ingredients: {
+      id: string,
+      text: string
+    }
   }[]
 }

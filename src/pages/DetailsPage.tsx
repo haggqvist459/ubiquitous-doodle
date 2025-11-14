@@ -4,11 +4,11 @@ import { useLocation, useParams } from "react-router-dom";
 import { RecipeType } from "@/types";
 import { RecipeDetails } from "@/features/recipeList/components";
 import { fetchSingleRecipeAPI } from "@/utils/backend/api/recipes/fetchSingleRecipeAPI";
-
+import { useLanguage } from "@/contexts";
 
 const DetailsPage = () => {
 
-
+  const { language } = useLanguage();
   const location = useLocation();
   const { id } = useParams<{ id: string }>();
   const [recipe, setRecipe] = useState<RecipeType | null>(
@@ -24,7 +24,7 @@ const DetailsPage = () => {
       try {
         setLoading(true);
 
-        const recipe = await fetchSingleRecipeAPI(id!)
+        const recipe = await fetchSingleRecipeAPI(id!, language)
         setRecipe(recipe)
 
       } catch (error) {
