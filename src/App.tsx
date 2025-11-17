@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from '@/utils';
 import { MainLayout, AuthLayout } from '@/layouts';
-import { HomePage, AdminPage, ErrorPage, DetailsPage, ProfilePage } from '@/pages';
+import { HomePage, AdminPage, ErrorPage, DetailsPage, ProfilePage, AuthPage } from '@/pages';
 
 
 
@@ -14,6 +14,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path={ROUTES.DETAILS} element={<DetailsPage />} />
           <Route path={ROUTES.ERROR} element={<ErrorPage />} />
+          <Route path={ROUTES.SIGN_IN} element={<AuthPage />}/>
           <Route element={<AuthLayout />}>
             <Route path={ROUTES.ADMIN} element={<AdminPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />

@@ -13,7 +13,8 @@ export const UIText = {
     navMenu: {
       home: 'Recipes',
       admin: 'Admin',
-      profile: 'Profile'
+      profile: 'Profile',
+      signIn: 'Sign in'
     },
     buttons: {
       next: "Next",
@@ -97,7 +98,8 @@ export const UIText = {
     navMenu: {
       home: 'Recept',
       admin: 'Admin',
-      profile: 'Profil'
+      profile: 'Profil',
+      signIn: 'Logga in'
     },
     buttons: {
       next: "Nästa",

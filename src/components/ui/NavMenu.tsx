@@ -17,12 +17,21 @@ const NavMenu = ({ isExpanded, onClick }: Props) => {
     ? 'text-primary-text underline decoration-2 hover:text-primary-text' //active link classes 
     : 'text-primary-text' //inactive link classes 
 
-  const allowedOptions =
-    userRole === "admin"
-      ? Object.values(NAVBAR_OPTIONS)
-      : Object.values(NAVBAR_OPTIONS).filter((navbarOption) => navbarOption.labelKey !== "admin");
+  let menuOptions;
 
-  const menuItems = allowedOptions.map(({ route, id, labelKey }) => (
+  switch (userRole) {
+    case 'admin':
+     menuOptions = [NAVBAR_OPTIONS.HOME, NAVBAR_OPTIONS.PROFILE, NAVBAR_OPTIONS.ADMIN]   
+      break;
+    case 'user':
+      menuOptions = [NAVBAR_OPTIONS.HOME, NAVBAR_OPTIONS.PROFILE]
+      break;
+    default:
+      menuOptions = [NAVBAR_OPTIONS.HOME, NAVBAR_OPTIONS.SIGN_IN]
+      break;
+  }
+
+  const menuItems = menuOptions.map(({ route, id, labelKey }) => (
     <NavLink to={route} key={id} className={linkClass} onClick={onClick}>
       <span className="text-lg font-semibold hover:font-bold">{translateText('navMenu', labelKey, language)}</span>
     </NavLink>

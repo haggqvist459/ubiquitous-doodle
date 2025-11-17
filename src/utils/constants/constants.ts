@@ -4,7 +4,8 @@ export const ROUTES = {
   ERROR: '/*',
   DETAILS: "/recipes/:id",
   DETAILS_PAGE: '/recipes/',
-  PROFILE: '/profile'
+  PROFILE: '/profile',
+  SIGN_IN: '/signin'
 } as const;
 
 export const NAVBAR_OPTIONS = {
@@ -22,6 +23,11 @@ export const NAVBAR_OPTIONS = {
     route: ROUTES.PROFILE,
     id: 3,
     labelKey: 'profile'
+  },
+  SIGN_IN: {
+    route: ROUTES.SIGN_IN,
+    id: 4,
+    labelKey: 'signIn'
   }
 } as const ;
 

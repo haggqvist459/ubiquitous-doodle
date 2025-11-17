@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Heading } from "@/components";
 import * as authApi from "@/utils/backend/api/auth";
+import { useAuth } from '@/contexts'
+import { ROUTES } from "@/utils";
 
 const AuthPage = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   async function handleSignIn(event: React.FormEvent) {
     event.preventDefault();
@@ -22,6 +27,10 @@ const AuthPage = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (user) {
+    return <Navigate to={ROUTES.PROFILE} replace />;
   }
 
   return (
