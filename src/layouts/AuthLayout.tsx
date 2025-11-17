@@ -1,26 +1,11 @@
-import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AuthPage } from "@/pages";
 import { FadeWrapper } from "@/components";
-import * as authApi from "@/utils/backend/api/auth";
+import { useAuth } from "@/contexts";
 
 const AuthLayout = () => {
   const location = useLocation();
-  const [isSignedIn, setIsSignedIn] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    // initial session check
-    authApi.getSession().then((res) => {
-      setIsSignedIn(res.success && !!res.session);
-    });
-
-    // subscribe to auth changes
-    const unsubscribe = authApi.onAuthStateChange((signedIn) => {
-      setIsSignedIn(signedIn);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { isSignedIn } = useAuth();
 
   if (isSignedIn === null) return null;
 
