@@ -1,7 +1,6 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { InsertRecipeType } from "../../types";
-import { handleError } from "../../utils";
 
 export const insertRecipe = async (recipe: InsertRecipeType): Promise<string> => {
 
@@ -11,18 +10,17 @@ export const insertRecipe = async (recipe: InsertRecipeType): Promise<string> =>
     } = await supabase.auth.getSession();
     if (!session) throw new Error("No active Supabase session");
 
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from(DB_TABLES.RECIPES)
       .insert([recipe])
       .select(DB_COLUMNS.RECIPES.ID)
-      .single();
+      .single()
+      .throwOnError();
 
-    if (error) throw error;
-    if (!data || !data.id) throw new Error('Insert succeeded but no ID returned');
-    return data.id as string;
+    return data.id
 
   } catch (error) {
-    return handleError(error, 'insertRecipe')
+    throw error
   }
 
 

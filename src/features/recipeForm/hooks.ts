@@ -3,8 +3,12 @@ import { resetState } from "@/features/recipeForm";
 import { createRecipe } from "@/utils/backend/api";
 import { useState } from "react";
 import { ModalStateType } from "@/components";
+import { useAuthenticatedUser } from "@/contexts";
 
 export const useRecipeFormHandlers = () => {
+  
+  const user = useAuthenticatedUser()
+
   const recipeDraft = useAppSelector(state => state.recipeForm.recipeDraft);
   const dispatch = useAppDispatch();
   const [modalState, setModalState] = useState<ModalStateType>({
@@ -27,7 +31,7 @@ export const useRecipeFormHandlers = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const result = await createRecipe(recipeDraft);
+      const result = await createRecipe(recipeDraft, user.id);
       if (result) {
         setModalState({
           isOpen: true,

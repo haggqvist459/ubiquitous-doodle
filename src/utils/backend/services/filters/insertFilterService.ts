@@ -1,5 +1,5 @@
 import { insertRecipeCuisines, insertRecipeMainIngredients } from "@/utils/backend/db";
-import { handleError } from "../../utils";
+
 
 export const attachRecipeMainIngredients = async (
   recipeId: string,
@@ -13,7 +13,7 @@ export const attachRecipeMainIngredients = async (
   try {
     await insertRecipeMainIngredients(recipeId, mainIngredientIds);
   } catch (error) {
-    handleError(error, 'attachRecipeMainIngredients')
+    throw error
   }
 };
 
@@ -28,6 +28,6 @@ export const attachRecipeCuisines = async (
   try {
     await insertRecipeCuisines(recipeId, cuisineIds);
   } catch (error) {
-    handleError(error, 'attachRecipeCuisines')
+    throw error
   }
 };

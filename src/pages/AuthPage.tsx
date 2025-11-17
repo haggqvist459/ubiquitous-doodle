@@ -5,7 +5,7 @@ import * as authApi from "@/utils/backend/api/auth";
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function handleSignIn(event: React.FormEvent) {
@@ -13,11 +13,14 @@ const AuthPage = () => {
     setLoading(true);
     setError(null);
 
-    const res = await authApi.signIn(email, password);
-    setLoading(false);
-
-    if (!res.success) {
-      setError(res.error || "Failed to sign in.");
+    try {
+      await authApi.signIn(email, password);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error)
+      }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -45,7 +48,7 @@ const AuthPage = () => {
           {loading ? "Authenticating..." : "Authenticate"}
         </button>
       </div>
-      {error && <div className="text-red-500 text-sm">{error}</div>}
+      {error && <div className="text-red-500 text-sm">{error.message}</div>}
     </form>
   );
 };

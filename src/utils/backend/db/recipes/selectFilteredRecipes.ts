@@ -1,7 +1,6 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { DbRecipeWithRelations, SortingFilterKey } from "../../types";
-import { handleError } from "../../utils";
 
 const sortConfigMap: Record<SortingFilterKey, { column?: string; ascending?: boolean }> = {
   "a_z": { column: DB_COLUMNS.RECIPES.TITLE, ascending: true },
@@ -39,13 +38,12 @@ export const selectFilteredRecipes = async ({
 
     if (sortConfig.column) query = query.order(sortConfig.column, { ascending: sortConfig.ascending });
 
-    const { data, error } = await query;
-    if (error) throw error;
+    const { data } = await query.throwOnError();
 
     return data;
 
   } catch (error) {
-   return handleError(error, 'selectFilteredRecipes')
+   throw error
   }
 
 }

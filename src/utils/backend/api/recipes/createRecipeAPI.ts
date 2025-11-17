@@ -1,12 +1,11 @@
 import { processRecipe } from "@/utils/backend/services/recipes/createRecipeService";
 import type { RecipeDraftType } from "@/features/recipeForm/types";
-import { handleError } from "../../utils";
 
-export const createRecipe = async (draft: RecipeDraftType): Promise<string> => {
+export const createRecipe = async (draft: RecipeDraftType, uid: string): Promise<string> => {
   try {
-    const data = await processRecipe(draft);
+    const data = await processRecipe(draft, uid);
     return data
   } catch (error) {
-    return handleError(error, 'createRecipe');
+    throw error
   }
 };

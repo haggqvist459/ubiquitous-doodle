@@ -1,6 +1,5 @@
 import { SortingFilterKey, FilterOptionType, RecipeType } from "../../types"
 import { fetchFilteredRecipesService } from "../../services/recipes/fetchFilteredRecipesService"
-import { handleError } from "../../utils"
 
 export const fetchFilteredRecipesAPI = async (
 {
@@ -17,6 +16,6 @@ export const fetchFilteredRecipesAPI = async (
     const data = await fetchFilteredRecipesService({typeFilters, cuisineFilters, sortingFilter})
     return data 
   } catch (error) {
-    return handleError(error, 'fetchFilteredRecipesAPI')
+    throw error
   }
 }

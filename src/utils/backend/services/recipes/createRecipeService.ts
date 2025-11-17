@@ -2,9 +2,10 @@ import { insertRecipe } from "@/utils/backend/db";
 import { mapRecipeDraftToDb } from "./mapRecipeDraft";
 import { RecipeDraftType } from "../../types";
 import { attachRecipeCuisines, attachRecipeMainIngredients } from "../filters";
-import { handleError } from "../../utils";
+import { selectUserRole } from "../../db/auth/getUserRole";
 
-export const processRecipe = async (draft: RecipeDraftType): Promise<string> => {
+
+export const processRecipe = async (draft: RecipeDraftType, uid: string): Promise<string> => {
   if (!draft.title.trim()) throw new Error("Recipe title is required.");
   if (
     draft.ingredients.length === 0 ||
@@ -21,7 +22,11 @@ export const processRecipe = async (draft: RecipeDraftType): Promise<string> => 
 
   try {
     const dbRecipe = mapRecipeDraftToDb(draft);
-    const recipeId = await insertRecipe(dbRecipe);
+    const userRole = await selectUserRole(uid);
+    if (userRole !== 'admin'){
+      throw new Error('[processRecipe] - Error creating recipe, insufficient permissions.')
+    }
+      const recipeId = await insertRecipe(dbRecipe);
     if (draft.types && draft.types.length > 0) {
       const typeIds = draft.types.map(type => type.id);
       await attachRecipeMainIngredients(recipeId, typeIds)
@@ -30,9 +35,9 @@ export const processRecipe = async (draft: RecipeDraftType): Promise<string> => 
       const cuisineIds = draft.cuisines.map(cuisine => cuisine.id)
       await attachRecipeCuisines(recipeId, cuisineIds)
     }
-    
+
     return recipeId;
   } catch (error) {
-   return handleError(error, 'processRecipe')
+    throw error
   }
 };

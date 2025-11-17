@@ -6,7 +6,7 @@ export const DB_TABLES = {
   RECIPE_CUISINES: 'recipe_cuisines',
   CUISINES: 'cuisines',
   MAIN_INGREDIENTS: 'main_ingredients',
-  USER_ROLES: 'user_roles'
+  USER_ROLES: 'user_role'
 } as const
 
 export const DB_COLUMNS = {
@@ -39,7 +39,7 @@ export const DB_COLUMNS = {
     SV_TEXT: 'sv_text',
     EN_TEXT: 'en_text',
   },
-  USER_ROLES: {
+  USER_ROLE: {
     ID: 'id',
     CREATED_AT: 'created_at',
     USER_ID: 'user_id',

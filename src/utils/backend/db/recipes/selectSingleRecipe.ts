@@ -1,7 +1,6 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
 import { DbRecipeWithRelations, LanguageType } from "../../types";
-import { handleError } from "../../utils";
 
 export const selectSingleRecipe = async (
   id: string,
@@ -9,7 +8,7 @@ export const selectSingleRecipe = async (
 ): Promise<DbRecipeWithRelations> => {
 
   try {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from(DB_TABLES.RECIPES)
       .select<string, DbRecipeWithRelations>(`
         *,
@@ -28,12 +27,11 @@ export const selectSingleRecipe = async (
       `)
       .eq(DB_COLUMNS.RECIPES.ID, id)
       .single()
-
-    if (error) throw error
+      .throwOnError()
 
     return data
 
   } catch (error) {
-    return handleError(error, 'selectSingleRecipe')
+    throw error
   }
 }
