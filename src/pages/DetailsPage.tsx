@@ -37,7 +37,7 @@ const DetailsPage = () => {
     };
 
     fetchRecipe();
-  }, [recipe, id]);
+  }, [recipe, id, language]);
 
 
 
