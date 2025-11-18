@@ -35,7 +35,7 @@
 - [x] Add the filters as dropdowns 
 - [x] Details view 
   - [ ] Link to edit form for admins 
-  - [ ] Mark recipe as favorite for users 
+  - [x] Mark recipe as favorite for users 
 
 ### Profile Page: 
 - [ ] Change email
