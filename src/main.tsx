@@ -8,13 +8,13 @@ import { AuthProvider, LanguageProvider } from '@/contexts';
 
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AuthProvider>
-      <LanguageProvider>
-        <Provider store={store}>
+  
+    <Provider store={store}>
+      <AuthProvider>
+        <LanguageProvider>
           <App />
-        </Provider>
-      </LanguageProvider>
-    </AuthProvider>
-  </StrictMode>,
+        </LanguageProvider>
+      </AuthProvider>
+    </Provider>
+  
 )

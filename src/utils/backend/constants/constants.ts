@@ -6,7 +6,8 @@ export const DB_TABLES = {
   RECIPE_CUISINES: 'recipe_cuisines',
   CUISINES: 'cuisines',
   MAIN_INGREDIENTS: 'main_ingredients',
-  USER_ROLES: 'user_role'
+  USER_ROLES: 'user_role',
+  FAVOURITES: 'favourites'
 } as const
 
 export const DB_COLUMNS = {
@@ -44,7 +45,12 @@ export const DB_COLUMNS = {
     CREATED_AT: 'created_at',
     USER_ID: 'user_id',
     ROLE: 'role'
-  }
+  },
+  FAVOURITES: {
+    USER_ID: 'user_id',
+    RECIPE_ID: 'recipe_id',
+    CREATED_AT: 'created_at'
+  },
 } as const
 
 export const LANGUAGES = [

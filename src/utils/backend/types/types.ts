@@ -42,3 +42,9 @@ export type RecipeType = {
 export type RecipeDraftType = Omit<RecipeType, "id" | "createdAt">
 
 export type LanguageType = (typeof LANGUAGES)[number]['code'];
+
+export type FavouriteType = {
+  userId: string,
+  recipeId: string,
+  createdAt: string
+}

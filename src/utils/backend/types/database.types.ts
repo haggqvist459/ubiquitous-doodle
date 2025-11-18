@@ -32,6 +32,32 @@ export type Database = {
         }
         Relationships: []
       }
+      favourites: {
+        Row: {
+          created_at: string
+          recipe_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          recipe_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          recipe_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favourites_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       main_ingredients: {
         Row: {
           en_text: string | null

@@ -1,3 +1,4 @@
+import type { AuthChangeEvent } from "@supabase/supabase-js";
 import * as authService from "@/utils/backend/services/auth";
 import { UserRoleType } from "../../types";
 
@@ -28,7 +29,10 @@ export const getSession = async () => {
   }
 };
 
-export const onAuthStateChange = (callback: (isSignedIn: boolean) => void) => {
+export const onAuthStateChange = (
+  callback: (event: AuthChangeEvent) => void
+) => {
+  
   return authService.onAuthStateChange(callback);
 };
 

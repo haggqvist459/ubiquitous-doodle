@@ -6,5 +6,6 @@ export { default as Close } from './Close';
 export { default as CogWheel } from './CogWheel';
 export { default as EditIcon } from './EditIcon';
 export { default as ErrorIcon } from './ErrorIcon';
+export { default as Favourite } from './Favourite'
 export { default as Info } from './Info';
 export { default as Trashcan } from './Trashcan';

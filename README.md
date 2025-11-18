@@ -61,3 +61,8 @@
   - [ ] Translate recipes between ENG/SWE
   - [ ] Clean up horizontal menu styles in NavMenu - follow Filters.tsx
 - [ ] Output.tsx too tightly coupled to single parent. Perhaps not a useful component in this project?
+- [ ] Ensure similar structure on the backend layers 
+  - [ ] Same try / catch principles 
+  - [ ] Same import / export principles
+  - [ ] Naming standards 
+  

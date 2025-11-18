@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Heading } from "@/components";
+import { Heading, Favourite } from "@/components";
 import { RecipeType } from "@/types";
-import { useLanguage } from "@/contexts";
+import { useAuth, useLanguage } from "@/contexts";
 import { translateText } from "@/utils";
+import { setFavouriteAPI, removeFavouriteAPI } from "@/utils/backend/api/favourites";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addFavourite, removeFavourite } from "@/features/favourites";
 
 type Props = {
   recipe: RecipeType
@@ -11,6 +14,11 @@ type Props = {
 const RecipeDetails = ({ recipe }: Props) => {
 
   const { language } = useLanguage()
+  const { user } = useAuth();
+
+  const dispatch = useAppDispatch()
+  const favouriteIds = useAppSelector(state => state.favourites.favouriteList)
+  const isToggled = favouriteIds.some(f => f.recipeId === recipe.id)
 
   const [view, setView] = useState<"ingredients" | "instructions">("ingredients");
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
@@ -23,10 +31,41 @@ const RecipeDetails = ({ recipe }: Props) => {
     });
   };
 
+  const toggleFavourite = async () => {
+    if (!user) return
+
+    try {
+      if (isToggled) {
+        await removeFavouriteAPI(user.id, recipe.id)
+        dispatch(removeFavourite(recipe.id))
+      } else {
+        const newFavourite = await setFavouriteAPI(user.id, recipe.id)
+        dispatch(addFavourite(newFavourite))
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('toggleFavourite error:', error)
+        // redirect to error page, pass error
+      } else {
+        console.error('Unknown error: ', error)
+      }
+    }
+  }
+
   return (
     <div className="w-11/12 bg-white p-1 rounded-sm inset-shadow-xs/15 shadow-sm/15 mx-auto mt-5 mb-10 px-2 pb-5">
-      <Heading title={recipe.title} />
-      <Heading title={recipe.description ?? ''} headingType="sub-heading" />
+      <div className="flex justify-between items-center px-5">
+        <div className="">
+          <Heading title={recipe.title} />
+          <Heading title={recipe.description ?? ''} headingType="sub-heading" />
+        </div>
+        <div className="py-2"
+          onClick={() => toggleFavourite()}
+        >
+          {user && <Favourite isToggled={isToggled} />}
+        </div>
+      </div>
+
       <div className="md:hidden">
         <button
           onClick={() => setView(view === "ingredients" ? "instructions" : "ingredients")}
@@ -72,7 +111,7 @@ const RecipeDetails = ({ recipe }: Props) => {
         )}
 
       </div>
-      <div className="hidden md:flex md:flex-row md:space-x-3 mt-5 px-5">
+      <div className="hidden md:flex md:flex-row md:space-x-3 mt-10 px-5">
         <div className="flex flex-col w-1/3 ">
           {recipe.ingredients.map((ingredient) => (
             <div

@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { User } from "@supabase/supabase-js";
 import * as authApi from "@/utils/backend/api/auth";
+import { getAllFavouritesAPI } from "@/utils/backend/api/favourites";
+import { useAppDispatch } from "@/redux/hooks";
+import { setFavourites, resetState } from "@/features/favourites";
 
 type UserRoleType = 'admin' | 'user'
 type AuthContextType = {
@@ -15,41 +18,51 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [userRole, setUserRole] = useState<UserRoleType | null>(null)
+  const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    authApi.getSession().then(async (session) => {
+  const loadUserState = async () => {
+    try {
+      const session = await authApi.getSession()
       const currentUser = session?.user ?? null
-      setUser(session?.user ?? null);
-      setIsSignedIn(!!session);
+
+      setUser(currentUser)
+      setIsSignedIn(!!session)
 
       if (currentUser) {
-        const fetchedUserRole = await authApi.getUserRoleAPI(currentUser.id);
-        setUserRole(fetchedUserRole);
+        const fetchedUserRole = await authApi.getUserRoleAPI(currentUser.id)
+        setUserRole(fetchedUserRole)
+
+        const favourites = await getAllFavouritesAPI(currentUser.id)
+        dispatch(setFavourites(favourites))
       }
 
-    });
+    } catch (error) {
+      console.error("AuthContext, loadUserState error:", error)
+    }
+  }
 
-    const unsubscribe = authApi.onAuthStateChange((signedIn) => {
-      if (signedIn) {
-        authApi.getSession().then(async (session) => {
-          const currentUser = session?.user ?? null
-          setUser(session?.user ?? null);
-          setIsSignedIn(!!session);
-          if (currentUser) {
-            const fetchedUserRole = await authApi.getUserRoleAPI(currentUser.id);
-            setUserRole(fetchedUserRole);
-          }
+  useEffect(() => {
 
-        });
-      } else {
-        setUser(null);
-        setIsSignedIn(false);
+    const unsubscribe = authApi.onAuthStateChange((event) => {
+
+      switch (event) {
+        case 'INITIAL_SESSION':
+          loadUserState()
+          break;
+        case 'SIGNED_IN':
+          if (!user) loadUserState()
+          break;
+        case 'SIGNED_OUT':
+          setUser(null)
+          setIsSignedIn(false)
+          dispatch(resetState())
+          break;
+        default:
+          break;
       }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
+    })
+    return () => unsubscribe()
+  }, [])
 
   return (
     <AuthContext.Provider value={{ user, isSignedIn, userRole }}>
