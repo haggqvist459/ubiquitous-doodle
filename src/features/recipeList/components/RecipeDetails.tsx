@@ -86,7 +86,9 @@ const RecipeDetails = ({ recipe }: Props) => {
           {recipe.instructions.map((instruction) => (
             <div
               key={instruction.id}
-              className="flex flex-col mt-2">
+              className={`flex flex-col mt-2 cursor-pointer ${completedIds.has(instruction.id) ? "line-through bg-primary-bg" : ""
+                }`}
+              onClick={() => toggleCompleted(instruction.id)}>
               <span className="label">{instruction.title}</span>
               <span className="">{instruction.text}</span>
             </div>
