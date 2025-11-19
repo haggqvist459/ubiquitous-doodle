@@ -9,7 +9,8 @@ export const getAllFavouritesService = async (uid: string): Promise<FavouriteTyp
     const formattedData: FavouriteType[] = dbData.map(row => ({
       userId: row.user_id,
       recipeId: row.recipe_id,
-      createdAt: row.created_at
+      createdAt: row.created_at,
+      title: row.recipes.title
     }))
     return formattedData
   } catch (error) {

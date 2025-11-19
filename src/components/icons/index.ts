@@ -8,4 +8,5 @@ export { default as EditIcon } from './EditIcon';
 export { default as ErrorIcon } from './ErrorIcon';
 export { default as Favourite } from './Favourite'
 export { default as Info } from './Info';
+export { default as SignOut } from './SignOut';
 export { default as Trashcan } from './Trashcan';

@@ -8,7 +8,8 @@ export const setFavouriteService = async (uid: string, recipeId: string): Promis
     const formattedData: FavouriteType = {
       userId: dbData.user_id,
       recipeId: dbData.recipe_id,
-      createdAt: dbData.created_at
+      createdAt: dbData.created_at,
+      title: dbData.recipes.title
     } 
     return formattedData
   } catch (error) {

@@ -65,4 +65,4 @@
   - [ ] Same try / catch principles 
   - [ ] Same import / export principles
   - [ ] Naming standards 
-  
+- [ ] Review error handling across pages and components 

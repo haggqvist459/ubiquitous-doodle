@@ -1,10 +1,13 @@
 import { ArrowCircle } from "@/components/icons"
 
-const LoadingComponent = () => {
+type Props = {
+  height?: string
+}
+const LoadingComponent = ({ height = 'min-h-[300px]'  }: Props) => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[300px]">
+    <div className={`flex flex-col items-center justify-center ${height}`}>
       <div className="animate-spin">
         <ArrowCircle />
       </div>

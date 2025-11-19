@@ -8,7 +8,7 @@ import { AuthProvider, LanguageProvider } from '@/contexts';
 
 
 createRoot(document.getElementById('root')!).render(
-  
+  <StrictMode>
     <Provider store={store}>
       <AuthProvider>
         <LanguageProvider>
@@ -16,5 +16,5 @@ createRoot(document.getElementById('root')!).render(
         </LanguageProvider>
       </AuthProvider>
     </Provider>
-  
+  </StrictMode>
 )

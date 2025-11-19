@@ -10,9 +10,7 @@ const PageContainer = ({
 
   return (
     <section className={`flex flex-col mx-auto w-full`}>
-      <div className="">
-        {children}
-      </div>
+      {children}
     </section>
   )
 };

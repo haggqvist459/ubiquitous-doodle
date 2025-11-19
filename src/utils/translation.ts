@@ -23,6 +23,7 @@ export const UIText = {
       previewRecipe: 'Preview recipe',
       submit: 'Submit',
       edit: 'Edit recipe',
+      confirm: 'Confirm'
     },
     footer: {
       codeGitHub: 'Code on GitHub'
@@ -93,6 +94,17 @@ export const UIText = {
     homePage: {
       recipe: 'Recipes'
     },
+    profile: {
+      title: 'Profile',
+      changeEmail: 'Change email',
+      newEmail: 'New email',
+      updatePassword: 'Update password',
+      newPassword: 'New password',
+      confirmPassword: 'Confirm password',
+      currentPassword: 'Current password',
+      validateChanges: 'Validate changes',
+      favouriteRecipes: 'Favourite recipes',
+    },
   },
   sv: {
     navMenu: {
@@ -108,6 +120,7 @@ export const UIText = {
       previewRecipe: 'Granska recept',
       submit: 'Spara',
       edit: 'Ändra recept',
+      confirm: 'Bekräfta'
     },
     footer: {
       codeGitHub: 'Länk till GitHub'
@@ -177,6 +190,17 @@ export const UIText = {
     },
     homePage: {
       recipe: 'Recept'
+    },
+    profile: {
+      title: 'Profil',
+      changeEmail: 'Byt e-post',
+      newEmail: 'Ny e-post',
+      updatePassword: 'Ändra lösenord',
+      newPassword: 'Nytt lösenord',
+      confirmPassword: 'Bekräfta lösenord',
+      currentPassword: 'Nuvarande lösenord',
+      validateChanges: 'Bekräfta ändringar',
+      favouriteRecipes: 'Favoriter',
     },
   }
 } as const

@@ -2,7 +2,8 @@
 export type FavouriteType = {
   userId: string,
   recipeId: string,
-  createdAt: string
+  createdAt: string,
+  title: string
 }
 
 export type FavouriteSliceType = {

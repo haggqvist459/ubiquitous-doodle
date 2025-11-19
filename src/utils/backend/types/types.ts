@@ -46,5 +46,7 @@ export type LanguageType = (typeof LANGUAGES)[number]['code'];
 export type FavouriteType = {
   userId: string,
   recipeId: string,
-  createdAt: string
+  createdAt: string,
+  title: string
 }
+

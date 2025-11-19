@@ -1,13 +1,17 @@
 import { supabase } from "../client";
-import { Tables } from "../../types/database.types";
-import { DB_COLUMNS } from "@/utils/backend/constants";
+import { DB_COLUMNS, DB_TABLES } from "@/utils/backend/constants";
 
-export const selectAllFavourites = async (uid: string): Promise<Tables<"favourites">[]> => {
+export const selectAllFavourites = async (uid: string) => {
   const { data } = await supabase
-  .from('favourites')
-  .select('*')
-  .eq(DB_COLUMNS.FAVOURITES.USER_ID, uid)
-  .throwOnError()
+    .from('favourites')
+    .select(`
+    *,
+    ${DB_TABLES.RECIPES}:${DB_COLUMNS.FAVOURITES.RECIPE_ID}(
+      ${DB_COLUMNS.RECIPES.TITLE}
+    )
+    `)
+    .eq(DB_COLUMNS.FAVOURITES.USER_ID, uid)
+    .throwOnError()
 
   return data
 }
