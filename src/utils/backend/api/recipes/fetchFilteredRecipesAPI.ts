@@ -1,20 +1,22 @@
-import { SortingFilterKey, FilterOptionType, RecipeType } from "../../types"
+import { SortingFilterKey, FilterOptionType, RecipeType, LanguageType } from "../../types"
 import { fetchFilteredRecipesService } from "../../services/recipes/fetchFilteredRecipesService"
 
 export const fetchFilteredRecipesAPI = async (
-{
-  typeFilters,
-  cuisineFilters,
-  sortingFilter
-}:{
-  typeFilters?: FilterOptionType[]
-  cuisineFilters?: FilterOptionType[]
-  sortingFilter: SortingFilterKey
-}
+  {
+    typeFilters,
+    cuisineFilters,
+    sortingFilter,
+    language
+  }: {
+    typeFilters?: FilterOptionType[]
+    cuisineFilters?: FilterOptionType[]
+    sortingFilter: SortingFilterKey
+    language: LanguageType
+  }
 ): Promise<RecipeType[]> => {
   try {
-    const data = await fetchFilteredRecipesService({typeFilters, cuisineFilters, sortingFilter})
-    return data 
+    const data = await fetchFilteredRecipesService({ typeFilters, cuisineFilters, sortingFilter, language })
+    return data
   } catch (error) {
     throw error
   }

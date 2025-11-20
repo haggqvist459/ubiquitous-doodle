@@ -35,6 +35,7 @@ const HomePage = () => {
           sortingFilter: selectedSortingFilter,
           typeFilters: selectedTypeFilters,
           cuisineFilters: selectedCuisineFilters,
+          language
         });
 
         setRecipeList(fetchedRecipes);

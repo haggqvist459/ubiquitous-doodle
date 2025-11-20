@@ -1,6 +1,6 @@
 import { supabase } from "../client";
 import { DB_TABLES, DB_COLUMNS } from "@/utils/backend/constants";
-import { DbRecipeWithRelations, SortingFilterKey } from "../../types";
+import { DbRecipeWithRelations, SortingFilterKey, LanguageType } from "../../types";
 
 const sortConfigMap: Record<SortingFilterKey, { column?: string; ascending?: boolean }> = {
   "a_z": { column: DB_COLUMNS.RECIPES.TITLE, ascending: true },
@@ -14,16 +14,18 @@ export const selectFilteredRecipes = async ({
   typeIds,
   cuisineIds,
   sortingFilter,
+  language
 }: {
-  typeIds?: string[];
-  cuisineIds?: string[];
-  sortingFilter: SortingFilterKey;
+  typeIds?: string[]
+  cuisineIds?: string[]
+  sortingFilter: SortingFilterKey
+  language: LanguageType
 }): Promise<DbRecipeWithRelations[]> => {
 
   try {
     const selectParts: string[] = ["*"];
-    if (typeIds?.length) selectParts.push(`${DB_TABLES.RECIPE_MAIN_INGREDIENTS}!inner(${DB_COLUMNS.RECIPE_MAIN_INGREDIENTS.MAIN_INGREDIENT_ID})`);
-    if (cuisineIds?.length) selectParts.push(`${DB_TABLES.RECIPE_CUISINES}!inner(${DB_COLUMNS.RECIPE_CUISINES.CUISINE_ID})`);
+    if (typeIds?.length) selectParts.push(`${DB_TABLES.RECIPE_MAIN_INGREDIENTS}!inner(${DB_TABLES.MAIN_INGREDIENTS}(${DB_COLUMNS.MAIN_INGREDIENTS.ID}, text:${language}_text))`);
+    if (cuisineIds?.length) selectParts.push(`${DB_TABLES.RECIPE_CUISINES}!inner(${DB_TABLES.CUISINES}(id, text:${language}_text))`);
     const selectClause: string = selectParts.join(", ");
 
     let query = supabase
@@ -43,7 +45,7 @@ export const selectFilteredRecipes = async ({
     return data;
 
   } catch (error) {
-   throw error
+    throw error
   }
 
 }
