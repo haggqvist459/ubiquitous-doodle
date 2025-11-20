@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useRef, ReactNode } from "react";
 import { User } from "@supabase/supabase-js";
 import * as authApi from "@/utils/backend/api/auth";
 import { getAllFavouritesAPI } from "@/utils/backend/api/favourites";
@@ -12,28 +12,33 @@ type AuthContextType = {
   userRole: UserRoleType | null
 };
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  userRole: null,
+  isSignedIn: false
+});
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [userRole, setUserRole] = useState<UserRoleType | null>(null)
   const dispatch = useAppDispatch()
+  const userIdRef = useRef<string | null>(null);
 
   const loadUserState = async () => {
+    console.log("loadUserState triggered")
     try {
       const session = await authApi.getSession()
       const currentUser = session?.user ?? null
 
       setUser(currentUser)
       setIsSignedIn(!!session)
+      userIdRef.current = currentUser?.id ?? null; // Update ref
 
       if (currentUser) {
+        console.log("about to make two DB calls")
         const fetchedUserRole = await authApi.getUserRoleAPI(currentUser.id)
         setUserRole(fetchedUserRole)
-
-        const favourites = await getAllFavouritesAPI(currentUser.id)
-        dispatch(setFavourites(favourites))
       }
 
     } catch (error) {
@@ -41,28 +46,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+
   useEffect(() => {
+    loadUserState()
 
-    const unsubscribe = authApi.onAuthStateChange((event) => {
+    let lastUserId: string | null = null;
 
-      switch (event) {
-        case 'INITIAL_SESSION':
+    const unsubscribe = authApi.onAuthStateChange((_event, session) => {
+      const eventUserId = session?.user?.id ?? null
+
+      // Only act if the user actually changed from last event
+      if (eventUserId !== lastUserId) {
+        lastUserId = eventUserId; // Update for next event
+
+        if (eventUserId) {
           loadUserState()
-          break;
-        case 'SIGNED_IN':
-          if (!user) loadUserState()
-          break;
-        case 'SIGNED_OUT':
+        } else {
           setUser(null)
           setIsSignedIn(false)
+          setUserRole(null)
           dispatch(resetState())
-          break;
-        default:
-          break;
+        }
       }
     })
     return () => unsubscribe()
   }, [])
+
 
   return (
     <AuthContext.Provider value={{ user, isSignedIn, userRole }}>

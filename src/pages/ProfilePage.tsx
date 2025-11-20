@@ -1,6 +1,7 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { PageContainer, Heading, LoadingComponent, Input, SignOut } from "@/components";
+import { FavouriteListItem } from "@/features/favourites";
 import { useLanguage } from "@/contexts";
 import { translateText } from "@/utils";
 
@@ -20,17 +21,12 @@ const ProfilePage = () => {
       <div className="h-[80vh] flex flex-col">
         <div className="flex-shrink-0 px-5">
           <Heading title={translateText('profile', 'favouriteRecipes', language)} headingType="sub-heading" />
-          <div className="w-full h-72 overflow-y-auto mb-2 border-b border-red-600">
+          <div className="w-full h-72 overflow-y-auto mb-2">
             {favourites.length === 0 ? (
               <LoadingComponent height="" />
             ) : (
               favourites.map(favourite => (
-                <div className="flex flex-col border-b my-2" key={favourite.recipeId}>
-                  <span className="font-medium text-primary-text">{favourite.title}</span>
-                  <span className="font-light text-primary-text">
-                    {new Date(favourite.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
+                <FavouriteListItem favourite={favourite} key={favourite.recipeId}/>
               ))
             )}
           </div>

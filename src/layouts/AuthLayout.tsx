@@ -5,8 +5,7 @@ import { useAuth } from "@/contexts";
 
 const AuthLayout = () => {
   const location = useLocation();
-  const { isSignedIn } = useAuth();
-
+  const { isSignedIn } = useAuth()
   if (isSignedIn === null) return null;
 
   return (

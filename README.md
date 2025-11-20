@@ -66,3 +66,4 @@
   - [ ] Same import / export principles
   - [ ] Naming standards 
 - [ ] Review error handling across pages and components 
+  - [ ] Admin Page must redirect to error in case of non admin roles 

@@ -1,4 +1,4 @@
-import type { AuthChangeEvent } from "@supabase/supabase-js";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import * as authService from "@/utils/backend/services/auth";
 import { UserRoleType } from "../../types";
 
@@ -30,12 +30,10 @@ export const getSession = async () => {
 };
 
 export const onAuthStateChange = (
-  callback: (event: AuthChangeEvent) => void
+  callback: (event: AuthChangeEvent, session: Session | null) => void
 ) => {
-  
   return authService.onAuthStateChange(callback);
 };
-
 export const getUserRoleAPI = async (uid: string): Promise<UserRoleType> => {
 
   try {

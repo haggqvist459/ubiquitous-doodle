@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: false, // Use your own file from public/
       srcDir: 'src',
       devOptions: {
-        enabled: true
+        enabled: false
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,woff2,woff,ttf,eot,png,webmanifest}'],
@@ -28,9 +28,9 @@ export default defineConfig({
     })
   ],
   server: {
-    host: true,
-    port: 5175
-  },
+  host: true,
+  port: 5175,
+},
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')

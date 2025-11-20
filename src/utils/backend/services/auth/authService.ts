@@ -1,7 +1,7 @@
 import { supabase } from "@/utils/backend/db/client";
 import { UserRoleType } from "../../types";
 import { selectUserRole } from "../../db/auth/getUserRole";
-import type { AuthChangeEvent } from "@supabase/supabase-js";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 
 export const signIn = async (email: string, password: string) => {
  
@@ -29,10 +29,10 @@ export const getCurrentUser = async () => {
 };
 
 export const onAuthStateChange = (
-  callback: (event: AuthChangeEvent) => void
+  callback: (event: AuthChangeEvent, session: Session | null) => void
 ) => {
-  const { data } = supabase.auth.onAuthStateChange((event) => {
-    callback(event);
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    callback(event, session);
   });
   return () => data.subscription.unsubscribe();
 };
