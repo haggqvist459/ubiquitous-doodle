@@ -2,4 +2,4 @@ export { default } from './slice';
 export * from './slice';
 
 export * from './components'
-export type { SortingFilterKey } from './types'
+export type { SortingFilterKey, FilterOptionType } from './types'

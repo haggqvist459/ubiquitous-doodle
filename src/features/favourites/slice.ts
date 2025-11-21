@@ -3,7 +3,8 @@ import { FavouriteType, FavouriteSliceType } from "./types";
 
 
 const initialState: FavouriteSliceType = {
-  favouriteList: []
+  favouriteList: [],
+  isLoaded: false
 }
 
 const favouriteSlice = createSlice({
@@ -27,6 +28,12 @@ const favouriteSlice = createSlice({
       action: PayloadAction<string>
     ) => {
      state.favouriteList = state.favouriteList.filter(favourite => favourite.recipeId !== action.payload)
+    },
+    setLoading: (
+      state,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isLoaded = action.payload
     },
     resetState: () => initialState
   }

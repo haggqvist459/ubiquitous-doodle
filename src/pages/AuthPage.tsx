@@ -11,7 +11,7 @@ const AuthPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, refreshAuth } = useAuth();
 
   async function handleSignIn(event: React.FormEvent) {
     event.preventDefault();
@@ -20,6 +20,7 @@ const AuthPage = () => {
 
     try {
       await authApi.signIn(email, password);
+      refreshAuth()
     } catch (error) {
       if (error instanceof Error) {
         setError(error)

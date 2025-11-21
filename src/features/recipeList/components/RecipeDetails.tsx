@@ -4,8 +4,8 @@ import { RecipeType } from "@/types";
 import { useAuth, useLanguage } from "@/contexts";
 import { translateText } from "@/utils";
 import { setFavouriteAPI, removeFavouriteAPI } from "@/utils/backend/api/favourites";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addFavourite, removeFavourite } from "@/features/favourites";
+import { useAppDispatch } from "@/redux/hooks";
+import { addFavourite, removeFavourite, useIsFavourited } from "@/features/favourites";
 
 type Props = {
   recipe: RecipeType
@@ -17,8 +17,8 @@ const RecipeDetails = ({ recipe }: Props) => {
   const { user } = useAuth();
 
   const dispatch = useAppDispatch()
-  const favouriteIds = useAppSelector(state => state.favourites.favouriteList)
-  const isToggled = favouriteIds.some(f => f.recipeId === recipe.id)
+  const isFavourite = useIsFavourited(recipe.id)
+
 
   const [view, setView] = useState<"ingredients" | "instructions">("ingredients");
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
@@ -35,7 +35,7 @@ const RecipeDetails = ({ recipe }: Props) => {
     if (!user) return
 
     try {
-      if (isToggled) {
+      if (isFavourite) {
         await removeFavouriteAPI(user.id, recipe.id)
         dispatch(removeFavourite(recipe.id))
       } else {
@@ -45,7 +45,6 @@ const RecipeDetails = ({ recipe }: Props) => {
     } catch (error) {
       if (error instanceof Error) {
         console.error('toggleFavourite error:', error)
-        // redirect to error page, pass error
       } else {
         console.error('Unknown error: ', error)
       }
@@ -62,7 +61,7 @@ const RecipeDetails = ({ recipe }: Props) => {
         <div className="py-2"
           onClick={() => toggleFavourite()}
         >
-          {user && <Favourite isToggled={isToggled} />}
+          {user && <Favourite isToggled={isFavourite} />}
         </div>
       </div>
 

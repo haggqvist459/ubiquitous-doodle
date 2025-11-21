@@ -1,4 +1,5 @@
 import { Tables } from "./database.types"
+import { FilterOptionType } from "@/features/filters/types";
 import { UNITS } from "@/utils"
 
 export type RecipeDbType = Tables<"recipes">
@@ -29,9 +30,4 @@ export type RecipeType = {
   ingredients: IngredientType[]
   instructions: InstructionType[]
   createdAt: Date
-}
-
-export type FilterOptionType = {
-  id: string
-  text: string
 }

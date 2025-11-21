@@ -8,4 +8,5 @@ export type FavouriteType = {
 
 export type FavouriteSliceType = {
   favouriteList: FavouriteType[]
+  isLoaded: boolean
 }

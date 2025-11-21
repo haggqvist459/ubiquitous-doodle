@@ -1,6 +1,4 @@
-import { FilterOptionType } from "@/types"
 import { SORTING_FILTERS } from "./constants";
-
 
 export type SortingFilterKey = keyof typeof SORTING_FILTERS;
 
@@ -10,4 +8,10 @@ export type FilterStateType = {
   cuisineFilters: FilterOptionType[] | []
   selectedCuisineFilters: FilterOptionType[] | []
   selectedSortingFilter: SortingFilterKey
+}
+
+
+export type FilterOptionType = {
+  id: string
+  text: string
 }

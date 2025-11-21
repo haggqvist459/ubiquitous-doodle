@@ -1,15 +1,15 @@
 
-import { useAppSelector } from "@/redux/hooks";
 import { PageContainer, Heading, LoadingComponent, Input, SignOut } from "@/components";
 import { FavouriteListItem } from "@/features/favourites";
 import { useLanguage } from "@/contexts";
 import { translateText } from "@/utils";
+import { useFavourites } from "@/features/favourites";
 
 const ProfilePage = () => {
 
-  const favourites = useAppSelector(state => state.favourites.favouriteList)
+  const  favourites = useFavourites()
   const { language } = useLanguage()
-
+  
   return (
     <PageContainer>
       <div className="my-5 px-5 flex justify-between items-center">

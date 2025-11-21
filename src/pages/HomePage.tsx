@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { fetchFilteredRecipesAPI } from '@/utils/backend/api/recipes';
 import { getCuisines, getMainIngredients } from '@/utils/backend/api/filters';
-import { RecipeType, FilterOptionType, } from '@/types';
 import { PageContainer, Heading, LoadingComponent, ErrorComponent } from "@/components";
 import { RecipeList } from "@/features/recipeList";
-import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterKey } from '@/features/filters';
+import { setFilterList, setActiveFilter, setActiveSorting, Filters, type SortingFilterKey, FilterOptionType } from '@/features/filters';
 import { useLanguage, } from '@/contexts';
 import { translateText } from '@/utils';
 
@@ -20,40 +18,9 @@ const HomePage = () => {
   const selectedTypeFilters = useAppSelector(state => state.filters.selectedTypeFilters);
   const selectedCuisineFilters = useAppSelector(state => state.filters.selectedCuisineFilters);
   const selectedSortingFilter = useAppSelector(state => state.filters.selectedSortingFilter);
-  const [recipeList, setRecipeList] = useState<RecipeType[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-
-  useEffect(() => {
-    setLoading(true);
-    setError(false)
-
-    const loadRecipes = async () => {
-      try {
-        const fetchedRecipes = await fetchFilteredRecipesAPI({
-          sortingFilter: selectedSortingFilter,
-          typeFilters: selectedTypeFilters,
-          cuisineFilters: selectedCuisineFilters,
-          language
-        });
-
-        setRecipeList(fetchedRecipes);
-
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error("Failed to load recipes:", error);
-          setError(true)
-          setErrorMessage(error.message)
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadRecipes();
-  }, [selectedCuisineFilters, selectedTypeFilters, selectedSortingFilter]);
-
 
   useEffect(() => {
     setError(false);
@@ -93,6 +60,14 @@ const HomePage = () => {
     dispatch(setActiveSorting(sorting));
   };
 
+  if (loading) {
+    return <LoadingComponent />;
+  }
+
+  if (error) {
+    return <ErrorComponent errorMessage={errorMessage} />;
+  }
+
   return (
     <PageContainer>
       <Filters
@@ -106,15 +81,7 @@ const HomePage = () => {
       />
       <div className="my-3 px-3">
         <Heading title={translateText('homePage', 'recipe', language)} />
-        <div className="">
-          {loading ?
-            <LoadingComponent />
-            : error ?
-              <ErrorComponent errorMessage={errorMessage} /> :
-              <>
-                <RecipeList recipeList={recipeList} />
-              </>}
-        </div>
+        <RecipeList />
       </div>
     </PageContainer>
   );

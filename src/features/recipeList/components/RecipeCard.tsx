@@ -21,3 +21,5 @@ const RecipeCard = ({ recipe }: Props) => {
 }
 
 export default RecipeCard;
+
+// TODO IMPLEMENT FAVOURITE ICON ON CARD 
